@@ -11,7 +11,7 @@
 
 [core]
   pager = less -FRSX
-	editor = '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' -n -w
+	editor = code --wait
 
 [alias]
   co = checkout
@@ -48,14 +48,5 @@
   mergeoptions = --no-edit
 
 [user]
-	email = francois@ridecell.com
-	name = Francois Catuhe
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-
-# This next lines include Netlify's Git Credential Helper configuration in your Git configuration.
-[include]
-  path = /Users/francois/.netlify/helper/git-config
+	email = fcatuhe@gmail.com
+	name = François Catuhe
