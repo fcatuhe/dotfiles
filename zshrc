@@ -10,7 +10,6 @@ unalias rm
 type -a rbenv > /dev/null && eval "$(rbenv init -)"
 
 type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
