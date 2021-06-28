@@ -33,14 +33,18 @@
   "prettier.requireConfig": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
-  "python.jediEnabled": false,
   "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    "--max-line-length=120",
+  ],
   "ruby.lint": {
     "rubocop": true
   },
-  "ruby.rubocop.onSave": false,
   "telemetry.enableTelemetry": false,
   "terminal.integrated.shell.osx": "/bin/zsh",
-  "window.zoomLevel": 0,
-  "workbench.startupEditor": "newUntitledFile"
+  "extensions.ignoreRecommendations": false,
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter.notebook.ipynb"
+  },
 }

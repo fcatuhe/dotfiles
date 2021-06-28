@@ -11,6 +11,8 @@ type -a rbenv > /dev/null && eval "$(rbenv init -)"
 
 type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
 
+export PATH="./bin:./node_modules/.bin:${PATH}:/usr/local/sbin"
+
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
 export LANG=en_US.UTF-8
@@ -18,4 +20,4 @@ export LC_ALL=en_US.UTF-8
 
 export EDITOR="code --wait"
 
-export AWS_PROFILE=emea
+# export AWS_PROFILE=emea

@@ -50,3 +50,6 @@
 [user]
 	email = fcatuhe@gmail.com
 	name = François Catuhe
+
+[pull]
+	ff = only
