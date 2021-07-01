@@ -21,8 +21,9 @@ symlink() {
   fi
 }
 
-# For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
-# and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
+CURRENT_DIR=`pwd`
+
+# For all files `$name` in the /home folder, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
 cd home
 for name in *; do
   if [ ! -d "$name" ]; then
@@ -31,10 +32,9 @@ for name in *; do
     symlink $PWD/$name $target
   fi
 done
-cd ..
+cd "$CURRENT_DIR"
 
 # Install zsh-syntax-highlighting plugin
-CURRENT_DIR=`pwd`
 ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
 mkdir -p "$ZSH_PLUGINS_DIR" && cd "$ZSH_PLUGINS_DIR"
 if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
