@@ -11,7 +11,7 @@
 
 [core]
   pager = less -FRSX
-	editor = code --wait
+  editor = code
 
 [alias]
   co = checkout
@@ -42,14 +42,14 @@
   autocorrect = 1
 
 [push]
-	default = simple
+  default = simple
 
 [branch "master"]
   mergeoptions = --no-edit
 
-[user]
-	email = fcatuhe@gmail.com
-	name = François Catuhe
-
 [pull]
-	ff = only
+  rebase = false
+
+[user]
+	email = francois@hey.com
+	name = François Catuhe
