@@ -23,8 +23,17 @@
   dt  = difftool
   stat = !git --no-pager diff --stat
 
-  # Clean merged branches
-  sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d && git remote prune origin
+  # Set remotes/origin/HEAD -> defaultBranch (copied from https://stackoverflow.com/a/67672350/14870317)
+  remoteSetHead = remote set-head origin --auto
+
+  # Get default branch name (copied from https://stackoverflow.com/a/67672350/14870317)
+  defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
+
+  # Clean merged branches (adapted from https://stackoverflow.com/a/6127884/14870317)
+  sweep = !git branch --merged $(git defaultBranch) | grep -E -v " $(git defaultBranch)$" | xargs -r git branch -d && git remote prune origin
+
+  # https://stackoverflow.com/questions/43489303/how-can-i-delete-all-git-branches-which-have-been-squash-and-merge-via-github
+  sweep-squashed = !git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
 
   # http://www.jukie.net/bart/blog/pimping-out-git-log
   lg = log --graph --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset'
@@ -44,6 +53,12 @@
 [push]
   default = simple
 
+[init]
+	defaultBranch = main
+
+[branch "main"]
+  mergeoptions = --no-edit
+
 [branch "master"]
   mergeoptions = --no-edit
 
@@ -51,5 +66,15 @@
   rebase = false
 
 [user]
-	email = francois@hey.com
+	email = francois@ridecell.com
 	name = François Catuhe
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKdHH01MoS+eduElSyn2FikYeDiLu50S/wiaCWrKDk9B francois@hey.com
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
