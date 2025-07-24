@@ -12,6 +12,7 @@
 [core]
   pager = less -FRSX
   editor = code
+	excludesfile = /Users/francois/.config/git/ignore
 
 [alias]
   co = checkout
@@ -30,7 +31,8 @@
   defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
 
   # Clean merged branches (adapted from https://stackoverflow.com/a/6127884/14870317)
-  sweep = !git branch --merged $(git defaultBranch) | grep -E -v " $(git defaultBranch)$" | xargs -r git branch -d && git remote prune origin
+  # sweep = !git branch --merged $(git defaultBranch) | grep -E -v " $(git defaultBranch)$" | xargs -r git branch -d && git remote prune origin
+  sweep = !sh -c 'git branch --merged | grep -v "^*" | xargs git branch -d'
 
   # https://stackoverflow.com/questions/43489303/how-can-i-delete-all-git-branches-which-have-been-squash-and-merge-via-github
   sweep-squashed = !git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
@@ -66,9 +68,9 @@
   rebase = false
 
 [user]
-	email = francois@ridecell.com
+	email = francois@hey.com
 	name = François Catuhe
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKdHH01MoS+eduElSyn2FikYeDiLu50S/wiaCWrKDk9B francois@hey.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA9dYZ6uxVPNTruoExoOH2XyANhVMYxxXZhmzgViNOK6
 [gpg]
 	format = ssh
 [commit]
