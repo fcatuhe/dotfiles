@@ -1,0 +1,12 @@
+{{- $secrets := include ".secrets.yaml.age" | decrypt | fromYaml -}}
+Host azade
+  HostName {{ $secrets.azade_ip }}
+  User {{ $secrets.azade_user }}
+
+Host *
+  UseKeychain yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519
+  SetEnv TERM=xterm-256color
+
+Include ~/.colima/ssh_config
