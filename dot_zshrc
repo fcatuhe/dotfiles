@@ -24,7 +24,7 @@ export CONSOLE_USER="François Catuhe"
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env" # keeps ~/.local/bin on PATH; original need for this is unclear today
 
 # Ridecell
-export AWS_PROFILE=bedrock-invoke
+export AWS_PROFILE=ridecell
 # export CLAUDE_CODE_USE_BEDROCK=1
 export AWS_REGION=us-west-2
 
