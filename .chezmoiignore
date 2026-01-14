@@ -8,6 +8,3 @@ private_Library/
 {{ if eq .chezmoi.os "darwin" }}
 .config/Code/
 {{ end }}
-
-# AWS credentials (secrets, never managed)
-.aws/credentials
