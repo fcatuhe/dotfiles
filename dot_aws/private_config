@@ -1,7 +1,4 @@
 [profile ridecell]
-region = us-west-2
-output = json
-[profile bedrock-invoke]
 sso_session = ridecell
 sso_account_id = 554717219400
 sso_role_name = bedrock-invoke
