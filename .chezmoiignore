@@ -1,0 +1,10 @@
+# macOS-specific paths (ignore on Linux)
+{{ if ne .chezmoi.os "darwin" }}
+private_Library/
+.ssh/config
+{{ end }}
+
+# Linux-specific paths (ignore on macOS)
+{{ if eq .chezmoi.os "darwin" }}
+.config/Code/
+{{ end }}

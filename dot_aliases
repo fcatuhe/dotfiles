@@ -1,0 +1,11 @@
+# Get External IP / Internet Speed
+alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
+
+# Quickly serve the current directory as HTTP
+alias serve='ruby -run -e httpd . -p 8000'
+
+# alias cc="claude --dangerously-skip-permissions"
+alias cc="claude"
+# alias cx="codex --dangerously-bypass-approvals-and-sandbox"
+alias cx="codex"
+alias oc="opencode"

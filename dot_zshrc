@@ -1,0 +1,39 @@
+ZSH=$HOME/.oh-my-zsh
+ZSH_THEME=robbyrussell
+plugins=(common-aliases git gitfast history-substring-search kamal last-working-dir macos vscode zsh-syntax-highlighting)
+
+export HOMEBREW_NO_ANALYTICS=1
+
+source "${ZSH}/oh-my-zsh.sh"
+unalias rm
+
+type -a mise > /dev/null && eval "$(mise activate zsh)"
+
+export PATH="./bin:${PATH}"
+
+[[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+export BUNDLER_EDITOR=code
+export EDITOR="code --wait"
+
+export CONSOLE_USER="François Catuhe"
+
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env" # keeps ~/.local/bin on PATH; original need for this is unclear today
+
+# Ridecell
+export AWS_PROFILE=bedrock-invoke
+# export CLAUDE_CODE_USE_BEDROCK=1
+export AWS_REGION=us-west-2
+
+# bun completions
+[ -s "/Users/francois/.bun/_bun" ] && source "/Users/francois/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/francois/.antigravity/antigravity/bin:$PATH"

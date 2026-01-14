@@ -1,0 +1,7 @@
+# Ignore MacOS Desktop Services Store files
+.DS_Store
+
+# Ignore TODO-FC.md
+TODO-FC.md
+
+**/.claude/settings.local.json
