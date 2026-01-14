@@ -2,10 +2,3 @@ encryption = "age"
 [age]
     recipient = "age1e2qkevjus09dfzmr82xppyuedlcya5283kf0u4ydsk7qgyhqgumspm36nl"
     identity = "~/.config/chezmoi/key.txt"
-
-[data]
-{{- if eq .chezmoi.os "darwin" }}
-    os_type = "macos"
-{{- else if eq .chezmoi.os "linux" }}
-    os_type = "linux"
-{{- end }}
