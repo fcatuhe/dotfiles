@@ -1,7 +1,7 @@
-{{- $secrets := include ".secrets.yaml.age" | decrypt | fromYaml -}}
+{{- $private := include ".private_config.yaml.age" | decrypt | fromYaml -}}
 Host azade
-  HostName {{ $secrets.ssh.azade_ip }}
-  User {{ $secrets.ssh.azade_user }}
+  HostName {{ $private.ssh.azade_ip }}
+  User {{ $private.ssh.azade_user }}
 
 Host *
   UseKeychain yes
