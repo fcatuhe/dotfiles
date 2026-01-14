@@ -1,10 +1,11 @@
+{{- $secrets := include ".secrets.yaml.age" | decrypt | fromYaml -}}
 [profile ridecell]
 sso_session = ridecell
-sso_account_id = 554717219400
+sso_account_id = {{ $secrets.aws.sso_account_id }}
 sso_role_name = bedrock-invoke
 region = us-west-2
 output = json
 [sso-session ridecell]
-sso_start_url = https://d-9267e4943c.awsapps.com/start
+sso_start_url = {{ $secrets.aws.sso_start_url }}
 sso_region = us-west-2
 sso_registration_scopes = sso:account:access
