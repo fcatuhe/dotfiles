@@ -1,0 +1,77 @@
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  ui = auto
+
+[color "branch"]
+  current = green
+  remote = yellow
+
+[core]
+  pager = less -FRSX
+  editor = code
+  excludesfile = ~/.config/git/ignore
+
+[alias]
+  co = checkout
+  st = status -sb
+  br = branch
+  ci = commit
+  fo = fetch origin
+  d = !git --no-pager diff
+  dt  = difftool
+  stat = !git --no-pager diff --stat
+
+  # Set remotes/origin/HEAD -> defaultBranch (copied from https://stackoverflow.com/a/67672350/14870317)
+  remoteSetHead = remote set-head origin --auto
+
+  # Get default branch name (copied from https://stackoverflow.com/a/67672350/14870317)
+  defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
+
+  # Clean merged branches (adapted from https://stackoverflow.com/a/6127884/14870317)
+  # sweep = !git branch --merged $(git defaultBranch) | grep -E -v " $(git defaultBranch)$" | xargs -r git branch -d && git remote prune origin
+  sweep = !sh -c 'git branch --merged | grep -v "^*" | xargs git branch -d'
+
+  # https://stackoverflow.com/questions/43489303/how-can-i-delete-all-git-branches-which-have-been-squash-and-merge-via-github
+  sweep-squashed = !git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
+
+  # http://www.jukie.net/bart/blog/pimping-out-git-log
+  lg = log --graph --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset'
+
+  # Serve local repo. http://coderwall.com/p/eybtga
+  # Then other can access via `git clone git://#{YOUR_IP_ADDRESS}/
+  serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+
+  m = checkout master
+
+  # Removes a file from the index
+  unstage = reset HEAD --
+
+[help]
+  autocorrect = 1
+
+[push]
+  default = simple
+
+[init]
+  defaultBranch = main
+
+[branch "main"]
+  mergeoptions = --no-edit
+
+[branch "master"]
+  mergeoptions = --no-edit
+
+[pull]
+  rebase = false
+
+[user]
+  email = francois@hey.com
+  name = François Catuhe
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA9dYZ6uxVPNTruoExoOH2XyANhVMYxxXZhmzgViNOK6
+[gpg]
+  format = ssh
+[commit]
+  gpgsign = true
