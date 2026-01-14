@@ -10,7 +10,7 @@ brew install chezmoi
 
 # Get the age key from Bitwarden and save it
 mkdir -p ~/.config/chezmoi
-# Copy key from Bitwarden "chezmoi age key" item to ~/.config/chezmoi/key.txt
+# Copy key from Bitwarden note "~/.config/chezmoi/key.txt" item to ~/.config/chezmoi/key.txt
 
 # Initialize and apply
 chezmoi init --apply fcatuhe

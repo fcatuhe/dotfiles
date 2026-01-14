@@ -6,6 +6,6 @@ encryption = "age"
 [data]
 {{- if eq .chezmoi.os "darwin" }}
     os_type = "macos"
-{{- else }}
+{{- else if eq .chezmoi.os "linux" }}
     os_type = "linux"
 {{- end }}
