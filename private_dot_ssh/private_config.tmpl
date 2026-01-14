@@ -3,10 +3,20 @@ Host azade
   HostName {{ $private.ssh.azade_ip }}
   User {{ $private.ssh.azade_user }}
 
+Host patoumatic
+  HostName {{ $private.ssh.patoumatic_ip }}
+  User {{ $private.ssh.patoumatic_user }}
+
+Host crooz
+  HostName {{ $private.ssh.crooz_ip }}
+  User {{ $private.ssh.crooz_user }}
+
 Host *
   UseKeychain yes
   AddKeysToAgent yes
   IdentityFile ~/.ssh/id_ed25519
   SetEnv TERM=xterm-256color
 
+{{ if eq .chezmoi.os "darwin" -}}
 Include ~/.colima/ssh_config
+{{- end }}
