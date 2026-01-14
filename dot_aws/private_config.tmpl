@@ -1,4 +1,4 @@
-{{- $private := include ".private_config.yaml.age" | decrypt | fromYaml -}}
+{{- $private := include ".private.yaml.age" | decrypt | fromYaml -}}
 [profile ridecell]
 sso_session = ridecell
 sso_account_id = {{ $private.aws.sso_account_id }}

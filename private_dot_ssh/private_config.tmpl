@@ -1,4 +1,4 @@
-{{- $private := include ".private_config.yaml.age" | decrypt | fromYaml -}}
+{{- $private := include ".private.yaml.age" | decrypt | fromYaml -}}
 Host azade
   HostName {{ $private.ssh.azade_ip }}
   User {{ $private.ssh.azade_user }}
