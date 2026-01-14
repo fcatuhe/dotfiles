@@ -1,15 +1,18 @@
 {{- $private := include ".private.yaml.age" | decrypt | fromYaml -}}
-Host azade
-  HostName {{ $private.ssh.azade_ip }}
-  User {{ $private.ssh.azade_user }}
-
-Host patoumatic
+Host patoumatic dropbear-patoumatic
   HostName {{ $private.ssh.patoumatic_ip }}
   User {{ $private.ssh.patoumatic_user }}
+
+Host dropbear-patoumatic
+  Port 2222
 
 Host crooz
   HostName {{ $private.ssh.crooz_ip }}
   User {{ $private.ssh.crooz_user }}
+
+Host azade
+  HostName {{ $private.ssh.azade_ip }}
+  User {{ $private.ssh.azade_user }}
 
 Host *
   UseKeychain yes
