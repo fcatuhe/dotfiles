@@ -1,5 +1,5 @@
 # Never commit decrypted private values or the age key
-private.env
+private/
 age.key
 
 # Ignore MacOS Desktop Services Store files

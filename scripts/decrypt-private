@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# Decrypt private.env.age and install .private files with {{VAR}} placeholders replaced.
+# Decrypt private.env.age and render .private files into the private/ folder.
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 CONF="$DOTFILES_DIR/install.private.yaml"
+PRIVATE_DIR="$DOTFILES_DIR/private"
 
 yaml_val() { grep "^${1}:" "$CONF" | head -1 | sed "s/^${1}: *//"; }
 
@@ -15,19 +16,9 @@ PRIVATE_FILE="$DOTFILES_DIR/$(yaml_val private)"
 
 decrypted="$(age -d -i "$IDENTITY" "$PRIVATE_FILE")"
 
-# Read file mappings and render each one
-in_files=false
-while IFS= read -r line; do
-  if [[ "$line" =~ ^files: ]]; then in_files=true; continue; fi
-  $in_files || continue
-  [[ "$line" =~ ^[a-z] || -z "$line" ]] && break
-
-  dest="$(echo "$line" | sed 's/^ *//' | cut -d: -f1)"
-  src="$(echo "$line" | sed 's/^ *//' | cut -d: -f2- | sed 's/^ *//')"
-  dest="${dest/#\~/$HOME}"
-  src="$DOTFILES_DIR/$src"
-
-  [[ -f "$src" ]] || { echo "  WARN: $src not found, skipping"; continue; }
+# Render each .private source file into private/
+for src in "$DOTFILES_DIR"/{,*/}*.private; do
+  [[ -f "$src" ]] || continue
 
   content="$(cat "$src")"
   while IFS='=' read -r key value; do
@@ -35,8 +26,13 @@ while IFS= read -r line; do
     content="${content//\{\{${key}\}\}/${value}}"
   done <<< "$decrypted"
 
+  # Mirror path: ssh/config.private → private/ssh/config
+  relative="${src#$DOTFILES_DIR/}"
+  dest="$PRIVATE_DIR/${relative%.private}"
+
   mkdir -p "$(dirname "$dest")"
   printf '%s\n' "$content" > "$dest"
-  chmod 600 "$dest"
   echo "  → $dest"
-done < "$CONF"
+done
+
+chmod -R 700 "$PRIVATE_DIR"

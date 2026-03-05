@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Decrypt private.env.age, open in $EDITOR, re-encrypt on save.
+# Run ./install after editing to update the private/ folder and symlinks.
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
