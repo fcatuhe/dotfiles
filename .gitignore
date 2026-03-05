@@ -1,6 +1,6 @@
 # Never commit decrypted private values or the age key
 private/
-age.key
+encrypted/age.key
 
 # Ignore MacOS Desktop Services Store files
 .DS_Store

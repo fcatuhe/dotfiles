@@ -1,5 +1,5 @@
 - shell:
-    - command: ./scripts/decrypt-private
+    - command: ./encrypted/decrypt
       description: Decrypt private config into private/
       stdout: true
       stderr: true

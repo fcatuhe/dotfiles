@@ -1,23 +1,24 @@
 #!/usr/bin/env bash
-# Decrypt private.env.age and render .private files into the private/ folder.
+# Decrypt private.env.age and render encrypted source files into private/.
 set -euo pipefail
 
-DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-CONF="$DOTFILES_DIR/install.private.yaml"
+ENCRYPTED_DIR="$(cd "$(dirname "$0")" && pwd)"
+DOTFILES_DIR="$(dirname "$ENCRYPTED_DIR")"
 PRIVATE_DIR="$DOTFILES_DIR/private"
 
-yaml_val() { grep "^${1}:" "$CONF" | head -1 | sed "s/^${1}: *//"; }
+# Read age.conf
+conf_val() { grep "^${1}=" "$ENCRYPTED_DIR/age.conf" | head -1 | cut -d= -f2-; }
 
-IDENTITY="$DOTFILES_DIR/$(yaml_val identity)"
-PRIVATE_FILE="$DOTFILES_DIR/$(yaml_val private)"
+IDENTITY="$ENCRYPTED_DIR/$(conf_val identity)"
+PRIVATE_FILE="$ENCRYPTED_DIR/$(conf_val private)"
 
 [[ -f "$IDENTITY" ]]    || { echo "ERROR: age identity not found at $IDENTITY"; exit 1; }
 [[ -f "$PRIVATE_FILE" ]] || { echo "ERROR: $PRIVATE_FILE not found"; exit 1; }
 
 decrypted="$(age -d -i "$IDENTITY" "$PRIVATE_FILE")"
 
-# Render each .private source file into private/
-for src in "$DOTFILES_DIR"/{,*/}*.private; do
+# Find all source files in encrypted/ (skip age.conf, age.key, *.age, scripts)
+for src in "$ENCRYPTED_DIR"/*/*.* "$ENCRYPTED_DIR"/*/*; do
   [[ -f "$src" ]] || continue
 
   content="$(cat "$src")"
@@ -26,9 +27,9 @@ for src in "$DOTFILES_DIR"/{,*/}*.private; do
     content="${content//\{\{${key}\}\}/${value}}"
   done <<< "$decrypted"
 
-  # Mirror path: ssh/config.private → private/ssh/config
-  relative="${src#$DOTFILES_DIR/}"
-  dest="$PRIVATE_DIR/${relative%.private}"
+  # Mirror path: encrypted/ssh/config → private/ssh/config
+  relative="${src#$ENCRYPTED_DIR/}"
+  dest="$PRIVATE_DIR/$relative"
 
   mkdir -p "$(dirname "$dest")"
   printf '%s\n' "$content" > "$dest"

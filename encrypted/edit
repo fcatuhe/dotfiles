@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 # Decrypt private.env.age, open in $EDITOR, re-encrypt on save.
-# Run ./install after editing to update the private/ folder and symlinks.
+# Run ./install after editing to update private/ and symlinks.
 set -euo pipefail
 
-DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-CONF="$DOTFILES_DIR/install.private.yaml"
+ENCRYPTED_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-yaml_val() { grep "^${1}:" "$CONF" | head -1 | sed "s/^${1}: *//"; }
+conf_val() { grep "^${1}=" "$ENCRYPTED_DIR/age.conf" | head -1 | cut -d= -f2-; }
 
-RECIPIENT="$(yaml_val recipient)"
-IDENTITY="$DOTFILES_DIR/$(yaml_val identity)"
-PRIVATE_FILE="$DOTFILES_DIR/$(yaml_val private)"
+RECIPIENT="$(conf_val recipient)"
+IDENTITY="$ENCRYPTED_DIR/$(conf_val identity)"
+PRIVATE_FILE="$ENCRYPTED_DIR/$(conf_val private)"
 
 [[ -f "$IDENTITY" ]] || { echo "ERROR: age identity not found at $IDENTITY"; exit 1; }
 

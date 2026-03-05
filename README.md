@@ -10,30 +10,29 @@ git clone --recurse-submodules git@github.com:fcatuhe/dotfiles.git ~/fcode/dotfi
 
 # Get the age key from Bitwarden ("dotfiles age key") and save it
 cd ~/fcode/dotfiles
-# Paste key into age.key
+# Paste key into encrypted/age.key
 ./install
 ```
 
 ## How It Works
 
 - **Plain dotfiles** (aliases, zshrc, gitconfig…) are symlinked to `$HOME` by dotbot
-- **Private config** (SSH hosts, AWS account IDs, API keys) lives in `private.env.age`, encrypted with age
-- **On install**, `decrypt-private` renders `.private` files into a `private/` folder (gitignored, chmod 700), then dotbot symlinks everything — both plain and private files
+- **Private config** (SSH hosts, AWS account IDs, API keys) lives in `encrypted/`, encrypted with age
+- **On install**, `encrypted/decrypt` renders source files into `private/` (gitignored, chmod 700), then dotbot symlinks everything — both plain and private files
 - **Platform-specific links** use dotbot's `if` guards (e.g. VS Code settings path differs on macOS vs Linux)
-- **Encryption settings** (recipient, identity) are in `install.private.yaml`
 
 ## Workflow
 
 | Task | Command |
 |------|---------|
 | Apply all dotfiles | `./install` |
-| Edit private values | `./scripts/edit-private` then `./install` |
+| Edit private values | `./encrypted/edit` then `./install` |
 
 ### Making Changes
 
 **Plain files:** edit directly in the repo, then `./install` to re-link.
 
-**Private values:** run `./scripts/edit-private`, then `./install` to decrypt and re-link.
+**Private values:** run `./encrypted/edit`, then `./install` to decrypt and re-link.
 
 ### Syncing
 
@@ -47,9 +46,9 @@ git pull && ./install
 
 ## Encryption
 
-Private values (IPs, account IDs, API keys) are stored in `private.env.age` — an age-encrypted key=value file. Encryption settings are in `install.private.yaml`.
+Private values are stored in `encrypted/private.env.age`. Source files with `{{PLACEHOLDER}}` variables live in `encrypted/` mirroring the folder structure of `private/`. On install, placeholders are replaced with decrypted values and written to `private/`.
 
-Only the `.age` file is committed. The `private/` folder and `age.key` are gitignored.
+The `encrypted/` folder is self-contained: age config, key, encrypted values, source files, and scripts.
 
 ### Key Management
 
@@ -57,14 +56,14 @@ The age private key is stored in Bitwarden under **"dotfiles age key"**.
 
 On a new machine:
 1. Retrieve the key from Bitwarden
-2. Save to `age.key` in the dotfiles repo (gitignored)
+2. Save to `encrypted/age.key` (gitignored)
 3. Run `./install`
 
 ### Editing Private Values
 
 ```bash
-./scripts/edit-private    # decrypt → $EDITOR → re-encrypt
-./install                 # decrypt into private/ and re-link
+./encrypted/edit    # decrypt → $EDITOR → re-encrypt
+./install           # decrypt into private/ and re-link
 ```
 
 ## Structure
@@ -72,13 +71,19 @@ On a new machine:
 ```
 install                                     # Dotbot entry point (stock script)
 install.conf.yaml                           # Dotbot config (symlinks, if guards, shell hooks)
-install.private.yaml                        # Age encryption settings
-age.key                                     # Age identity (gitignored)
-private.env.age                             # Encrypted private values (committed)
-private/                                    # Decrypted private files (gitignored, chmod 700)
-scripts/
-  decrypt-private                           # Decrypt + render .private files into private/
-  edit-private                              # Decrypt → edit → re-encrypt
+encrypted/                                  # Encryption module (self-contained)
+  age.conf                                  # Age settings (recipient, identity, private file)
+  age.key                                   # Age identity (gitignored)
+  private.env.age                           # Encrypted private values (committed)
+  decrypt                                   # Render source files into private/
+  edit                                      # Decrypt → edit → re-encrypt
+  ssh/config                                # Source: {{SSH_*}} placeholders
+  aws/config                                # Source: {{AWS_*}} placeholders
+  zsh/zshenv                                # Source: {{BRAVE_API_KEY}} placeholder
+private/                                    # Decrypted output (gitignored, chmod 700)
+  ssh/config                                # → ~/.ssh/config
+  aws/config                                # → ~/.aws/config
+  zsh/zshenv                                # → ~/.zshenv.private
 git/
   config                                    # → ~/.gitconfig
   ignore                                    # → ~/.config/git/ignore
@@ -87,11 +92,6 @@ zsh/
   zshrc                                     # → ~/.zshrc
   zprofile                                  # → ~/.zprofile
   zshenv                                    # → ~/.zshenv
-  zshenv.private                            # → private/zsh/zshenv → ~/.zshenv.private
-ssh/
-  config.private                            # → private/ssh/config → ~/.ssh/config
-aws/
-  config.private                            # → private/aws/config → ~/.aws/config
 vscode/
   settings.json                             # → ~/.config/Code/User/settings.json (Linux)
                                             #   ~/Library/.../settings.json (macOS)

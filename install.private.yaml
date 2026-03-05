@@ -1,5 +1,0 @@
-# Used by scripts/decrypt-private and scripts/edit-private.
-
-recipient: age1e2qkevjus09dfzmr82xppyuedlcya5283kf0u4ydsk7qgyhqgumspm36nl
-identity: age.key
-private: private.env.age
