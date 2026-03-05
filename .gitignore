@@ -1,0 +1,6 @@
+# Never commit decrypted private values or the age key
+private.env
+age.key
+
+# OS junk
+.DS_Store

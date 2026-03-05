@@ -1,0 +1,29 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+
+- clean: ['~']
+
+- link:
+    ~/.aliases: zsh/aliases
+    ~/.gitconfig: git/config
+    ~/.zprofile: zsh/zprofile
+    ~/.zshenv: zsh/zshenv
+    ~/.zshrc: zsh/zshrc
+    ~/.config/git/ignore: git/ignore
+    ~/.claude/settings.json: claude/settings.json
+    ~/.claude/statusline-command.sh: claude/statusline-command.sh
+    ~/.config/Code/User/settings.json:
+      path: vscode/settings.json
+      if: '[ "$(uname)" = "Linux" ]'
+    ~/Library/Application Support/Code/User/settings.json:
+      path: vscode/settings.json
+      if: '[ "$(uname)" = "Darwin" ]'
+
+- shell:
+    - command: ./scripts/install-private
+      description: Decrypt and install private config (see install.private.yaml)
+      stdout: true
+      stderr: true

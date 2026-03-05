@@ -1,112 +1,101 @@
 # Dotfiles
 
-Managed with [chezmoi](https://www.chezmoi.io/).
+Managed with [dotbot](https://github.com/anishathalye/dotbot) + [age](https://age-encryption.org/) encryption.
 
 ## Setup on a New Machine
 
 ```bash
-# Install chezmoi
-brew install chezmoi
+# Clone with submodules
+git clone --recurse-submodules git@github.com:fcatuhe/dotfiles.git ~/fcode/dotfiles
 
-# Get the age key from Bitwarden and save it
-mkdir -p ~/.config/chezmoi
-# Copy key from Bitwarden note "~/.config/chezmoi/key.txt" item to ~/.config/chezmoi/key.txt
-
-# Initialize and apply
-chezmoi init --apply fcatuhe
+# Get the age key from Bitwarden ("dotfiles age key") and save it
+cd ~/fcode/dotfiles
+# Paste key into age.key
+./install
 ```
+
+## How It Works
+
+- **Plain dotfiles** (aliases, zshrc, gitconfig…) are symlinked to `$HOME` by dotbot
+- **Private config** (SSH hosts, AWS account IDs, API keys) lives in `private.env.age`, encrypted with age
+- **Private files** (`*.private`) contain `{{PLACEHOLDER}}` variables that get replaced at install time with decrypted values, then written (not symlinked) to their destinations
+- **Platform-specific links** use dotbot's `if` guards (e.g. VS Code settings path differs on macOS vs Linux)
+- **Encryption settings** (recipient, identity path, private file mappings) are centralized in `install.private.yaml`
 
 ## Workflow
 
 | Task | Command |
 |------|---------|
-| Edit a dotfile | `chezmoi edit ~/.zshrc` |
-| See pending changes | `chezmoi diff` |
-| Apply chezmoi → home | `chezmoi apply` |
-| Pull external changes into chezmoi | `chezmoi re-add ~/.zshrc` |
-| Sync from remote | `chezmoi update` |
-| Add new file | `chezmoi add ~/.newfile` |
+| Apply all dotfiles | `./install` |
+| Edit private values | `./scripts/edit-private` |
+| Install private config only | `./scripts/install-private` |
 
 ### Making Changes
 
-**Option 1: Edit via chezmoi (recommended)**
-```bash
-chezmoi edit ~/.zshrc      # Opens in $EDITOR, applies on save
-```
+**Plain files:** edit directly in the repo, then `./install` to re-link.
 
-**Option 2: Edit source directly**
-```bash
-vim ~/fcode/dotfiles/dot_zshrc
-chezmoi apply
-```
-
-**Option 3: External program modified a file**
-```bash
-chezmoi diff                 # See what changed
-chezmoi re-add ~/.zshrc      # Pull changes INTO chezmoi
-```
+**Private values:** run `./scripts/edit-private`, then `./install` to re-render.
 
 ### Syncing
 
 ```bash
-# Push changes
-cd ~/fcode/dotfiles
+# Push
 git add -A && git commit -m "Update" && git push
 
 # Pull on another machine
-chezmoi update              # git pull + apply
+git pull && ./install
 ```
 
 ## Encryption
 
-Private configuration (IPs, account IDs) is stored encrypted in `.private.yaml.age` using [age](https://age-encryption.org/) encryption.
+Private values (IPs, account IDs, API keys) are stored in `private.env.age` — an age-encrypted key=value file. All encryption settings live in `install.private.yaml`.
 
-Templates reference these values:
-```
-{{- $private := include ".private.yaml.age" | decrypt | fromYaml -}}
-{{ $private.ssh.azade_ip }}
-```
+Only the `.age` file is committed. The decrypted `private.env` is gitignored.
 
 ### Key Management
 
-The age private key is stored in Bitwarden under **"chezmoi age key"**.
+The age private key is stored in Bitwarden under **"dotfiles age key"**.
 
 On a new machine:
 1. Retrieve the key from Bitwarden
-2. Save to `~/.config/chezmoi/key.txt`
-3. Run `chezmoi init --apply fcatuhe`
+2. Save to `age.key` in the dotfiles repo (gitignored)
+3. Run `./install`
 
-The public key (recipient) is in `.chezmoi.toml.tmpl` - safe to commit.
-
-### Editing Encrypted Values
+### Editing Private Values
 
 ```bash
-# Decrypt, edit, re-encrypt
-age -d -i ~/.config/chezmoi/key.txt .private.yaml.age > /tmp/private.yaml
-vim /tmp/private.yaml
-age -r age1e2qkevjus09dfzmr82xppyuedlcya5283kf0u4ydsk7qgyhqgumspm36nl /tmp/private.yaml > .private.yaml.age
-rm /tmp/private.yaml
+./scripts/edit-private    # decrypt → $EDITOR → re-encrypt
 ```
 
 ## Structure
 
 ```
-.chezmoi.toml.tmpl          # Config with age recipient
-.chezmoiignore              # OS-conditional ignores
-.private.yaml.age           # Encrypted private config
-dot_zshrc                   # → ~/.zshrc
-dot_zprofile                # → ~/.zprofile
-dot_aliases                 # → ~/.aliases
-dot_gitconfig               # → ~/.gitconfig
-dot_aws/
-  private_config.tmpl       # → ~/.aws/config
-dot_config/
-  git/ignore                # → ~/.config/git/ignore
-  Code/User/settings.json   # → ~/.config/Code/User/settings.json (Linux)
-private_Library/...         # → ~/Library/.../settings.json (macOS)
-private_dot_ssh/
-  private_config.tmpl       # → ~/.ssh/config (macOS only)
-private_dot_claude/
-  settings.json             # → ~/.claude/settings.json
-  executable_statusline-command.sh
+install                                     # Dotbot entry point (stock script)
+install.conf.yaml                           # Dotbot config (symlinks, if guards, shell hooks)
+install.private.yaml                        # Private config: age settings + file mappings
+age.key                                     # Age identity (gitignored)
+private.env.age                             # Encrypted private values (committed)
+scripts/
+  install-private                           # Decrypt + install .private files
+  edit-private                              # Decrypt → edit → re-encrypt
+git/
+  config                                    # → ~/.gitconfig
+  ignore                                    # → ~/.config/git/ignore
+zsh/
+  aliases                                   # → ~/.aliases
+  zshrc                                     # → ~/.zshrc
+  zprofile                                  # → ~/.zprofile
+  zshenv                                    # → ~/.zshenv
+  zshenv.private                            # → ~/.zshenv.private (rendered)
+ssh/
+  config.private                            # → ~/.ssh/config (rendered)
+aws/
+  config.private                            # → ~/.aws/config (rendered)
+vscode/
+  settings.json                             # → ~/.config/Code/User/settings.json (Linux)
+                                            #   ~/Library/.../settings.json (macOS)
+claude/
+  settings.json                             # → ~/.claude/settings.json
+  statusline-command.sh                     # → ~/.claude/statusline-command.sh
+dotbot/                                     # Dotbot submodule
 ```

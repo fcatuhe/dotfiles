@@ -1,0 +1,1 @@
+[ -f ~/.zshenv.private ] && source ~/.zshenv.private

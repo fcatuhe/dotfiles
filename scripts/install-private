@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Decrypt private.env.age and install .private files with {{VAR}} placeholders replaced.
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+CONF="$DOTFILES_DIR/install.private.yaml"
+
+yaml_val() { grep "^${1}:" "$CONF" | head -1 | sed "s/^${1}: *//"; }
+
+IDENTITY="$DOTFILES_DIR/$(yaml_val identity)"
+PRIVATE_FILE="$DOTFILES_DIR/$(yaml_val private)"
+
+[[ -f "$IDENTITY" ]]    || { echo "ERROR: age identity not found at $IDENTITY"; exit 1; }
+[[ -f "$PRIVATE_FILE" ]] || { echo "ERROR: $PRIVATE_FILE not found"; exit 1; }
+
+decrypted="$(age -d -i "$IDENTITY" "$PRIVATE_FILE")"
+
+# Read file mappings and render each one
+in_files=false
+while IFS= read -r line; do
+  if [[ "$line" =~ ^files: ]]; then in_files=true; continue; fi
+  $in_files || continue
+  [[ "$line" =~ ^[a-z] || -z "$line" ]] && break
+
+  dest="$(echo "$line" | sed 's/^ *//' | cut -d: -f1)"
+  src="$(echo "$line" | sed 's/^ *//' | cut -d: -f2- | sed 's/^ *//')"
+  dest="${dest/#\~/$HOME}"
+  src="$DOTFILES_DIR/$src"
+
+  [[ -f "$src" ]] || { echo "  WARN: $src not found, skipping"; continue; }
+
+  content="$(cat "$src")"
+  while IFS='=' read -r key value; do
+    [[ -z "$key" || "$key" =~ ^# ]] && continue
+    content="${content//\{\{${key}\}\}/${value}}"
+  done <<< "$decrypted"
+
+  mkdir -p "$(dirname "$dest")"
+  printf '%s\n' "$content" > "$dest"
+  chmod 600 "$dest"
+  echo "  → $dest"
+done < "$CONF"

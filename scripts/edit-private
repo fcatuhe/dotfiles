@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Decrypt private.env.age, open in $EDITOR, re-encrypt on save.
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+CONF="$DOTFILES_DIR/install.private.yaml"
+
+yaml_val() { grep "^${1}:" "$CONF" | head -1 | sed "s/^${1}: *//"; }
+
+RECIPIENT="$(yaml_val recipient)"
+IDENTITY="$DOTFILES_DIR/$(yaml_val identity)"
+PRIVATE_FILE="$DOTFILES_DIR/$(yaml_val private)"
+
+[[ -f "$IDENTITY" ]] || { echo "ERROR: age identity not found at $IDENTITY"; exit 1; }
+
+tmpfile="$(mktemp)"
+trap 'rm -f "$tmpfile"' EXIT
+
+age -d -i "$IDENTITY" "$PRIVATE_FILE" > "$tmpfile"
+checksum_before="$(shasum -a 256 "$tmpfile")"
+
+${EDITOR:-vim} "$tmpfile"
+
+if [[ "$(shasum -a 256 "$tmpfile")" == "$checksum_before" ]]; then
+  echo "No changes made."
+  exit 0
+fi
+
+age -r "$RECIPIENT" "$tmpfile" > "$PRIVATE_FILE"
+echo "Private values re-encrypted."

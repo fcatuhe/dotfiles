@@ -26,6 +26,13 @@ export AWS_PROFILE=ridecell
 export AWS_REGION=us-west-2
 # export CLAUDE_CODE_USE_BEDROCK=1
 
+# claude & others
+export PATH="$HOME/.local/bin:$PATH"
+
+# opencode
+export PATH=/Users/francois/.opencode/bin:$PATH
+
+
 # bun completions
 [ -s "/Users/francois/.bun/_bun" ] && source "/Users/francois/.bun/_bun"
 
@@ -35,3 +42,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Added by Antigravity
 export PATH="/Users/francois/.antigravity/antigravity/bin:$PATH"
+
+# Whisper
+export SUMMARIZE_WHISPER_CPP_MODEL_PATH="$HOME/.local/share/whisper-cpp/models/ggml-small-q8_0.bin"

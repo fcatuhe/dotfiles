@@ -1,0 +1,27 @@
+# Get External IP / Internet Speed
+alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
+
+# Quickly serve the current directory as HTTP
+alias serve='ruby -run -e httpd . -p 8000'
+
+# alias cc="claude --dangerously-skip-permissions"
+alias cc="claude"
+# alias cx="codex --dangerously-bypass-approvals-and-sandbox"
+alias cx="codex"
+alias oc="opencode"
+
+# pi with prompt - usage: pip "your prompt here"
+alias pip='pi -p'
+
+# Update pi itself + its packages
+alias piu='npm install -g @mariozechner/pi-coding-agent && pi update'
+
+# Marp slide server
+alias marps='marp -s .'
+
+# Walkie (whisper transcription)
+alias wlkd='wlk --backend mlx-whisper --model large-v3-turbo --diarization --diarization-backend diart'
+alias wlkd-fr='wlkd --language fr'
+
+# Git sweep
+alias gs='git sweep'

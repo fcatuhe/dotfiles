@@ -27,15 +27,23 @@
   # Set remotes/origin/HEAD -> defaultBranch (copied from https://stackoverflow.com/a/67672350/14870317)
   remoteSetHead = remote set-head origin --auto
 
-  # Get default branch name (copied from https://stackoverflow.com/a/67672350/14870317)
-  defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
+  # Get default branch name (sets origin/HEAD if missing)
+  defaultBranch = "!git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null >/dev/null || git remote set-head origin -a >/dev/null 2>&1; git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4"
 
-  # Clean merged branches (adapted from https://stackoverflow.com/a/6127884/14870317)
-  # sweep = !git branch --merged $(git defaultBranch) | grep -E -v " $(git defaultBranch)$" | xargs -r git branch -d && git remote prune origin
-  sweep = !sh -c 'git branch --merged | grep -v "^*" | xargs git branch -d'
-
-  # https://stackoverflow.com/questions/43489303/how-can-i-delete-all-git-branches-which-have-been-squash-and-merge-via-github
-  sweep-squashed = !git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
+  # Clean merged branches + squash-merged branches, prune remotes (uses defaultBranch)
+  sweep = "!f() { \
+    default=$(git defaultBranch); \
+    git checkout -q $default; \
+    git branch --merged $default | grep -v \"^[* ]*$default$\" | xargs -r git branch -d; \
+    for branch in $(git for-each-ref refs/heads/ --format='%(refname:short)'); do \
+      [ \"$branch\" = \"$default\" ] && continue; \
+      mergeBase=$(git merge-base $default $branch 2>/dev/null) || continue; \
+      if [[ $(git cherry $default $(git commit-tree $(git rev-parse \"$branch^{tree}\") -p $mergeBase -m _)) == \"-\"* ]]; then \
+        git branch -D $branch; \
+      fi; \
+    done; \
+    git remote prune origin; \
+  }; f"
 
   # http://www.jukie.net/bart/blog/pimping-out-git-log
   lg = log --graph --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset'
@@ -75,3 +83,9 @@
   format = ssh
 [commit]
   gpgsign = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

@@ -1,0 +1,11 @@
+# Used by scripts/install-private and scripts/edit-private.
+
+recipient: age1e2qkevjus09dfzmr82xppyuedlcya5283kf0u4ydsk7qgyhqgumspm36nl
+identity: age.key
+private: private.env.age
+
+# destination → source (relative to dotfiles root)
+files:
+  ~/.ssh/config: ssh/config.private
+  ~/.aws/config: aws/config.private
+  ~/.zshenv.private: zsh/zshenv.private

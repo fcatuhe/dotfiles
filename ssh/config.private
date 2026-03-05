@@ -1,0 +1,26 @@
+Host patoumatic dropbear-patoumatic
+  HostName {{SSH_PATOUMATIC_IP}}
+  User {{SSH_PATOUMATIC_USER}}
+
+Host dropbear-patoumatic
+  Port 2222
+
+Host crooz
+  HostName {{SSH_CROOZ_IP}}
+  User {{SSH_CROOZ_USER}}
+
+Host azade
+  HostName {{SSH_AZADE_IP}}
+  User {{SSH_AZADE_USER}}
+
+Host clawdzilla
+  HostName {{SSH_CLAWDZILLA_IP}}
+  User {{SSH_CLAWDZILLA_USER}}
+
+Host *
+  UseKeychain yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519
+  SetEnv TERM=xterm-256color
+
+Include ~/.colima/ssh_config
