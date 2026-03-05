@@ -52,7 +52,7 @@ The `encrypted/` folder is self-contained: age config, key, encrypted values, so
 
 ### Key Management
 
-The age private key is stored in Bitwarden under **"dotfiles age key"**.
+The age private key is stored in Bitwarden under **"dotfiles/encrypted/age.key"**.
 
 On a new machine:
 1. Retrieve the key from Bitwarden
