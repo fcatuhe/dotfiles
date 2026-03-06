@@ -26,21 +26,8 @@ export AWS_PROFILE=ridecell
 export AWS_REGION=us-west-2
 # export CLAUDE_CODE_USE_BEDROCK=1
 
-# ~/.local/bin is added by mise activate
-
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
-
-
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Added by Antigravity
-export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # Whisper
 export SUMMARIZE_WHISPER_CPP_MODEL_PATH="$HOME/.local/share/whisper-cpp/models/ggml-small-q8_0.bin"
