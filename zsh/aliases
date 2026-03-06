@@ -23,5 +23,8 @@ alias marps='marp -s .'
 alias wlkd='wlk --backend mlx-whisper --model large-v3-turbo --diarization --diarization-backend diart'
 alias wlkd-fr='wlkd --language fr'
 
+# Git log graph all branches
+alias gla='glola'
+
 # Git sweep
 alias gs='git sweep'
