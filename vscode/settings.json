@@ -1,27 +1,14 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[erb]": {
-    "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
+    "editor.defaultFormatter": "Shopify.ruby-lsp"
   },
   "files.associations": {
     "*.html.erb": "erb",
     "llms.txt": "markdown",
     "llms-full.txt": "markdown"
   },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "diffEditor.ignoreTrimWhitespace": false,
-  "diffEditor.renderSideBySide": true,
   "editor.fontFamily": "'Cascadia Code', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 13,
@@ -40,25 +27,13 @@
   "prettier.requireConfig": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
-  "ruby.lint": {
-    "rubocop": true
-  },
   "telemetry.telemetryLevel": "off",
+  "redhat.telemetry.enabled": false,
   "extensions.ignoreRecommendations": false,
-  "workbench.startupEditor": "newUntitledFile",
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter.notebook.ipynb"
-  },
-  "editor.bracketPairColorization.enabled": true,
   "explorer.confirmDragAndDrop": false,
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "security.workspace.trust.untrustedFiles": "open",
   "workbench.sideBar.location": "right",
-  "redhat.telemetry.enabled": false,
   "[sql]": {
-
     "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
   },
   "explorer.sortOrder": "mixed",
@@ -82,13 +57,7 @@
     "*.jsx": "${capture}.js",
     "*.tsx": "${capture}.ts",
     "tsconfig.json": "tsconfig.*.json",
-    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb",
-    "*.sqlite": "${capture}.${extname}-*",
-    "*.db": "${capture}.${extname}-*",
-    "*.sqlite3": "${capture}.${extname}-*",
-    "*.db3": "${capture}.${extname}-*",
-    "*.sdb": "${capture}.${extname}-*",
-    "*.s3db": "${capture}.${extname}-*"
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb"
   },
   "[dockercompose]": {
     "editor.insertSpaces": true,
