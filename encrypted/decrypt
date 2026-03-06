@@ -36,4 +36,5 @@ for src in "$ENCRYPTED_DIR"/*/*.* "$ENCRYPTED_DIR"/*/*; do
   echo "  → $dest"
 done
 
-chmod -R 700 "$PRIVATE_DIR"
+find "$PRIVATE_DIR" -type d -exec chmod 700 {} \;
+find "$PRIVATE_DIR" -type f -exec chmod 600 {} \;
