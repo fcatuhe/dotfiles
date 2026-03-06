@@ -26,8 +26,7 @@ export AWS_PROFILE=ridecell
 export AWS_REGION=us-west-2
 # export CLAUDE_CODE_USE_BEDROCK=1
 
-# claude & others
-export PATH="$HOME/.local/bin:$PATH"
+# ~/.local/bin is added by mise activate
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
