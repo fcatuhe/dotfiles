@@ -1,8 +1,7 @@
-- shell:
-    - command: ./encrypted/decrypt
-      description: Decrypt private config into private/
-      stdout: true
-      stderr: true
+- plugins:
+    - dotbot-age
+
+- decrypt:
 
 - defaults:
     link:
