@@ -10,8 +10,8 @@ alias cc="claude"
 alias cx="codex"
 alias oc="opencode"
 
-# pi with prompt - usage: pip "your prompt here"
-alias pip='pi -p'
+# pi with prompt - usage: pii "your prompt here"
+alias pii='pi -p'
 
 # Update pi itself + its packages
 alias piu='npm install -g @mariozechner/pi-coding-agent && pi update'

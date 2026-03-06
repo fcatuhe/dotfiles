@@ -40,14 +40,10 @@
   "prettier.requireConfig": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
-  "python.linting.flake8Enabled": true,
-  "python.linting.flake8Args": [
-    "--max-line-length=120"
-  ],
   "ruby.lint": {
     "rubocop": true
   },
-  "telemetry.enableTelemetry": false,
+  "telemetry.telemetryLevel": "off",
   "extensions.ignoreRecommendations": false,
   "workbench.startupEditor": "newUntitledFile",
   "workbench.editorAssociations": {
