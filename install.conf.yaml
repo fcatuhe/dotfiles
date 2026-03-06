@@ -17,7 +17,7 @@
     ~/.zprofile: zsh/zprofile
     ~/.zshenv: zsh/zshenv
     ~/.zshrc: zsh/zshrc
-    ~/.zshenv.private: private/zsh/zshenv
+    ~/.zshenv.private: private/zsh/zshenv.private
 
     # git
     ~/.gitconfig: git/config
