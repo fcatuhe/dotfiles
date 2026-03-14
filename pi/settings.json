@@ -5,6 +5,14 @@
   "defaultThinkingLevel": "medium",
   "quietStartup": true,
   "packages": [
-    "git:github.com/fcatuhe/pi-hooks@feat/ruby-lsp"
+    {
+      "source": "git:github.com/fcatuhe/pi-hooks@feat/ruby-lsp",
+      "extensions": [
+        "-checkpoint/checkpoint.ts",
+        "-permission/permission.ts",
+        "-ralph-loop/ralph-loop.ts",
+        "-repeat/repeat.ts"
+      ]
+    }
   ]
 }
