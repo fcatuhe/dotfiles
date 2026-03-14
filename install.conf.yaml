@@ -51,4 +51,4 @@
 
     # pi
     ~/.pi/agent/settings.json: pi/settings.json
-    ~/.pi/agent/extensions/anthropic-web-search.ts: pi/extensions/anthropic-web-search.ts
+    # ~/.pi/agent/extensions/anthropic-web-search.ts: pi/extensions/anthropic-web-search.ts
