@@ -35,6 +35,16 @@
       path: vscode/settings.json
       if: '[ "$(uname)" = "Darwin" ]'
 
+    # hyprland (Linux only)
+    ~/.config/hypr:
+      path: hypr
+      if: '[ "$(uname)" = "Linux" ]'
+
+    # environment.d (Linux only)
+    ~/.config/environment.d:
+      path: environment.d
+      if: '[ "$(uname)" = "Linux" ]'
+
     # claude
     ~/.claude/settings.json: claude/settings.json
     ~/.claude/statusline-command.sh: claude/statusline-command.sh
