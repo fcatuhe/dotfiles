@@ -5,6 +5,7 @@ plugins=(common-aliases git gitfast history-substring-search kamal last-working-
 export HOMEBREW_NO_ANALYTICS=1
 
 source "${ZSH}/oh-my-zsh.sh"
+[[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 unalias rm
 
 type -a mise > /dev/null && eval "$(mise activate zsh)"
