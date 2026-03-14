@@ -32,6 +32,8 @@
   // Git
   "git.autofetch": true,
   "git.confirmSync": false,
+  "git.detectSubmodules": false,
+  "git.autoRepositoryDetection": "openEditors",
 
   // Formatters
   "editor.defaultFormatter": "esbenp.prettier-vscode",
