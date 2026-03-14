@@ -76,9 +76,11 @@
 [user]
   email = francois@hey.com
   name = François Catuhe
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA9dYZ6uxVPNTruoExoOH2XyANhVMYxxXZhmzgViNOK6
+  signingkey = ~/.ssh/id_ed25519.pub
 [gpg]
   format = ssh
+[gpg "ssh"]
+  program = ssh-keygen
 [commit]
   gpgsign = true
 [credential "https://github.com"]

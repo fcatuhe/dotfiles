@@ -14,9 +14,12 @@ Host azade
   User {{SSH_AZADE_USER}}
 
 Host *
+  IgnoreUnknown UseKeychain
   UseKeychain yes
   AddKeysToAgent yes
-  IdentityFile ~/.ssh/id_ed25519
+  IdentityAgent ~/.bitwarden-ssh-agent.sock
   SetEnv TERM=xterm-256color
 
-Include ~/.colima/ssh_config
+Match host * exec "uname | grep -q Darwin"
+  IdentityFile ~/.ssh/id_ed25519
+  Include ~/.colima/ssh_config
