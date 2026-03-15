@@ -55,5 +55,6 @@
 
     # pi
     ~/.pi/agent/settings.json: pi/settings.json
-    ~/.pi/agent/skills/transcribe: pi/skills/transcribe
     # ~/.pi/agent/extensions/anthropic-web-search.ts: pi/extensions/anthropic-web-search.ts
+    ~/.pi/agent/extensions/compact-footer.ts: pi/extensions/compact-footer.ts
+    ~/.pi/agent/skills/transcribe: pi/skills/transcribe
