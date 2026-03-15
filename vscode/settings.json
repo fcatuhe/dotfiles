@@ -69,5 +69,6 @@
   "telemetry.telemetryLevel": "off",
   "redhat.telemetry.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
-  "workbench.startupEditor": "none"
+  "workbench.startupEditor": "none",
+  "workbench.secondarySideBar.defaultVisibility": "hidden"
 }
