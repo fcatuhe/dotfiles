@@ -11,7 +11,7 @@ unalias rm
 
 type -a mise > /dev/null && eval "$(mise activate zsh)"
 
-export PATH="./bin:${PATH}"
+export PATH="./bin:$HOME/.local/bin:${PATH}"
 
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
