@@ -8,6 +8,7 @@
   "modules-center": ["clock", "custom/update", "custom/voxtype", "custom/screenrecording-indicator", "custom/idle-indicator", "custom/notification-silencing-indicator"],
   "modules-right": [
     "group/tray-expander",
+    "custom/claudebar",
     "bluetooth",
     "network",
     "pulseaudio",
@@ -170,5 +171,13 @@
   "tray": {
     "icon-size": 12,
     "spacing": 17
+  },
+  "custom/claudebar": {
+    "exec": "~/.local/bin/claudebar --format-pace-color --tooltip-pace-pts --format '{session_pace_indicator}{session_pace_abs_delta}·{weekly_pace_indicator}{weekly_pace_abs_delta}'",
+    "return-type": "json",
+    "interval": 300,
+    "signal": 13,
+    "tooltip": true,
+    "on-click": "xdg-open https://claude.ai/settings/usage"
   }
 }

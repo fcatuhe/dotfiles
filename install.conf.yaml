@@ -44,6 +44,9 @@
     ~/.config/waybar:
       path: waybar
       if: '[ "$(uname)" = "Linux" ]'
+    # ~/.local/bin/claudebar:
+    #   path: ../oss/claudebar/claudebar
+    #   if: '[ "$(uname)" = "Linux" ]'
 
     # environment.d (Linux only)
     ~/.config/environment.d:
