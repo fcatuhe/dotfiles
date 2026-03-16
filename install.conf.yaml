@@ -40,6 +40,11 @@
       path: hypr
       if: '[ "$(uname)" = "Linux" ]'
 
+    # waybar (Linux only)
+    ~/.config/waybar:
+      path: waybar
+      if: '[ "$(uname)" = "Linux" ]'
+
     # environment.d (Linux only)
     ~/.config/environment.d:
       path: environment.d
