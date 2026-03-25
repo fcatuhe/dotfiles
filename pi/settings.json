@@ -13,6 +13,7 @@
         "-ralph-loop/ralph-loop.ts",
         "-repeat/repeat.ts"
       ]
-    }
+    },
+    "git:github.com/badlogic/pi-skills"
   ]
 }
