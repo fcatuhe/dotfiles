@@ -15,5 +15,17 @@
       ]
     },
     "git:github.com/badlogic/pi-skills"
+  ],
+  "extensions": [
+    "~/.pi/agent/extensions/anthropic-web-search.ts"
+  ],
+  "skills": [
+    "~/.pi/agent/git/github.com/badlogic/pi-skills/brave-search",
+    "~/.pi/agent/git/github.com/badlogic/pi-skills/browser-tools",
+    "~/.pi/agent/git/github.com/badlogic/pi-skills/gccli",
+    "~/.pi/agent/git/github.com/badlogic/pi-skills/gdcli",
+    "~/.pi/agent/git/github.com/badlogic/pi-skills/gmcli",
+    "~/.pi/agent/git/github.com/badlogic/pi-skills/vscode",
+    "~/.pi/agent/git/github.com/badlogic/pi-skills/youtube-transcript"
   ]
 }

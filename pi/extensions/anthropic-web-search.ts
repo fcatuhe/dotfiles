@@ -1,42 +1,67 @@
-// Adds Anthropic's server-side web_search tool to Claude requests.
+// Adds Anthropic server-side web search to Claude requests.
 //
-// 2026-03-11: pi-ai's convertMessages runs sanitizeSurrogates on thinking
-// block text, which breaks the cryptographic signature. Anthropic returns 400:
-//   "thinking or redacted_thinking blocks in the latest assistant message
-//    cannot be modified."
-// Workaround: strip thinking blocks from history in the `context` event
-// (before convertMessages touches them). Claude loses prior reasoning chain
-// in context, but the reasoning is already reflected in the text responses.
+// Wraps streamSimpleAnthropic, patches the outbound payload to:
+//   1. Restore signed thinking text after pi-ai's sanitizeSurrogates corrupts it.
+//   2. Inject the web_search_20250305 server tool.
 //
-// This also busts Anthropic's prompt cache — the message prefix changes every
-// turn since thinking blocks are missing, so the API can never match a cached
-// prefix. The proper fix is in pi-ai: don't run sanitizeSurrogates on signed
-// thinking blocks (the text + signature are a cryptographic pair).
+// When pi fixes sanitizeSurrogates to skip signed blocks, (1) becomes a no-op.
+// server_tool_use / web_search_tool_result blocks are dropped by pi-ai's
+// streaming parser — search results only appear in Claude's text response.
 
+import { type Context, type SimpleStreamOptions, streamSimpleAnthropic } from "@mariozechner/pi-ai";
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
 
-export default function (pi: ExtensionAPI) {
-	// Strip thinking blocks from assistant message history so convertMessages
-	// never runs sanitizeSurrogates on signed content.
-	pi.on("context", async (event) => {
-		const messages = event.messages.map((msg: any) => {
-			if (msg.role === "assistant" && Array.isArray(msg.content)) {
-				return {
-					...msg,
-					content: msg.content.filter((block: any) => block.type !== "thinking"),
-				};
-			}
-			return msg;
-		});
-		return { messages };
-	});
+function restoreSignedThinking(payload: any, context: Context): void {
+	if (!Array.isArray(payload?.messages)) return;
 
-	// Add Anthropic's server-side web search tool to the API payload.
-	pi.on("before_provider_request", (event) => {
-		const payload = event.payload as any;
-		if (!payload?.model?.startsWith?.("claude")) return;
-		const tools = payload.tools ?? [];
-		tools.push({ type: "web_search_20250305", name: "web_search" });
-		return { ...payload, tools };
+	const originals = new Map<string, string>();
+	for (const msg of context.messages) {
+		if (msg.role !== "assistant" || !Array.isArray(msg.content)) continue;
+		for (const block of msg.content) {
+			if (block.type === "thinking" && !block.redacted && block.thinkingSignature?.trim() && block.thinking?.trim()) {
+				originals.set(block.thinkingSignature, block.thinking);
+			}
+		}
+	}
+	if (originals.size === 0) return;
+
+	for (const msg of payload.messages) {
+		if (msg.role !== "assistant" || !Array.isArray(msg.content)) continue;
+		for (const block of msg.content) {
+			if (block.type === "thinking" && block.signature) {
+				const original = originals.get(block.signature);
+				if (original !== undefined) block.thinking = original;
+			}
+		}
+	}
+}
+
+function addWebSearchTool(payload: any, model: { provider: string }): void {
+	if (model.provider !== "anthropic") return;
+	const tools: any[] = payload.tools ?? [];
+	if (tools.some((t: any) => t.type === "web_search_20250305")) return;
+	tools.push({ type: "web_search_20250305", name: "web_search" });
+	payload.tools = tools;
+}
+
+export default function (pi: ExtensionAPI) {
+	pi.registerProvider("anthropic-websearch", {
+		api: "anthropic-messages",
+		streamSimple: (model, context, options?: SimpleStreamOptions) => {
+			const outerOnPayload = options?.onPayload;
+			return streamSimpleAnthropic(model, context, {
+				...options,
+				onPayload: async (payload, payloadModel) => {
+					let next = payload;
+					if (outerOnPayload) {
+						const modified = await outerOnPayload(next, payloadModel);
+						if (modified !== undefined) next = modified;
+					}
+					restoreSignedThinking(next, context);
+					addWebSearchTool(next, payloadModel);
+					return next;
+				},
+			});
+		},
 	});
 }
