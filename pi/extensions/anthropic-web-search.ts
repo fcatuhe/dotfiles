@@ -4,9 +4,13 @@
 //   1. Restore signed thinking text after pi-ai's sanitizeSurrogates corrupts it.
 //   2. Inject the web_search_20250305 server tool.
 //
-// When pi fixes sanitizeSurrogates to skip signed blocks, (1) becomes a no-op.
-// server_tool_use / web_search_tool_result blocks are dropped by pi-ai's
-// streaming parser — search results only appear in Claude's text response.
+// BROKEN: pi-ai's streaming parser only handles text, thinking, redacted_thinking,
+// and tool_use content blocks. When Claude uses web search, the API returns
+// server_tool_use and web_search_tool_result blocks which are silently dropped.
+// On the next turn, the truncated assistant message is sent back, and the API
+// rejects it with "thinking blocks in the latest assistant message cannot be
+// modified" because the content array no longer matches the original response.
+// This needs an upstream fix in pi-ai to preserve server tool blocks.
 
 import { type Context, type SimpleStreamOptions, streamSimpleAnthropic } from "@mariozechner/pi-ai";
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
