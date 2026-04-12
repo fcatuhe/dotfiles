@@ -1,0 +1,72 @@
+{
+  "providers": {
+    "fireworks": {
+      "baseUrl": "https://api.fireworks.ai/inference/v1",
+      "api": "openai-completions",
+      "apiKey": "FIREWORKS_API_KEY",
+      "authHeader": true,
+      "compat": {
+        "supportsDeveloperRole": false,
+        "supportsReasoningEffort": false
+      },
+      "models": [
+        {
+          "id": "accounts/fireworks/models/kimi-k2p5",
+          "name": "Kimi K2.5 (Fireworks)",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 262144,
+          "maxTokens": 262144,
+          "cost": {
+            "input": 0.6,
+            "output": 3,
+            "cacheRead": 0.1,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "accounts/fireworks/models/glm-5p1",
+          "name": "GLM 5.1 (Fireworks)",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 202752,
+          "maxTokens": 131072,
+          "cost": {
+            "input": 1.4,
+            "output": 4.4,
+            "cacheRead": 0.26,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "accounts/fireworks/models/minimax-m2p7",
+          "name": "MiniMax M2.7 (Fireworks)",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 204800,
+          "maxTokens": 65536,
+          "cost": {
+            "input": 0.3,
+            "output": 1.2,
+            "cacheRead": 0.059,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "accounts/fireworks/routers/kimi-k2p5-turbo",
+          "name": "Kimi K2.5 Turbo (Fireworks)",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 262144,
+          "maxTokens": 262144,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    }
+  }
+}

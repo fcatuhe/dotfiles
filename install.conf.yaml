@@ -44,9 +44,6 @@
     ~/.config/waybar:
       path: waybar
       if: '[ "$(uname)" = "Linux" ]'
-    # ~/.local/bin/claudebar:
-    #   path: ../oss/claudebar/claudebar
-    #   if: '[ "$(uname)" = "Linux" ]'
 
     # environment.d (Linux only)
     ~/.config/environment.d:
@@ -66,6 +63,7 @@
 
     # pi
     ~/.pi/agent/settings.json: pi/settings.json
+    ~/.pi/agent/models.json: pi/models.json
     # ~/.pi/agent/extensions/anthropic-web-search.ts: pi/extensions/anthropic-web-search.ts
     ~/.pi/agent/extensions/compact-footer.ts: pi/extensions/compact-footer.ts
     ~/.pi/agent/skills/transcribe: pi/skills/transcribe
