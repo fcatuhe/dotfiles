@@ -27,6 +27,11 @@
   // Workbench
   "workbench.colorTheme": "Spinel",
   "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "none",
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "workbench.welcomePage.walkthroughs.openOnInstall": false,
+  "workbench.tips.enabled": false,
+  "workbench.settings.showAISearchToggle": false,
   "update.showReleaseNotes": false,
 
   // Git
@@ -57,6 +62,10 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
 
+  // Chat / Copilot AI UI — keep it out of the way
+  "chat.commandCenter.enabled": false,
+  "chat.agent.enabled": false,
+
   // Extensions
   "extensions.ignoreRecommendations": false,
   "rubyLsp.enableExperimentalFeatures": false,
@@ -68,7 +77,5 @@
   // Privacy
   "telemetry.telemetryLevel": "off",
   "redhat.telemetry.enabled": false,
-  "security.workspace.trust.untrustedFiles": "open",
-  "workbench.startupEditor": "none",
-  "workbench.secondarySideBar.defaultVisibility": "hidden"
+  "security.workspace.trust.untrustedFiles": "open"
 }
