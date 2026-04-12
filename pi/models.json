@@ -60,9 +60,9 @@
           "contextWindow": 262144,
           "maxTokens": 262144,
           "cost": {
-            "input": 0,
-            "output": 0,
-            "cacheRead": 0,
+            "input": 0.6,
+            "output": 3,
+            "cacheRead": 0.1,
             "cacheWrite": 0
           }
         }

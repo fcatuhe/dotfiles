@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.66.1",
   "defaultProvider": "fireworks",
-  "defaultModel": "accounts/fireworks/models/minimax-m2p7",
+  "defaultModel": "accounts/fireworks/routers/kimi-k2p5-turbo",
   "defaultThinkingLevel": "medium",
   "quietStartup": true,
   "packages": [
