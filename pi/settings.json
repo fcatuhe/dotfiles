@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.66.1",
   "defaultProvider": "fireworks",
-  "defaultModel": "accounts/fireworks/models/minimax-m2p7",
+  "defaultModel": "accounts/fireworks/models/glm-5p1",
   "defaultThinkingLevel": "medium",
   "quietStartup": true,
   "packages": [
