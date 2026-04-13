@@ -3,11 +3,9 @@ alias gla='glola'
 alias gs='git sweep'
 
 # AI assistants
-alias cc="claude"
-alias cx="codex"
-alias oc="opencode"
-alias pii='pi -p'
-alias piu='npm install -g @mariozechner/pi-coding-agent && pi update'
+alias pi='clear && \pi'
+alias pii='\pi -p'
+alias piu='npm install -g @mariozechner/pi-coding-agent && \pi update'
 
 # Transcription
 alias wlkd='wlk --backend mlx-whisper --model large-v3-turbo --diarization --diarization-backend diart'
