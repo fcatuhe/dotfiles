@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.66.1",
   "defaultProvider": "fireworks",
-  "defaultModel": "accounts/fireworks/routers/kimi-k2p5-turbo",
+  "defaultModel": "accounts/fireworks/models/minimax-m2p7",
   "defaultThinkingLevel": "medium",
   "quietStartup": true,
   "packages": [
@@ -17,7 +17,8 @@
     "git:github.com/badlogic/pi-skills"
   ],
   "extensions": [
-    "~/.pi/agent/extensions/anthropic-web-search.ts"
+    "~/.pi/agent/extensions/compact-footer.ts",
+    "~/.pi/agent/extensions/subagent"
   ],
   "skills": [
     "~/.pi/agent/git/github.com/badlogic/pi-skills/brave-search",
