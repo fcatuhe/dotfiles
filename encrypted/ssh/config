@@ -13,6 +13,10 @@ Host azade
   HostName {{SSH_AZADE_IP}}
   User {{SSH_AZADE_USER}}
 
+Host flyzilla
+  HostName {{SSH_FLYZILLA_IP}}
+  User {{SSH_FLYZILLA_USER}}
+
 Host *
   IgnoreUnknown UseKeychain
   UseKeychain yes
