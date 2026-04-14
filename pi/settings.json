@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.66.1",
+  "lastChangelogVersion": "0.67.1",
   "defaultProvider": "fireworks",
   "defaultModel": "accounts/fireworks/models/glm-5p1",
   "defaultThinkingLevel": "medium",
@@ -29,5 +29,8 @@
     "~/.pi/agent/git/github.com/badlogic/pi-skills/gmcli",
     "~/.pi/agent/git/github.com/badlogic/pi-skills/vscode",
     "~/.pi/agent/git/github.com/badlogic/pi-skills/youtube-transcript"
-  ]
+  ],
+  "compaction": {
+    "enabled": true
+  }
 }
