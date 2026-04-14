@@ -18,6 +18,7 @@
   ],
   "extensions": [
     "~/.pi/agent/extensions/compact-footer.ts",
+    "~/.pi/agent/extensions/model-shortcuts.ts",
     "~/.pi/agent/extensions/subagent"
   ],
   "skills": [

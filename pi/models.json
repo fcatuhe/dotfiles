@@ -1,4 +1,7 @@
 {
+  "aliases": {
+    "gpt": "openai-codex:gpt-5.4"
+  },
   "providers": {
     "fireworks": {
       "baseUrl": "https://api.fireworks.ai/inference/v1",
@@ -12,6 +15,7 @@
       "models": [
         {
           "id": "accounts/fireworks/models/kimi-k2p5",
+          "alias": "kimi",
           "name": "Kimi K2.5 (Fireworks)",
           "reasoning": true,
           "input": ["text", "image"],
@@ -26,6 +30,7 @@
         },
         {
           "id": "accounts/fireworks/models/glm-5p1",
+          "alias": "glm",
           "name": "GLM 5.1 (Fireworks)",
           "reasoning": true,
           "input": ["text"],
@@ -40,6 +45,7 @@
         },
         {
           "id": "accounts/fireworks/models/minimax-m2p7",
+          "alias": "minimax",
           "name": "MiniMax M2.7 (Fireworks)",
           "reasoning": true,
           "input": ["text"],
@@ -54,6 +60,7 @@
         },
         {
           "id": "accounts/fireworks/routers/kimi-k2p5-turbo",
+          "alias": "kimit",
           "name": "Kimi K2.5 Turbo (Fireworks)",
           "reasoning": true,
           "input": ["text", "image"],
