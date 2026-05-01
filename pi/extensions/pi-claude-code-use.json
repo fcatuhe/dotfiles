@@ -1,10 +1,6 @@
 {
   "toolAliases": [
     [
-      "subagent",
-      "mcp__extension__subagent"
-    ],
-    [
       "sidequests",
       "mcp__extension__sidequests"
     ]
