@@ -5,8 +5,8 @@
       "mcp__extension__subagent"
     ],
     [
-      "sidequest",
-      "mcp__extension__sidequest"
+      "sidequests",
+      "mcp__extension__sidequests"
     ]
   ]
 }
