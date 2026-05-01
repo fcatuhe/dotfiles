@@ -25,7 +25,7 @@
   "explorer.sortOrder": "mixed",
 
   // Workbench
-  "workbench.colorTheme": "Spinel",
+  // "workbench.colorTheme": "Spinel",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
   "workbench.secondarySideBar.defaultVisibility": "hidden",
@@ -33,6 +33,7 @@
   "workbench.tips.enabled": false,
   "workbench.settings.showAISearchToggle": false,
   "update.showReleaseNotes": false,
+  "update.mode": "none",
 
   // Git
   "git.autofetch": true,
@@ -67,7 +68,7 @@
   "chat.agent.enabled": false,
 
   // Extensions
-  "extensions.ignoreRecommendations": false,
+  "extensions.ignoreRecommendations": true,
   "rubyLsp.enableExperimentalFeatures": false,
   "github.copilot.editor.enableAutoCompletions": true,
   "claudeCode.selectedModel": "default",
