@@ -1,0 +1,9 @@
+{
+  "opus":     { "provider": "anthropic",    "model": "claude-opus-4-7" },
+  "sonnet":   { "provider": "anthropic",    "model": "claude-sonnet-4-6" },
+  "gpt":      { "provider": "openai-codex", "model": "gpt-5.5" },
+  "deepseek": { "provider": "fireworks",    "model": "accounts/fireworks/models/deepseek-v4-pro" },
+  "glm":      { "provider": "fireworks",    "model": "accounts/fireworks/models/glm-5p1" },
+  "kimi":     { "provider": "fireworks",    "model": "accounts/fireworks/models/kimi-k2p6" },
+  "minimax":  { "provider": "fireworks",    "model": "accounts/fireworks/models/minimax-m2p7" }
+}

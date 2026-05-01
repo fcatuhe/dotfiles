@@ -1,25 +1,26 @@
 {
-  "lastChangelogVersion": "0.67.1",
-  "defaultProvider": "fireworks",
-  "defaultModel": "accounts/fireworks/models/glm-5p1",
+  "lastChangelogVersion": "0.71.0",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-7",
   "defaultThinkingLevel": "medium",
   "quietStartup": true,
   "packages": [
+    "~/fcode/pi-wares",
+    "git:github.com/badlogic/pi-skills",
+    {
+      "source": "git:github.com/fcatuhe/pi-packages@feat/claude-code-use-tool-aliases",
+      "extensions": [
+        "packages/pi-claude-code-use/extensions/index.ts"
+      ]
+    },
     {
       "source": "git:github.com/fcatuhe/pi-hooks@feat/ruby-lsp",
       "extensions": [
-        "-checkpoint/checkpoint.ts",
-        "-permission/permission.ts",
-        "-ralph-loop/ralph-loop.ts",
-        "-repeat/repeat.ts"
+        "lsp/lsp.ts",
+        "lsp/lsp-tool.ts",
+        "token-rate/token-rate.ts"
       ]
-    },
-    "git:github.com/badlogic/pi-skills"
-  ],
-  "extensions": [
-    "~/.pi/agent/extensions/compact-footer.ts",
-    "~/.pi/agent/extensions/model-shortcuts.ts",
-    "~/.pi/agent/extensions/subagent"
+    }
   ],
   "skills": [
     "~/.pi/agent/git/github.com/badlogic/pi-skills/brave-search",
@@ -32,5 +33,10 @@
   ],
   "compaction": {
     "enabled": true
-  }
+  },
+  "enabledModels": [
+    "anthropic/claude-opus-4-7",
+    "anthropic/claude-sonnet-4-6",
+    "openai-codex/gpt-5.5"
+  ]
 }
