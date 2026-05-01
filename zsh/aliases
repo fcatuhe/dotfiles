@@ -4,6 +4,7 @@ alias gs='git sweep'
 
 # AI assistants
 alias pi='clear && \pi'
+alias pir='\pi -r'
 alias pii='\pi -p'
 alias piu='npm install -g @mariozechner/pi-coding-agent && \pi update'
 
