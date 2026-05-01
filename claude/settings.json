@@ -17,5 +17,6 @@
     "compound-engineering@every-marketplace": false,
     "swift-lsp@claude-plugins-official": false
   },
+  "effortLevel": "medium",
   "skipDangerousModePermissionPrompt": true
 }
