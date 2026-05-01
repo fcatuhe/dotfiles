@@ -14,7 +14,9 @@
 - link:
     # zsh
     ~/.aliases: zsh/aliases
-    ~/.zprofile: zsh/zprofile
+    ~/.zprofile:
+      path: zsh/zprofile
+      if: '[ "$(uname)" = "Darwin" ]'
     ~/.zshenv: zsh/zshenv
     ~/.zshrc: zsh/zshrc
     ~/.zshenv.private: private/zsh/zshenv.private
