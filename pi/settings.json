@@ -5,7 +5,7 @@
   "defaultThinkingLevel": "medium",
   "quietStartup": true,
   "packages": [
-    "git:github.com/fcatuhe/pi-wares",
+    "~/fcode/pi-wares",
     "git:github.com/badlogic/pi-skills",
     "npm:@benvargas/pi-claude-code-use",
     {
