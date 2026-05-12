@@ -17,13 +17,19 @@ Host flyzilla
   HostName {{SSH_FLYZILLA_IP}}
   User {{SSH_FLYZILLA_USER}}
 
+Host lambda-cloud
+  HostName {{SSH_LAMBDA_CLOUD_IP}}
+  User {{SSH_LAMBDA_CLOUD_USER}}
+
+# macOS-specific: Bitwarden desktop is sandboxed, socket lives under Containers.
+# Match blocks come first so their IdentityAgent wins over the Host * default.
+Match host * exec "uname | grep -q Darwin"
+  IdentityAgent ~/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
+  Include ~/.colima/ssh_config
+
 Host *
   IgnoreUnknown UseKeychain
   UseKeychain yes
   AddKeysToAgent yes
   IdentityAgent ~/.bitwarden-ssh-agent.sock
   SetEnv TERM=xterm-256color
-
-Match host * exec "uname | grep -q Darwin"
-  IdentityFile ~/.ssh/id_ed25519
-  Include ~/.colima/ssh_config
