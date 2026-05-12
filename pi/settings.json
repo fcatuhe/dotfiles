@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.72.1",
+  "lastChangelogVersion": "0.74.0",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-4-7",
   "defaultThinkingLevel": "medium",
@@ -34,5 +34,8 @@
     "anthropic/claude-sonnet-4-6",
     "openai-codex/gpt-5.5"
   ],
-  "transport": "websocket-cached"
+  "transport": "websocket-cached",
+  "warnings": {
+    "anthropicExtraUsage": false
+  }
 }
