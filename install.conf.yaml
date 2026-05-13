@@ -59,6 +59,9 @@
     # npm
     ~/.npmrc: npm/npmrc
 
+    # herdr
+    ~/.config/herdr/config.toml: herdr/config.toml
+
     # claude
     ~/.claude/settings.json: claude/settings.json
     ~/.claude/statusline-command.sh: claude/statusline-command.sh
