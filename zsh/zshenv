@@ -1,1 +1,6 @@
+# Bitwarden SSH agent (macOS)
+_bw_sock="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
+[ -S "$_bw_sock" ] && export SSH_AUTH_SOCK="$_bw_sock"
+unset _bw_sock
+
 [ -f ~/.zshenv.private ] && source ~/.zshenv.private
