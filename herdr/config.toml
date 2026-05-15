@@ -5,3 +5,6 @@ name = "catppuccin"
 
 [ui]
 agent_panel_scope = "current"
+
+[keys]
+prefix = "ctrl+space"
