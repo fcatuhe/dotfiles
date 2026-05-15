@@ -19,7 +19,6 @@
   ],
   "skills": [
     "~/.pi/agent/git/github.com/badlogic/pi-skills/brave-search",
-    "~/.pi/agent/git/github.com/badlogic/pi-skills/browser-tools",
     "~/.pi/agent/git/github.com/badlogic/pi-skills/gccli",
     "~/.pi/agent/git/github.com/badlogic/pi-skills/gdcli",
     "~/.pi/agent/git/github.com/badlogic/pi-skills/gmcli",
