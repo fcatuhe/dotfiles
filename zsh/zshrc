@@ -11,25 +11,21 @@ unalias rm
 
 type -a mise > /dev/null && eval "$(mise activate zsh)"
 
-export PATH="./bin:$HOME/.local/bin:${PATH}"
+export PATH="$HOME/.local/bin:${PATH}"
+# export PATH="./bin:$HOME/.local/bin:${PATH}"
 
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
 export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
 
-export BUNDLER_EDITOR=code
 export EDITOR="code --wait"
+export BUNDLER_EDITOR="code --wait"
 
 export CONSOLE_USER="François Catuhe"
+
+# ---------------------------------------------------------------------------
 
 # Ridecell
 export AWS_PROFILE=ridecell
 export AWS_REGION=us-west-2
 # export CLAUDE_CODE_USE_BEDROCK=1
-
-# opencode
-export PATH="$HOME/.opencode/bin:$PATH"
-
-# Whisper
-export SUMMARIZE_WHISPER_CPP_MODEL_PATH="$HOME/.local/share/whisper-cpp/models/ggml-small-q8_0.bin"
