@@ -12,24 +12,29 @@
 - clean: ['~']
 
 - link:
-    # zsh
-    ~/.aliases: zsh/aliases
+    # --- Shell ---
+    ~/.zshenv: zsh/zshenv
+    ~/.zshenv.private: private/zsh/zshenv.private
     ~/.zprofile:
       path: zsh/zprofile
       if: '[ "$(uname)" = "Darwin" ]'
-    ~/.zshenv: zsh/zshenv
     ~/.zshrc: zsh/zshrc
-    ~/.zshenv.private: private/zsh/zshenv.private
+    ~/.aliases: zsh/aliases
 
-    # git
+    # --- Version control ---
     ~/.gitconfig: git/config
     ~/.config/git/ignore: git/ignore
+    ~/.config/gh/config.yml: gh/config.yml
+    ~/.config/gh/hosts.yml: gh/hosts.yml
 
-    # ssh + aws (decrypted)
+    # --- Credentials (decrypted via dotbot-age) ---
     ~/.ssh/config: private/ssh/config
     ~/.aws/config: private/aws/config
 
-    # vscode
+    # --- Package managers ---
+    ~/.npmrc: npm/npmrc
+
+    # --- Editors ---
     ~/.config/Code/User/settings.json:
       path: vscode/settings.json
       if: '[ "$(uname)" = "Linux" ]'
@@ -37,35 +42,23 @@
       path: vscode/settings.json
       if: '[ "$(uname)" = "Darwin" ]'
 
-    # hyprland (Linux only)
+    # --- Linux desktop ---
     ~/.config/hypr:
       path: hypr
       if: '[ "$(uname)" = "Linux" ]'
-
-    # waybar (Linux only)
     ~/.config/waybar:
       path: waybar
       if: '[ "$(uname)" = "Linux" ]'
-
-    # environment.d (Linux only)
     ~/.config/environment.d:
       path: environment.d
       if: '[ "$(uname)" = "Linux" ]'
 
-    # gh
-    ~/.config/gh/config.yml: gh/config.yml
-    ~/.config/gh/hosts.yml: gh/hosts.yml
-
-    # npm
-    ~/.npmrc: npm/npmrc
-
-    # herdr
+    # --- CLI tools ---
     ~/.config/herdr/config.toml: herdr/config.toml
 
-    # claude
-    ~/.claude/settings.json: claude/settings.json
-    ~/.claude/statusline-command.sh: claude/statusline-command.sh
-
-    # pi
+    # --- AI agents ---
     ~/.pi/agent/settings.json: pi/settings.json
     ~/.pi/agent/extensions: pi/extensions
+
+    ~/.claude/settings.json: claude/settings.json
+    ~/.claude/statusline-command.sh: claude/statusline-command.sh
