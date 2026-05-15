@@ -8,3 +8,6 @@ agent_panel_scope = "all"
 
 [keys]
 prefix = "ctrl+space"
+
+[experimental]
+kitty_graphics = true
