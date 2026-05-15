@@ -17,9 +17,9 @@ Host flyzilla
   HostName {{SSH_FLYZILLA_IP}}
   User {{SSH_FLYZILLA_USER}}
 
-Host lambda-cloud
-  HostName {{SSH_LAMBDA_CLOUD_IP}}
-  User {{SSH_LAMBDA_CLOUD_USER}}
+Host lambda
+  HostName {{SSH_LAMBDA_IP}}
+  User {{SSH_LAMBDA_USER}}
 
 # macOS-specific: Bitwarden desktop is sandboxed, socket lives under Containers.
 # Match blocks come first so their IdentityAgent wins over the Host * default.
@@ -32,4 +32,3 @@ Host *
   UseKeychain yes
   AddKeysToAgent yes
   IdentityAgent ~/.bitwarden-ssh-agent.sock
-  SetEnv TERM=xterm-256color
