@@ -3,6 +3,10 @@
     [
       "sidequests",
       "mcp__extension__sidequests"
+    ],
+    [
+      "lsp",
+      "mcp__extension__lsp"
     ]
   ]
 }
