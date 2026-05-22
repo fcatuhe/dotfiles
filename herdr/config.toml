@@ -5,9 +5,8 @@ name = "catppuccin"
 
 [ui]
 agent_panel_scope = "all"
-
-[keys]
-prefix = "ctrl+space"
+show_agent_labels_on_pane_borders = true
+prompt_new_tab_name = false
 
 [experimental]
 kitty_graphics = true

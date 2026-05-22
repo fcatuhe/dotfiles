@@ -21,6 +21,12 @@ Host lambda
   HostName {{SSH_LAMBDA_IP}}
   User {{SSH_LAMBDA_USER}}
 
+# Route GitHub SSH over 443 when port 22 is blocked
+# Host github.com
+#   HostName ssh.github.com
+#   Port 443
+#   User git
+
 # macOS-specific: Bitwarden desktop is sandboxed, socket lives under Containers.
 # Match blocks come first so their IdentityAgent wins over the Host * default.
 Match host * exec "uname | grep -q Darwin"
