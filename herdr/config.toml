@@ -3,6 +3,9 @@ onboarding = false
 [theme]
 name = "catppuccin"
 
+[keys]
+prefix = "ctrl+space"
+
 [ui]
 agent_panel_scope = "all"
 show_agent_labels_on_pane_borders = true
