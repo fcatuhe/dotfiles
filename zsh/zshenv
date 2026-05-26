@@ -3,4 +3,13 @@ _bw_sock="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-age
 [ -S "$_bw_sock" ] && export SSH_AUTH_SOCK="$_bw_sock"
 unset _bw_sock
 
+# Disable Metal residency-set keep-alive in llama.cpp / node-llama-cpp.
+# Works around upstream bug: GGML_ASSERT([rsets->data count] == 0) failed in
+# ggml-metal-device.m at process teardown, which crashes any short-lived CLI
+# consumer (qmd, llama.cpp tools, etc.) on macOS 15+ / Apple Silicon when
+# built from llama.cpp >= b7289. Tracked upstream: ggml-org/llama.cpp#22593,
+# fix in flight as #22595. Remove once node-llama-cpp ships a release that
+# includes the fix. Trade-off: loses the residency-set keep-alive perf hint.
+export GGML_METAL_NO_RESIDENCY=1
+
 [ -f ~/.zshenv.private ] && source ~/.zshenv.private
