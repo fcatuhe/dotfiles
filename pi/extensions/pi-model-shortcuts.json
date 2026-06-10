@@ -1,4 +1,5 @@
 {
+  "fable":    { "provider": "anthropic",    "model": "claude-fable-5" },
   "opus":     { "provider": "anthropic",    "model": "claude-opus-4-8" },
   "sonnet":   { "provider": "anthropic",    "model": "claude-sonnet-4-6" },
   "gpt":      { "provider": "openai-codex", "model": "gpt-5.5" },

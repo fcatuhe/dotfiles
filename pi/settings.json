@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.77.0",
+  "lastChangelogVersion": "0.79.1",
   "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-4-8",
+  "defaultModel": "claude-fable-5",
   "defaultThinkingLevel": "medium",
   "quietStartup": true,
   "packages": [
@@ -29,6 +29,7 @@
     "enabled": true
   },
   "enabledModels": [
+    "anthropic/claude-fable-5",
     "anthropic/claude-opus-4-8",
     "anthropic/claude-sonnet-4-6",
     "openai-codex/gpt-5.5",
