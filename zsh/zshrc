@@ -29,3 +29,6 @@ export CONSOLE_USER="François Catuhe"
 export AWS_PROFILE=ridecell
 export AWS_REGION=us-west-2
 # export CLAUDE_CODE_USE_BEDROCK=1
+
+# fzf shell integration (Ctrl-R history, Ctrl-T files, Alt-C cd)
+source <(fzf --zsh)
