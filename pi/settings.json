@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.79.1",
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-fable-5",
+  "lastChangelogVersion": "0.79.3",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
   "defaultThinkingLevel": "medium",
   "quietStartup": true,
   "packages": [
@@ -15,7 +15,8 @@
         "lsp/lsp-tool.ts",
         "token-rate/token-rate.ts"
       ]
-    }
+    },
+    "npm:@qraxiss/pi-gemini-auth"
   ],
   "skills": [
     "~/.pi/agent/git/github.com/badlogic/pi-skills/brave-search",
@@ -33,7 +34,9 @@
     "anthropic/claude-opus-4-8",
     "anthropic/claude-sonnet-4-6",
     "openai-codex/gpt-5.5",
-    "ridecell/qwen3.6-27b"
+    "ridecell/qwen3.6-27b",
+    "google-gemini-cli/gemini-3-flash-preview",
+    "google-gemini-cli/gemini-3.1-flash-lite-preview"
   ],
   "transport": "websocket-cached",
   "warnings": {
