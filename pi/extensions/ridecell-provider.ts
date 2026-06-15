@@ -10,7 +10,7 @@ export default function (pi: ExtensionAPI) {
 	pi.registerProvider("ridecell", {
 		name: "Ridecell Inference",
 		baseUrl: "https://inference.ridecell.tech/v1",
-		apiKey: "RIDECELL_INFERENCE_API_KEY",
+		apiKey: "$RIDECELL_INFERENCE_API_KEY",
 		api: "openai-completions",
 		models: [
 			{
