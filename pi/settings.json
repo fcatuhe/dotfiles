@@ -19,12 +19,16 @@
     "npm:@qraxiss/pi-gemini-auth"
   ],
   "skills": [
+    "~/.pi/agent/skills/gog",
     "~/.pi/agent/git/github.com/badlogic/pi-skills/brave-search",
     "~/.pi/agent/git/github.com/badlogic/pi-skills/gccli",
     "~/.pi/agent/git/github.com/badlogic/pi-skills/gdcli",
     "~/.pi/agent/git/github.com/badlogic/pi-skills/gmcli",
     "~/.pi/agent/git/github.com/badlogic/pi-skills/vscode",
-    "~/.pi/agent/git/github.com/badlogic/pi-skills/youtube-transcript"
+    "~/.pi/agent/git/github.com/badlogic/pi-skills/youtube-transcript",
+    "-git/github.com/badlogic/pi-skills/gccli/SKILL.md",
+    "-git/github.com/badlogic/pi-skills/gdcli/SKILL.md",
+    "-git/github.com/badlogic/pi-skills/gmcli/SKILL.md"
   ],
   "compaction": {
     "enabled": true

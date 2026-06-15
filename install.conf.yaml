@@ -59,6 +59,7 @@
     # --- AI agents ---
     ~/.pi/agent/settings.json: pi/settings.json
     ~/.pi/agent/extensions: pi/extensions
+    ~/.pi/agent/skills: pi/skills
 
     ~/.agent-browser/.encryption-key: private/agent-browser/encryption-key
     ~/.agent-browser/auth: agent-browser/auth
