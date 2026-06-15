@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.79.3",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5",
+  "lastChangelogVersion": "0.79.4",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-8",
   "defaultThinkingLevel": "medium",
   "quietStartup": true,
   "packages": [
@@ -45,5 +45,6 @@
   "transport": "websocket-cached",
   "warnings": {
     "anthropicExtraUsage": false
-  }
+  },
+  "theme": "dark"
 }
