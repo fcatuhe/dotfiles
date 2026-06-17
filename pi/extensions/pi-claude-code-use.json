@@ -7,6 +7,10 @@
     [
       "lsp",
       "mcp__extension__lsp"
+    ],
+    [
+      "set_tab_title",
+      "mcp__extension__set_tab_title"
     ]
   ]
 }
