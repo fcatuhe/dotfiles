@@ -5,7 +5,7 @@ alias gs='git sweep'
 # AI assistants
 alias pir='pi -r'
 alias pii='pi -p' # pi inline
-alias piu='pi update'
+alias piu='pi update --all'
 
 # Transcription
 alias wlkd='wlk --backend mlx-whisper --model large-v3-turbo --diarization --diarization-backend diart'
