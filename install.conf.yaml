@@ -68,6 +68,3 @@
 
     ~/.agent-browser/.encryption-key: private/agent-browser/encryption-key
     ~/.agent-browser/auth: agent-browser/auth
-
-    ~/.claude/settings.json: claude/settings.json
-    ~/.claude/statusline-command.sh: claude/statusline-command.sh

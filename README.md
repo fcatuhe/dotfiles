@@ -93,9 +93,6 @@ zsh/
 vscode/
   settings.json                             # → ~/.config/Code/User/settings.json (Linux)
                                             #   ~/Library/.../settings.json (macOS)
-claude/
-  settings.json                             # → ~/.claude/settings.json
-  statusline-command.sh                     # → ~/.claude/statusline-command.sh
 pi/
   settings.json                             # → ~/.pi/agent/settings.json
   extensions/                               # → ~/.pi/agent/extensions

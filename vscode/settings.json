@@ -71,10 +71,6 @@
   "extensions.ignoreRecommendations": true,
   "rubyLsp.enableExperimentalFeatures": false,
   "github.copilot.editor.enableAutoCompletions": true,
-  "claudeCode.selectedModel": "default",
-  "claudeCode.allowDangerouslySkipPermissions": true,
-  "claudeCode.preferredLocation": "sidebar",
-
   // Privacy
   "telemetry.telemetryLevel": "off",
   "redhat.telemetry.enabled": false,

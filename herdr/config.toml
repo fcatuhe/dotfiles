@@ -3,10 +3,6 @@ onboarding = false
 [theme]
 name = "catppuccin"
 
-[terminal]
-default_shell = "/usr/bin/zsh"
-shell_mode = "login"
-
 [keys]
 prefix = "ctrl+space"
 
