@@ -1,0 +1,57 @@
+schema_version = 3
+
+[app_settings]
+launch_at_login = true
+check_for_updates = true
+update_prompt_seen = true
+show_in_menu_bar = false
+auto_download_assets = true
+thumbwheel_sensitivity = 14
+
+[devices.1b034.bindings.GestureButton]
+Left = "PreviousDesktop"
+Right = "NextDesktop"
+Click = "MissionControl"
+
+[devices."receiver:aa1b0f44a71c6b5e:slot:2".identity]
+display_name = "MX Master 3S"
+codename = "MX Master 3S"
+kind = "mouse"
+
+[devices."receiver:aa1b0f44a71c6b5e:slot:2".identity.model_info]
+entity_count = 3
+unit_id = [
+    0,
+    0,
+    0,
+    0,
+]
+model_ids = [
+    45108,
+    0,
+    0,
+]
+extended_model_id = 1
+
+[devices."receiver:aa1b0f44a71c6b5e:slot:2".identity.model_info.transports]
+usb = false
+equad = false
+btle = true
+bluetooth = false
+
+[devices."receiver:aa1b0f44a71c6b5e:slot:2".identity.capabilities]
+buttons = true
+pointer = true
+lighting = false
+scroll_inversion = true
+
+[devices."receiver:aa1b0f44a71c6b5e:slot:2".bindings]
+Back = "NextDesktop"
+Forward = "PreviousDesktop"
+
+[devices."receiver:aa1b0f44a71c6b5e:slot:2".bindings.GestureButton]
+Up = "AppExpose"
+Down = "ShowDesktop"
+Left = "BrowserBack"
+Right = "BrowserForward"
+Click = "MissionControl"

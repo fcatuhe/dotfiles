@@ -99,6 +99,8 @@ claude/
 pi/
   settings.json                             # → ~/.pi/agent/settings.json
   extensions/                               # → ~/.pi/agent/extensions
+openlogi/
+  config.toml                               # → ~/.config/openlogi/config.toml (macOS only)
 hypr/                                       # → ~/.config/hypr (Linux only)
 waybar/                                     # → ~/.config/waybar (Linux only)
 environment.d/                              # → ~/.config/environment.d (Linux only)

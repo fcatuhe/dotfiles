@@ -42,6 +42,11 @@
       path: vscode/settings.json
       if: '[ "$(uname)" = "Darwin" ]'
 
+    # --- macOS desktop ---
+    ~/.config/openlogi/config.toml:
+      path: openlogi/config.toml
+      if: '[ "$(uname)" = "Darwin" ]'
+
     # --- Linux desktop ---
     ~/.config/hypr:
       path: hypr
