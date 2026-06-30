@@ -2,14 +2,10 @@
 alias gla='glola'
 alias gs='git sweep'
 
-# AI assistants
+# Pi
 alias pir='pi -r'
 alias pii='pi -p' # pi inline
 alias piu='pi update --all'
-
-# Transcription
-alias wlkd='wlk --backend mlx-whisper --model large-v3-turbo --diarization --diarization-backend diart'
-alias wlkd-fr='wlkd --language fr'
 
 # Utilities
 alias myip="curl https://ipinfo.io/json"
