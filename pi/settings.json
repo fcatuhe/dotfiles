@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.80.2",
+  "lastChangelogVersion": "0.80.3",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-4-8",
   "defaultThinkingLevel": "medium",
@@ -36,7 +36,7 @@
   "enabledModels": [
     "anthropic/claude-fable-5",
     "anthropic/claude-opus-4-8",
-    "anthropic/claude-sonnet-4-6",
+    "anthropic/claude-sonnet-5",
     "openai-codex/gpt-5.5",
     "fireworks/accounts/fireworks/models/glm-5p2",
     "fireworks/accounts/fireworks/models/deepseek-v4-pro",
@@ -50,5 +50,6 @@
   "warnings": {
     "anthropicExtraUsage": false
   },
-  "theme": "dark"
+  "theme": "dark",
+  "hideThinkingBlock": true
 }

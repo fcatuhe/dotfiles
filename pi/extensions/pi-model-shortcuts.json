@@ -1,7 +1,7 @@
 {
   "fable":    { "provider": "anthropic",    "model": "claude-fable-5" },
   "opus":     { "provider": "anthropic",    "model": "claude-opus-4-8" },
-  "sonnet":   { "provider": "anthropic",    "model": "claude-sonnet-4-6" },
+  "sonnet":   { "provider": "anthropic",    "model": "claude-sonnet-5" },
   "gpt":      { "provider": "openai-codex", "model": "gpt-5.5" },
   "deepseek": { "provider": "fireworks",    "model": "accounts/fireworks/models/deepseek-v4-pro" },
   "glm":      { "provider": "fireworks",    "model": "accounts/fireworks/models/glm-5p2" },
