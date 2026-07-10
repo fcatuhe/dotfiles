@@ -11,6 +11,7 @@ previous_workspace = "cmd+shift+up"
 next_workspace = "cmd+shift+down"
 new_tab = "cmd+shift+n"
 close_tab = "cmd+shift+w"
+rename_tab = "cmd+shift+r"
 
 [ui]
 agent_panel_scope = "all"
