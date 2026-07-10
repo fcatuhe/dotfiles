@@ -1,0 +1,7 @@
+#!/bin/sh
+# Run a command in an interactive zsh, so oh-my-zsh shortcuts/aliases
+# (vsc, ofd, ...) and your ~/.aliases are available.
+#   z vsc          -> runs the `vsc` omz function
+#   z ofd ~/dir    -> passes args through
+#   z 'gst && vsc' -> quote to chain
+exec /bin/zsh -ic "$*"

@@ -59,6 +59,7 @@
       if: '[ "$(uname)" = "Linux" ]'
 
     # --- CLI tools ---
+    ~/.local/bin/z: bin/z
     ~/.config/herdr/config.toml: herdr/config.toml
     ~/.config/ghostty/config: ghostty/config
 
