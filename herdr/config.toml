@@ -5,6 +5,12 @@ name = "catppuccin"
 
 [keys]
 prefix = "ctrl+space"
+previous_tab = "cmd+shift+left"
+next_tab = "cmd+shift+right"
+previous_workspace = "cmd+shift+up"
+next_workspace = "cmd+shift+down"
+new_tab = "cmd+shift+n"
+close_tab = "cmd+shift+w"
 
 [ui]
 agent_panel_scope = "all"

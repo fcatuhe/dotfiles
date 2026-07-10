@@ -1,0 +1,11 @@
+font-family = "JetBrainsMono Nerd Font"
+
+# Let herdr handle workspace navigation (cmd+shift+up/down).
+# Ghostty binds these to jump_to_prompt by default, which would
+# otherwise swallow the chords before they reach herdr.
+keybind = super+shift+arrow_up=unbind
+keybind = super+shift+arrow_down=unbind
+
+# Let herdr handle close tab (cmd+shift+w). Ghostty binds this to
+# close_window by default, which would swallow the chord.
+keybind = super+shift+w=unbind

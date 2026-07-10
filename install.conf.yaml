@@ -60,6 +60,7 @@
 
     # --- CLI tools ---
     ~/.config/herdr/config.toml: herdr/config.toml
+    ~/.config/ghostty/config: ghostty/config
 
     # --- AI agents ---
     ~/.pi/agent/settings.json: pi/settings.json
