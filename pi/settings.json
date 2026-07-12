@@ -1,22 +1,14 @@
 {
   "lastChangelogVersion": "0.80.6",
   "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-4-8",
+  "defaultModel": "claude-fable-5",
   "defaultThinkingLevel": "high",
   "quietStartup": true,
   "packages": [
     "git:github.com/fcatuhe/pi-wares",
     "git:github.com/badlogic/pi-skills",
     "npm:@benvargas/pi-claude-code-use",
-    {
-      "source": "git:github.com/fcatuhe/pi-hooks@feat/ruby-lsp",
-      "extensions": [
-        "lsp/lsp.ts",
-        "lsp/lsp-tool.ts",
-        "token-rate/token-rate.ts"
-      ]
-    },
-    "npm:@qraxiss/pi-gemini-auth"
+    "npm:token-rate-pi"
   ],
   "skills": [
     "~/.pi/agent/skills/gog",
@@ -42,9 +34,7 @@
     "fireworks/accounts/fireworks/models/deepseek-v4-pro",
     "fireworks/accounts/fireworks/models/kimi-k2p7-code",
     "fireworks/accounts/fireworks/models/minimax-m3",
-    "ridecell/qwen3.6-27b",
-    "google-gemini-cli/gemini-3-flash-preview",
-    "google-gemini-cli/gemini-3.1-flash-lite-preview"
+    "ridecell/qwen3.6-27b"
   ],
   "transport": "websocket-cached",
   "warnings": {
