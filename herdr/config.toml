@@ -14,10 +14,10 @@ close_tab = "cmd+shift+w"
 rename_tab = "cmd+shift+r"
 
 [ui]
-agent_panel_scope = "all"
 show_agent_labels_on_pane_borders = true
 prompt_new_tab_name = false
 
+agent_panel_sort = "priority"
 [experimental]
 kitty_graphics = true
 pane_history = true
