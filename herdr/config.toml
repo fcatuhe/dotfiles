@@ -13,22 +13,10 @@ new_tab = "cmd+shift+n"
 close_tab = "cmd+shift+w"
 rename_tab = "cmd+shift+r"
 
-# New tab + launch pi in it. cmd+shift+i is free in both Ghostty and
-# herdr defaults, and mirrors the cmd+shift+n = new_tab convention.
-# type="shell" already runs the command via `sh -c "..."`, so we do NOT
-# wrap it again. A TOML literal string ('''...''') passes the \" escapes
-# through verbatim, keeping the JSON pane-id extraction quote-safe.
 [[keys.command]]
 key = "cmd+shift+i"
 type = "shell"
-command = '''
-out=$(herdr tab create --focus --label pi)
-pane=${out#*\"pane_id\":\"}
-pane=${pane%%\"*}
-# Use `pane run` (types the command) rather than `agent start`, whose
-# readiness check races the just-spawned shell and errors pane_busy.
-[ -n "$pane" ] && exec herdr pane run "$pane" pi
-'''
+command = 'p=$(herdr tab create --focus --label pi); p=${p#*\"pane_id\":\"}; herdr pane run "${p%%\"*}" pi'
 
 [ui]
 show_agent_labels_on_pane_borders = true
