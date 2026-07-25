@@ -9,3 +9,7 @@ keybind = super+shift+arrow_down=unbind
 # Let herdr handle close tab (cmd+shift+w). Ghostty binds this to
 # close_window by default, which would swallow the chord.
 keybind = super+shift+w=unbind
+
+# Let herdr handle new tab (cmd+shift+t). Ghostty binds this by
+# default, which would swallow the chord before it reaches herdr.
+keybind = super+shift+t=unbind

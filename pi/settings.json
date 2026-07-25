@@ -1,14 +1,12 @@
 {
-  "lastChangelogVersion": "0.81.1",
+  "lastChangelogVersion": "0.82.1",
   "defaultProvider": "anthropic",
-  "defaultModel": "claude-fable-5",
+  "defaultModel": "claude-opus-5",
   "defaultThinkingLevel": "high",
   "quietStartup": true,
   "packages": [
     "git:github.com/fcatuhe/pi-wares",
-    "git:github.com/badlogic/pi-skills",
-    "npm:@benvargas/pi-claude-code-use",
-    "npm:token-rate-pi"
+    "git:github.com/badlogic/pi-skills"
   ],
   "skills": [
     "~/.pi/agent/skills/gog",
@@ -27,14 +25,13 @@
   },
   "enabledModels": [
     "anthropic/claude-fable-5",
-    "anthropic/claude-opus-4-8",
+    "anthropic/claude-opus-5",
     "anthropic/claude-sonnet-5",
     "openai-codex/gpt-5.6-sol",
     "fireworks/accounts/fireworks/models/glm-5p2",
     "fireworks/accounts/fireworks/models/deepseek-v4-pro",
     "fireworks/accounts/fireworks/models/kimi-k2p7-code",
-    "fireworks/accounts/fireworks/models/minimax-m3",
-    "ridecell/qwen3.6-27b"
+    "fireworks/accounts/fireworks/models/minimax-m3"
   ],
   "transport": "websocket-cached",
   "warnings": {
