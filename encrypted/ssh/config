@@ -17,9 +17,10 @@ Host flyzilla
   HostName {{SSH_FLYZILLA_IP}}
   User {{SSH_FLYZILLA_USER}}
 
-Host lambda
-  HostName {{SSH_LAMBDA_IP}}
-  User {{SSH_LAMBDA_USER}}
+Host vast-ai
+  HostName {{SSH_VAST_AI_IP}}
+  Port {{SSH_VAST_AI_PORT}}
+  User {{SSH_VAST_AI_USER}}
 
 # Route GitHub SSH over 443 when port 22 is blocked
 # Host github.com
