@@ -1,11 +1,11 @@
 [profile ridecell]
 sso_session = ridecell
-sso_account_id = {{AWS_SSO_ACCOUNT_ID}}
+sso_account_id = {{ vars.AWS_SSO_ACCOUNT_ID }}
 sso_role_name = bedrock-invoke
 region = us-west-2
 output = json
 
 [sso-session ridecell]
-sso_start_url = {{AWS_SSO_START_URL}}
+sso_start_url = {{ vars.AWS_SSO_START_URL }}
 sso_region = us-west-2
 sso_registration_scopes = sso:account:access

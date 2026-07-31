@@ -1,7 +1,5 @@
-# Never commit decrypted private values or the age key
-private/
-encrypted/age.key
+# Machine-local mise overrides
+mise.local.toml
 
 # Ignore MacOS Desktop Services Store files
 .DS_Store
-
