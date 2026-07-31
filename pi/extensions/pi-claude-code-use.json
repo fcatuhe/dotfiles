@@ -1,10 +1,6 @@
 {
   "toolAliases": [
     [
-      "sidequests",
-      "mcp__extension__sidequests"
-    ],
-    [
       "spawn_agent",
       "mcp__subagents__spawn_agent"
     ],

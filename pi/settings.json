@@ -5,14 +5,7 @@
   "defaultThinkingLevel": "high",
   "quietStartup": true,
   "packages": [
-    {
-      "source": "git:github.com/fcatuhe/pi-wares",
-      "extensions": [
-        "+extensions/compact-footer/index.ts",
-        "-node_modules/@ogulcancelik/pi-minimal-footer/index.ts",
-        "-extensions/sidequests/index.ts"
-      ]
-    },
+    "git:github.com/fcatuhe/pi-wares",
     "git:github.com/badlogic/pi-skills",
     "../../fcode/pi-extensions/packages/pi-codex-subagents"
   ],
