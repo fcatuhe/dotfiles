@@ -16,7 +16,7 @@ rename_tab = "cmd+shift+r"
 [[keys.command]]
 key = "cmd+shift+i"
 type = "shell"
-command = 'p=$(herdr tab create --focus --label pi); p=${p#*\"pane_id\":\"}; herdr pane run "${p%%\"*}" pi'
+command = 'p=$(herdr tab create --focus); p=${p#*\"pane_id\":\"}; herdr pane run "${p%%\"*}" pi'
 
 [ui]
 show_agent_labels_on_pane_borders = true
