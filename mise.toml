@@ -36,7 +36,6 @@ run = "chmod 600 ssh/config.tmpl aws/config.tmpl zsh/zshenv.private.tmpl agent-b
 # --- AI agents ---
 "~/.pi/agent/settings.json" = "pi/settings.json"
 "~/.pi/agent/extensions" = "pi/extensions"
-"~/.pi/agent/skills" = "pi/skills"
 "~/.agent-browser/auth" = "agent-browser/auth"
 
 [vars]
