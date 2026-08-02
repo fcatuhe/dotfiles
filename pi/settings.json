@@ -1,12 +1,11 @@
 {
   "lastChangelogVersion": "0.83.0",
   "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-5",
+  "defaultModel": "claude-fable-5",
   "defaultThinkingLevel": "high",
   "quietStartup": true,
   "packages": [
-    "git:github.com/fcatuhe/pi-wares",
-    "../../fcode/pi-extensions/packages/pi-codex-subagents"
+    "git:github.com/fcatuhe/pi-wares"
   ],
   "compaction": {
     "enabled": true
