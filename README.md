@@ -6,11 +6,11 @@ Three envs, picked per machine and remembered in `~/.config/dotfiles/envs`:
 
 | env | machine |
 |---|---|
-| `darwin,secrets,agents` | mac |
-| `omarchy,secrets,agents` | linux laptop |
+| `base,secrets,agents,darwin` | mac |
+| `base,secrets,agents,omarchy` | linux laptop |
 | `agents` | on its own, pi and herdr only, see [README.agents.md](README.agents.md) |
 
-`mise.toml` holds what every machine gets. `mise.secrets.toml` holds the age-encrypted `[vars]` and everything rendered from them, and is loaded only where the age identity exists: mise decrypts `[vars]` on every config load, so a keyless machine has to not load that file at all. `mise.agents.toml` holds pi and herdr, references no secret, and is what makes a server possible.
+`mise.toml` carries settings and no files, so an env list gets exactly what it names. `base` is shell, git, gh and npm. `secrets` is the age-encrypted `[vars]` and everything rendered from them, loaded only where the age identity exists: mise decrypts `[vars]` on every config load, so a keyless machine has to not load that file at all. `agents` is pi and herdr, references no secret, and stands alone on a server.
 
 ## Setup on a New Machine
 
@@ -20,14 +20,14 @@ The age private key lives in Bitwarden under **"dotfiles/age-key"**. Unlock the 
 git clone git@github.com:fcatuhe/dotfiles.git ~/fcode/dotfiles
 mkdir -p ~/.config/mise && (umask 077; pbpaste > ~/.config/mise/age.txt) && pbcopy < /dev/null
 age-keygen -y ~/.config/mise/age.txt   # must print age1e2qkevjus09dfzmr82xppyuedlcya5283kf0u4ydsk7qgyhqgumspm36nl
-cd ~/fcode/dotfiles && ./install darwin,secrets,agents
+cd ~/fcode/dotfiles && ./install base,secrets,agents,darwin
 ```
 
 ## Commands
 
 ```bash
 ./install                                    # apply everything for this machine's envs
-./install omarchy,secrets,agents             # change this machine's envs, then apply
+./install base,secrets,agents,omarchy        # change this machine's envs, then apply
 mise -E "$(cat ~/.config/dotfiles/envs)" dotfiles status   # what is out of sync
 mise set --age-encrypt --prompt NAME         # add or change a private value, then ./install
 ```

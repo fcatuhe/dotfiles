@@ -1,21 +1,2 @@
 [settings]
 experimental = true
-
-[dotfiles]
-# --- Shell ---
-"~/.zshenv" = "zsh/zshenv"
-"~/.zshrc" = "zsh/zshrc"
-"~/.aliases" = "zsh/aliases"
-
-# --- Version control ---
-"~/.gitconfig" = "git/config"
-"~/.config/git/ignore" = "git/ignore"
-"~/.config/gh/config.yml" = "gh/config.yml"
-"~/.config/gh/hosts.yml" = "gh/hosts.yml"
-
-# --- Package managers ---
-"~/.npmrc" = "npm/npmrc"
-
-# --- CLI tools ---
-"~/.local/bin/z" = "bin/z"
-"~/.config/ghostty/config" = "ghostty/config"
