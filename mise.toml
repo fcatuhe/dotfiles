@@ -3,6 +3,8 @@ experimental = true
 
 # One-time, needs sudo, so it is not wired into `mise bootstrap`:
 #   mise run setup:zsh
+# apt-get targets Debian and Ubuntu. macOS ships zsh as the login shell, so the
+# first and third guards short-circuit there and only oh-my-zsh can be missing.
 # KEEP_ZSHRC is mandatory, the installer replaces ~/.zshrc by default and would
 # swallow the symlink the zsh env just put there.
 [tasks."setup:zsh"]
