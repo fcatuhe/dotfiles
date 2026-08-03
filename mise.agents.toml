@@ -1,0 +1,10 @@
+[dotfiles]
+# The rest of ~/.pi/agent/extensions is left alone: herdr writes its own
+# integration file there and overwrites it on every version bump.
+"~/.pi/agent/settings.json" = "agents/pi/settings.json"
+"~/.pi/agent/extensions/pi-model-shortcuts.json" = "agents/pi/extensions/pi-model-shortcuts.json"
+"~/.config/herdr/config.toml" = "agents/herdr/config.toml"
+
+# Both tools self-update, so this only has to cover a machine that lacks them.
+[tasks.bootstrap]
+run = "./bin/install-agent-tools"

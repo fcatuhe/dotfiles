@@ -12,7 +12,6 @@ run = "chmod 600 ssh/config.tmpl aws/config.tmpl zsh/zshenv.private.tmpl agent-b
 "~/.zshenv" = "zsh/zshenv"
 "~/.zshrc" = "zsh/zshrc"
 "~/.aliases" = "zsh/aliases"
-"~/.zshenv.private" = { source = "zsh/zshenv.private.tmpl", mode = "template" }
 
 # --- Version control ---
 "~/.gitconfig" = "git/config"
@@ -20,23 +19,12 @@ run = "chmod 600 ssh/config.tmpl aws/config.tmpl zsh/zshenv.private.tmpl agent-b
 "~/.config/gh/config.yml" = "gh/config.yml"
 "~/.config/gh/hosts.yml" = "gh/hosts.yml"
 
-# --- Credentials (rendered from age-encrypted [vars]) ---
-"~/.ssh/config" = { source = "ssh/config.tmpl", mode = "template" }
-"~/.aws/config" = { source = "aws/config.tmpl", mode = "template" }
-"~/.agent-browser/.encryption-key" = { source = "agent-browser/encryption-key.tmpl", mode = "template" }
-
 # --- Package managers ---
 "~/.npmrc" = "npm/npmrc"
 
 # --- CLI tools ---
 "~/.local/bin/z" = "bin/z"
-"~/.config/herdr/config.toml" = "herdr/config.toml"
 "~/.config/ghostty/config" = "ghostty/config"
-
-# --- AI agents ---
-"~/.pi/agent/settings.json" = "pi/settings.json"
-"~/.pi/agent/extensions" = "pi/extensions"
-"~/.agent-browser/auth" = "agent-browser/auth"
 
 [vars]
 SSH_AZADE_IP = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAra29zazF0VGp3elE4ZGZLclhlRmc0bHBVZkkvQksxY0RVanloVWNwMGxBCmY0TmNVaWhMMVVnTnVaVVlZRjJNVi9ZSGpLaHFQTFlWb1JqVkNFZXp1T1EKLT4gXEJbRHt1U2QtZ3JlYXNlIHBHaiUwMgpVcGQvNk53bnBFVHVFUQotLS0gNHBBZmUzaFhGVjY2ZThRRnIvb2VOc2ZEdDdmaFRWcXJldkUvbVhPSDRMQQomQDo1Cx5xpfW4eblfBsedeyq9oMvhfA+cBFIppy28BL+AyT64hAYmJgYRbQ" }

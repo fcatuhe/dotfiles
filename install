@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
+
+envs_file="$HOME/.config/dotfiles/envs"
+if [[ $# -gt 0 && $1 != -* ]]; then
+  mkdir -p "$(dirname "$envs_file")"
+  printf '%s\n' "$1" > "$envs_file"
+  shift
+fi
+
+if [[ ! -f "$envs_file" ]]; then
+  echo "usage: ./install <envs>    darwin,agents | omarchy,agents | agents" >&2
+  exit 1
+fi
+
 mise trust --quiet .
-exec mise bootstrap --only dotfiles -E "$(uname -s | tr '[:upper:]' '[:lower:]')" "$@"
+exec mise bootstrap --only dotfiles,task -E "$(cat "$envs_file")" "$@"

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+command -v pi >/dev/null || curl -fsSL https://pi.dev/install.sh | sh
+command -v herdr >/dev/null || curl -fsSL https://herdr.dev/install.sh | sh

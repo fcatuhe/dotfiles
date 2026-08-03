@@ -7,8 +7,7 @@
 "~/.agent-browser/.encryption-key" = { source = "agent-browser/encryption-key.tmpl", mode = "template" }
 "~/.agent-browser/auth" = "agent-browser/auth"
 
-"~/.zprofile" = "zsh/zprofile"
-"~/Library/Application Support/Code/User/settings.json" = "vscode/settings.json"
-# openlogi rewrites its config in place, which breaks a symlink. Capture edits
-# back into the repo with: mise dotfiles add ~/.config/openlogi/config.toml
-"~/.config/openlogi/config.toml" = { source = "openlogi/config.toml", mode = "copy" }
+"~/.config/Code/User/settings.json" = "vscode/settings.json"
+"~/.config/hypr" = "hypr"
+"~/.config/waybar" = "waybar"
+"~/.config/environment.d" = "environment.d"
