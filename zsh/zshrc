@@ -5,9 +5,9 @@ plugins=(common-aliases git gitfast history-substring-search kamal last-working-
 
 export HOMEBREW_NO_ANALYTICS=1
 
-source "${ZSH}/oh-my-zsh.sh"
+[[ -f "${ZSH}/oh-my-zsh.sh" ]] && source "${ZSH}/oh-my-zsh.sh"
 [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-unalias rm
+(( ${+aliases[rm]} )) && unalias rm
 
 type -a mise > /dev/null && eval "$(mise activate zsh)"
 
@@ -18,8 +18,8 @@ export PATH="$HOME/.local/bin:${PATH}"
 
 export LANG=en_US.UTF-8
 
-export EDITOR="code --wait"
-export BUNDLER_EDITOR="code --wait"
+command -v code > /dev/null && export EDITOR="code --wait" || export EDITOR=vim
+export BUNDLER_EDITOR="$EDITOR"
 
 export CONSOLE_USER="François Catuhe"
 

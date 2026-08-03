@@ -28,3 +28,5 @@ curl -fsSL https://herdr.dev/install.sh | sh
 ```
 
 Later runs are just `./install`, the env is remembered in `~/.config/dotfiles/envs`.
+
+Use `./install cli,agents` to get zsh, git, gh and npm on the box as well. That env holds no encrypted vars either, so it needs no age identity.
