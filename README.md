@@ -8,7 +8,7 @@ Three envs, picked per machine and remembered in `~/.config/dotfiles/envs`:
 |---|---|
 | `darwin,agents` | mac |
 | `omarchy,agents` | linux laptop |
-| `agents` | a VPS, see [README.vps.md](README.vps.md) |
+| `agents` | on its own, pi and herdr only, see [README.agents.md](README.agents.md) |
 
 `mise.toml` holds what every machine gets. `mise.agents.toml` holds pi and herdr and needs no secrets, which is what makes it safe to apply on a server.
 
