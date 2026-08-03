@@ -1,5 +1,6 @@
 [dotfiles]
 "~/.zprofile" = "zsh/zprofile"
+"~/.config/ghostty/config" = "ghostty/config"
 "~/Library/Application Support/Code/User/settings.json" = "vscode/settings.json"
 # openlogi rewrites its config in place, which breaks a symlink. Capture edits
 # back into the repo with: mise dotfiles add ~/.config/openlogi/config.toml

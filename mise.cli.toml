@@ -13,6 +13,5 @@
 # --- Package managers ---
 "~/.npmrc" = "npm/npmrc"
 
-# --- CLI tools ---
+# --- Navigation ---
 "~/.local/bin/z" = "bin/z"
-"~/.config/ghostty/config" = "ghostty/config"

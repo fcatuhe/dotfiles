@@ -1,5 +1,6 @@
 [dotfiles]
 "~/.config/Code/User/settings.json" = "vscode/settings.json"
+"~/.config/ghostty/config" = "ghostty/config"
 "~/.config/hypr" = "hypr"
 "~/.config/waybar" = "waybar"
 "~/.config/environment.d" = "environment.d"
