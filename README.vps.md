@@ -10,7 +10,7 @@ git clone https://github.com/fcatuhe/dotfiles.git ~/fcode/dotfiles
 cd ~/fcode/dotfiles && ./install agents
 ```
 
-This links pi's settings, its model-shortcuts extension, and the herdr config, then runs `bin/install-agent-tools`, which installs whatever is missing:
+This links pi's settings, its model-shortcuts extension, and the herdr config, then installs whatever is missing:
 
 ```bash
 curl -fsSL https://pi.dev/install.sh | sh
