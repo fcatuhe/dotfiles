@@ -2,6 +2,16 @@
 
 Runs pi and herdr on a server with the same settings as the laptops. The `agents` env applies three config files and nothing templated, so the age identity never has to leave your machines.
 
+## Prerequisites
+
+`git` and `curl`. Most images ship both, a bare Debian or Ubuntu may not:
+
+```bash
+sudo apt-get update && sudo apt-get install -y git curl
+```
+
+git is not only for the clone below: pi shells out to it to fetch skills from `git:github.com/fcatuhe/pi-wares` on startup.
+
 ## Install
 
 ```bash
