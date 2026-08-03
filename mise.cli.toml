@@ -7,6 +7,3 @@
 
 # --- Package managers ---
 "~/.npmrc" = "npm/npmrc"
-
-# --- Navigation ---
-"~/.local/bin/z" = "bin/z"

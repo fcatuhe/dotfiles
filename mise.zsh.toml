@@ -2,3 +2,4 @@
 "~/.zshenv" = "zsh/zshenv"
 "~/.zshrc" = "zsh/zshrc"
 "~/.aliases" = "zsh/aliases"
+"~/.local/bin/z" = "bin/z"
