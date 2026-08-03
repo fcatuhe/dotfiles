@@ -1,12 +1,4 @@
 [dotfiles]
-# Credentials live here rather than in mise.toml so that a machine applying
-# `agents` alone never needs the age identity.
-"~/.zshenv.private" = { source = "zsh/zshenv.private.tmpl", mode = "template" }
-"~/.ssh/config" = { source = "ssh/config.tmpl", mode = "template" }
-"~/.aws/config" = { source = "aws/config.tmpl", mode = "template" }
-"~/.agent-browser/.encryption-key" = { source = "agent-browser/encryption-key.tmpl", mode = "template" }
-"~/.agent-browser/auth" = "agent-browser/auth"
-
 "~/.config/Code/User/settings.json" = "vscode/settings.json"
 "~/.config/hypr" = "hypr"
 "~/.config/waybar" = "waybar"
