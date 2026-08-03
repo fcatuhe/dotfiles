@@ -10,7 +10,7 @@ if [[ $# -gt 0 && $1 != -* ]]; then
 fi
 
 if [[ ! -f "$envs_file" ]]; then
-  echo "usage: ./install <envs>    cli,secrets,agents,darwin | cli,secrets,agents,omarchy | agents" >&2
+  echo "usage: ./install <envs>    zsh,cli,secrets,agents,darwin | zsh,cli,secrets,agents,omarchy | agents" >&2
   exit 1
 fi
 

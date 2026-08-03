@@ -1,2 +1,13 @@
 [settings]
 experimental = true
+
+# One-time, needs sudo, so it is not wired into `mise bootstrap`:
+#   mise run setup:zsh
+# KEEP_ZSHRC is mandatory, the installer replaces ~/.zshrc by default and would
+# swallow the symlink the zsh env just put there.
+[tasks."setup:zsh"]
+run = [
+  'command -v zsh >/dev/null || sudo apt-get install -y zsh',
+  '[ -d ~/.oh-my-zsh ] || KEEP_ZSHRC=yes RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',
+  '[ "$(basename "$SHELL")" = zsh ] || sudo chsh -s "$(command -v zsh)" "$USER"',
+]

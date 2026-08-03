@@ -1,9 +1,4 @@
 [dotfiles]
-# --- Shell ---
-"~/.zshenv" = "zsh/zshenv"
-"~/.zshrc" = "zsh/zshrc"
-"~/.aliases" = "zsh/aliases"
-
 # --- Version control ---
 "~/.gitconfig" = "git/config"
 "~/.config/git/ignore" = "git/ignore"
