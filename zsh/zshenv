@@ -6,4 +6,6 @@ unset _bw_sock
 # QMD: workaround llama.cpp Metal teardown crash on macOS 15+ (ggml-org/llama.cpp#22593)
 export GGML_METAL_NO_RESIDENCY=1
 
+export NPM_CONFIG_FUND=false
+
 [ -f ~/.zshenv.private ] && source ~/.zshenv.private

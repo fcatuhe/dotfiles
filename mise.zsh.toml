@@ -14,4 +14,6 @@ run = [
   'command -v zsh >/dev/null || sudo apt-get install -y zsh',
   '[ -d ~/.oh-my-zsh ] || KEEP_ZSHRC=yes RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',
   '[ "$(basename "$SHELL")" = zsh ] || sudo chsh -s "$(command -v zsh)" "$USER"',
+  '[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] || git clone -q --depth=1 https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions',
+  '[ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ] || git clone -q --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting',
 ]
