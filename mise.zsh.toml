@@ -3,3 +3,15 @@
 "~/.zshrc" = "zsh/zshrc"
 "~/.aliases" = "zsh/aliases"
 "~/.local/bin/z" = "bin/z"
+
+# Runs on every ./install that names this env, and no-ops once satisfied.
+# apt-get targets Debian and Ubuntu. macOS ships zsh as the login shell, so the
+# first and third guards short-circuit there and only oh-my-zsh can be missing.
+# KEEP_ZSHRC is mandatory, the installer replaces ~/.zshrc by default and would
+# swallow the symlink the zsh env just put there.
+[tasks."setup:zsh"]
+run = [
+  'command -v zsh >/dev/null || sudo apt-get install -y zsh',
+  '[ -d ~/.oh-my-zsh ] || KEEP_ZSHRC=yes RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',
+  '[ "$(basename "$SHELL")" = zsh ] || sudo chsh -s "$(command -v zsh)" "$USER"',
+]

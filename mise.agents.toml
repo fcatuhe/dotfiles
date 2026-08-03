@@ -4,7 +4,7 @@
 "~/.config/herdr/config.toml" = "agents/herdr/config.toml"
 
 # Both tools self-update, so this only has to cover a machine that lacks them.
-[tasks.bootstrap]
+[tasks."setup:agents"]
 run = [
   "command -v pi >/dev/null || curl -fsSL https://pi.dev/install.sh | sh",
   "command -v herdr >/dev/null || curl -fsSL https://herdr.dev/install.sh | sh",

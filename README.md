@@ -10,7 +10,7 @@ Three envs, picked per machine and remembered in `~/.config/dotfiles/envs`:
 | `zsh,cli,secrets,agents,omarchy` | linux laptop |
 | `agents` | on its own, pi and herdr only, see [README.agents.md](README.agents.md) |
 
-`mise.toml` carries settings and no files, so an env list gets exactly what it names. `zsh` is the shell and its aliases, with `mise run setup:zsh` to install zsh and oh-my-zsh and make it the login shell. `cli` is git, gh and npm. `secrets` is the age-encrypted `[vars]` and everything rendered from them, loaded only where the age identity exists: mise decrypts `[vars]` on every config load, so a keyless machine has to not load that file at all. `agents` is pi and herdr, references no secret, and stands alone on a server.
+`mise.toml` carries settings and no files, so an env list gets exactly what it names. `zsh` is the shell, its aliases and `z`, and installs zsh, oh-my-zsh and the login shell on a box that lacks them. `cli` is git, gh and npm. `secrets` is the age-encrypted `[vars]` and everything rendered from them, loaded only where the age identity exists: mise decrypts `[vars]` on every config load, so a keyless machine has to not load that file at all. `agents` is pi and herdr, references no secret, and stands alone on a server.
 
 ## Setup on a New Machine
 

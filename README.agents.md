@@ -29,8 +29,4 @@ curl -fsSL https://herdr.dev/install.sh | sh
 
 Later runs are just `./install`, the env is remembered in `~/.config/dotfiles/envs`.
 
-Use `./install zsh,cli,agents` to get the shell, git, gh and npm on the box as well. Neither env holds encrypted vars, so neither needs the age identity. To install zsh and oh-my-zsh and make zsh the login shell:
-
-```bash
-mise run setup:zsh
-```
+Use `./install zsh,cli,agents` to get the shell, git, gh and npm on the box as well. Neither env holds encrypted vars, so neither needs the age identity. `zsh` installs zsh and oh-my-zsh and makes zsh the login shell, which needs `sudo`.
