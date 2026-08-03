@@ -6,8 +6,8 @@ Runs pi and herdr on a server with the same settings as the laptops. The `agents
 
 ```bash
 curl https://mise.run | sh
-git clone https://github.com/fcatuhe/dotfiles.git ~/fcode/dotfiles
-cd ~/fcode/dotfiles && ./install agents
+git clone https://github.com/fcatuhe/dotfiles.git ~/dotfiles
+cd ~/dotfiles && ./install agents
 ```
 
 This links pi's settings, its model-shortcuts extension, and the herdr config, then installs whatever is missing:
@@ -42,6 +42,6 @@ Editing `~/.config/herdr/config.toml` on the server edits the repo, since it is 
 ## Updating
 
 ```bash
-cd ~/fcode/dotfiles && git pull && ./install
+cd ~/dotfiles && git pull && ./install
 herdr update
 ```
