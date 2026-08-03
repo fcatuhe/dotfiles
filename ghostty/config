@@ -1,15 +1,8 @@
 font-family = "JetBrainsMono Nerd Font"
 
-# Let herdr handle workspace navigation (cmd+shift+up/down).
-# Ghostty binds these to jump_to_prompt by default, which would
-# otherwise swallow the chords before they reach herdr.
+# Ghostty binds these by default and would swallow them before herdr sees
+# them. Keep in sync with [keys] in agents/herdr/config.toml.
 keybind = super+shift+arrow_up=unbind
 keybind = super+shift+arrow_down=unbind
-
-# Let herdr handle close tab (cmd+shift+w). Ghostty binds this to
-# close_window by default, which would swallow the chord.
 keybind = super+shift+w=unbind
-
-# Let herdr handle new tab (cmd+shift+t). Ghostty binds this by
-# default, which would swallow the chord before it reaches herdr.
 keybind = super+shift+t=unbind
