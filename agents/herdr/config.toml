@@ -26,4 +26,3 @@ pane_scrollbars = false
 agent_panel_sort = "spaces"
 [experimental]
 kitty_graphics = true
-pane_history = true
