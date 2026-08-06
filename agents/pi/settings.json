@@ -1,11 +1,15 @@
 {
-  "lastChangelogVersion": "0.83.0",
+  "lastChangelogVersion": "0.84.0",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5",
   "defaultThinkingLevel": "high",
-  "quietStartup": true,
   "packages": [
-    "git:github.com/fcatuhe/pi-wares"
+    {
+      "source": "git:github.com/fcatuhe/pi-wares",
+      "skills": [
+        "-skills/brave-search/SKILL.md"
+      ]
+    }
   ],
   "compaction": {
     "enabled": true
@@ -23,5 +27,8 @@
     "anthropicExtraUsage": false
   },
   "theme": "dark",
-  "hideThinkingBlock": true
+  "hideThinkingBlock": true,
+  "tuiMode": "fullscreen",
+  "showCacheMissNotices": true,
+  "treeFilterMode": "no-tools"
 }
