@@ -1,6 +1,6 @@
 # Agents
 
-Runs pi and herdr with the same settings as the laptops. The `agents` env applies four config files and nothing templated, so the age identity never has to leave your machines.
+Runs pi and herdr with the same settings as the laptops. The `agents` env applies five config files and nothing templated, so the age identity never has to leave your machines.
 
 ## Prerequisites on a VPS
 
@@ -20,7 +20,7 @@ git clone https://github.com/fcatuhe/dotfiles.git ~/dotfiles
 cd ~/dotfiles && ./install agents
 ```
 
-This links pi's settings, its model-shortcuts extension, the subagents config, and the herdr config, then installs whatever is missing:
+This links pi's settings, its model-shortcuts and markdown-preview extension configs, the subagents config, and the herdr config, then installs whatever is missing:
 
 ```bash
 curl -fsSL https://pi.dev/install.sh | sh
