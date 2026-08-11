@@ -5,6 +5,7 @@ font-family = "JetBrainsMono Nerd Font"
 keybind = super+shift+arrow_up=unbind
 keybind = super+shift+arrow_down=unbind
 keybind = super+shift+w=unbind
+keybind = super+alt+w=unbind
 keybind = super+shift+t=unbind
 keybind = super+alt+arrow_left=unbind
 keybind = super+alt+arrow_right=unbind
