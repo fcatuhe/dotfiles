@@ -1,15 +1,10 @@
 {
-  "lastChangelogVersion": "0.84.1",
+  "lastChangelogVersion": "0.84.2",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5",
   "defaultThinkingLevel": "high",
   "packages": [
-    {
-      "source": "git:github.com/fcatuhe/pi-wares",
-      "skills": [
-        "-skills/brave-search/SKILL.md"
-      ]
-    }
+    "git:github.com/fcatuhe/pi-wares"
   ],
   "compaction": {
     "enabled": true
