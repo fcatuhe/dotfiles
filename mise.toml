@@ -10,6 +10,7 @@ experimental = true
 "~/.config/hypr/autostart.lua" = "hypr/autostart.lua"
 "~/.config/hypr/monitors.lua" = "hypr/monitors.lua"
 "~/.config/omarchy/defaults/agent" = "omarchy/defaults/agent"
+"~/.config/sunsetr/sunsetr.toml" = "sunsetr/sunsetr.toml"
 "~/.config/uwsm/env.d/bitwarden-ssh" = "uwsm/env.d/bitwarden-ssh"
 "~/.pi/agent/settings.json" = "agents/pi/settings.json"
 "~/.config/herdr/config.toml" = "agents/herdr/config.toml"
