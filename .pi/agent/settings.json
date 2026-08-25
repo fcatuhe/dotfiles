@@ -1,6 +1,6 @@
 {
   "theme": "omarchy-system",
-  "lastChangelogVersion": "0.84.2",
+  "lastChangelogVersion": "0.84.3",
   "packages": [
     "git:github.com/fcatuhe/pi-wares"
   ],

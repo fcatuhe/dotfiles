@@ -1,20 +1,41 @@
 [settings]
 experimental = true
 
+# Rendered files inherit the source file's mode and git tracks only the exec
+# bit, so a fresh clone would render ~/.ssh/config world-readable without this.
+[bootstrap.hooks.pre-dotfiles]
+run = "chmod 600 .ssh/config.tmpl"
+
+[vars]
+SSH_PATOUMATIC_IP = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBIR1JmMFUxeGVwc29EMVVYbmNQVkNZTFBsOWhiZFdmTG03cldqQ0YxdXo4ClZheDhySjFTODdaRk95ODNlM3F1bHNtT3NhYXNRWHlZcjgrc3pqWWFHTTgKLS0tIGVGSXJTbFNxdHRBMzFzM1F0V3NjeXVocjZ6VVJJbFlqM3R1RmlLSTkvZmsKw0mms2Z+jXgVkQ7obeYzaMu6Tt2/kq5YncBw+R7MqOZB4+b+mfrTstVGgjlR" }
+SSH_PATOUMATIC_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwWGR4VmRONHhnelJsSTBlaU9KRjFXZjlVZDc4d0JKbHM3YUZyaHA4eFhnCitHemxqeEpIdStURHpXbTN2eWIzSmo3cUdTYmVydGJpWnlSZm1Bd01oWTQKLS0tIHJ4c1E3eHhHYy9DT0wxby8zdU9SUURjSnp4eGFjZUhDVmNXWG9YaHhBVzAK3w+z70AEyVWeYjcIUD+D2g4+z0Rgl0fDTqd/bQ12z/VsHANX" }
+SSH_CROOZ_IP = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSUXh1SmRIQ2d4ZnRBRm1mUHZ2d2EzbVExdHNHcERuK3kxL0h4cEJnR3pBCmJZWHc2NlVXQ3F2cHFzdEx4dXp2WmFnWFdUd3N6UGRhUmcxZ2EweXNqdm8KLS0tIDAwNFNndllzTTErS0FBd1lVdEV1S0t5bVZBdUZOSVVJSlI1dkliYzZleU0K//U9ATSYZjtVZBELkk9WOgTEwcWGfFyx/Suw5mtlh7SOFvCoSzKh5qT2Bzsxgg" }
+SSH_CROOZ_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMVHdRdm10aEM0czEwQ1BDamdudFNjM3lweHJCQnZVL1lTSGNFZjIwTmtrCkhqQXBmQ0QwRWNyTFFaOEdPUnFib1JhYkdQb091R0x5Z3BlR3Z6TlJVTTgKLS0tIFl5NnBML3VCRno5ZlpQdWhmWmZOWjhlcHFtenRPUlFsTmdNQzA2MjhzVW8KbfABJDwrI+wOEnwKPmtz134OYF/iPUkgC2NA/4LGEKhhjM0a" }
+SSH_AZADE_IP = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBuWHNKYjZTMUliSTdNSHpJalBmY3pNRlFiTTFmZHIvV1ZYdjgvUVY4ZFZNClY4K0RGcnlNekFnSzM2MkZpcHNuc3B2cGQwYkVkYnZRTVhRZ2ZHL3ZmYVkKLS0tIFBkQlAwSUx2V2d3enhhQ2ZCNTAyRFZoc3picm1RTE5sVTU2Q2RjcDYwbFEK8R0zOe6zPZFzh6tQ9a5U6FpDW49tBv4wCUdfU+wiEJ1gzE0IVH36vpHIlqk" }
+SSH_AZADE_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB4R0lqZ1hXYWJScEpIRy80cWNwamNJNnBudnZHL203RlFncHYzb3krSEVZCnlaV1pGdlZIbHRzcU5mYm4wVXlEaURIWUtPcUFnaklQN1ZkdG9xY0ZCekkKLS0tIFhEc0tpTGFrRzlzbG5uMG11UEl2WC91MTFZTyt6NXpmUkZYRFAxczZiMEkKPfnoxRBqG8yK25PswsvZsd2QYlGX83npSHlFCiyh2Degaohi" }
+SSH_BADGER_IP = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEQW56V2RLbFNORGlZRkp4ZEowekttOXhZcFN6UFRwbzl0SWFkTHJ6TTNVCmhhQ2ZGMDRPeUI0WWZHcWJpVEFKV0haMDFGQmpnVS82TW5wL1c4QytKTlkKLS0tIEZpam9TbWNaR2VlTVVPNFdNaVNoRmdVVmxQdEM1UWhBUWlPUUEwaklmL1kKKQKis+2XY8IhKsqqAG/83VxOBdoMYQw1R3ZC2HhnJKzTih8IvZ9uNEgAMwgpllE" }
+SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ2taQTdKdTlpYVpPTzJCOVlxNFlDMVgvRUZ1M0FEUmZ1MXpzCnU1RmZtajY2NEtIT2lDZ2YyRmxZTEZMek1YQ1ZyY0F3c2NZOGFJdnN2L1EKLS0tIHkzcGN0cHd4alpSNXZ6QlJuVW5obEVNR0gxdUFROC9BTFhPbVpCeVB6V1kKWRzu3W5HhvlfxvAhNjz+gnIi3bFGhw6WWIBR8EgspAl3mzu0h3k" }
+
 [dotfiles]
-"~/.XCompose" = "XCompose"
-"~/.config/git/config" = "git/config"
-"~/.config/git/allowed_signers" = "git/allowed_signers"
-"~/.config/gh/config.yml" = "gh/config.yml"
-"~/.config/mise/config.toml" = "mise/config.toml"
-"~/.config/hypr/autostart.lua" = "hypr/autostart.lua"
-"~/.config/hypr/monitors.lua" = "hypr/monitors.lua"
-"~/.config/omarchy/defaults/agent" = "omarchy/defaults/agent"
-"~/.config/sunsetr/sunsetr.toml" = "sunsetr/sunsetr.toml"
-"~/.config/uwsm/env.d/bitwarden-ssh" = "uwsm/env.d/bitwarden-ssh"
-"~/.pi/agent/settings.json" = "agents/pi/settings.json"
-"~/.config/herdr/config.toml" = "agents/herdr/config.toml"
+"~/.XCompose" = {}
+"~/.config/gh/config.yml" = {}
+"~/.config/git/allowed_signers" = {}
+"~/.config/git/config" = {}
+"~/.config/herdr/config.toml" = {}
+"~/.config/hypr/autostart.lua" = {}
+"~/.config/hypr/monitors.lua" = {}
+# xdg-mime rewrites this file, so a symlink would not survive setting a default app.
+"~/.config/mimeapps.list" = { mode = "copy" }
+"~/.config/mise/config.toml" = {}
+"~/.config/omarchy/defaults/agent" = {}
 
 # The shell rewrites this file in place, which replaces a symlink with a regular
-# file. Capture edits back with: mise bootstrap dotfiles add ~/.config/omarchy/shell.json
-"~/.config/omarchy/shell.json" = { source = "omarchy/shell.json", mode = "copy" }
+# file. Capture edits back with: mise bootstrap dotfiles add -l ~/.config/omarchy/shell.json
+"~/.config/omarchy/shell.json" = { mode = "copy" }
+"~/.config/sunsetr/sunsetr.toml" = {}
+"~/.config/tmux/tmux.conf" = {}
+"~/.config/uwsm/env.d/bitwarden-ssh" = {}
+# The `voxtype configure` TUI rewrites this file, and voxtype rejects a partial config.
+"~/.config/voxtype/config.toml" = { mode = "copy" }
+"~/.pi/agent/settings.json" = {}
+"~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }

@@ -2,13 +2,15 @@
 
 Omarchy laptop, symlinked by [mise](https://mise.jdx.dev/) `[dotfiles]`. See `mise.toml` for what maps where.
 
+The repo lives at mise's default `dotfiles.root` and mirrors `$HOME`, so `.config/tmux/tmux.conf` here is `~/.config/tmux/tmux.conf` there and an entry needs no `source`.
+
 Only files that diverge from Omarchy's install templates are tracked. The rest of `~/.config/hypr/` is pristine, so tracking it would only cause conflicts on `omarchy update`.
 
 ## Apply
 
 ```bash
-git clone git@github.com:fcatuhe/dotfiles.git ~/fcode/dotfiles
-cd ~/fcode/dotfiles
+git clone git@github.com:fcatuhe/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
 mise trust
 mise bootstrap dotfiles apply
 ```
@@ -33,9 +35,11 @@ Add or change a secret with `mise set --age-encrypt --prompt NAME`. It writes to
 ```bash
 mise bootstrap dotfiles status   # what is out of sync
 mise bootstrap dotfiles apply    # symlink everything into place
-mise bootstrap dotfiles add ~/.config/omarchy/shell.json   # capture a copy-mode file after editing it live
+mise bootstrap dotfiles add -l ~/.config/foo/bar.toml   # track a new file, or capture a copy-mode one after editing it live
 ```
 
-Symlinked files are live: editing them in the repo or in `~` is the same file. `~/.config/omarchy/shell.json` is the exception, it is copied because the Omarchy shell rewrites it in place.
+Run them from `~/.dotfiles`, and pass `-l` to `add` so the entry lands in `mise.toml` rather than the global config.
+
+Symlinked files are live: editing them in the repo or in `~` is the same file. The `mode = "copy"` entries are the exception, one per app that rewrites its own config file.
 
 `~/.config/uwsm/env.d/bitwarden-ssh` points `SSH_AUTH_SOCK` at the Bitwarden desktop SSH agent. uwsm sources it once at session start, so it takes effect on next login.
