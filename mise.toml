@@ -1,0 +1,17 @@
+[settings]
+experimental = true
+
+[dotfiles]
+"~/.XCompose" = "XCompose"
+"~/.config/git/config" = "git/config"
+"~/.config/gh/config.yml" = "gh/config.yml"
+"~/.config/mise/config.toml" = "mise/config.toml"
+"~/.config/hypr/monitors.lua" = "hypr/monitors.lua"
+"~/.config/omarchy/defaults/agent" = "omarchy/defaults/agent"
+"~/.config/uwsm/env.d/bitwarden-ssh" = "uwsm/env.d/bitwarden-ssh"
+"~/.pi/agent/settings.json" = "agents/pi/settings.json"
+"~/.config/herdr/config.toml" = "agents/herdr/config.toml"
+
+# The shell rewrites this file in place, which replaces a symlink with a regular
+# file. Capture edits back with: mise bootstrap dotfiles add ~/.config/omarchy/shell.json
+"~/.config/omarchy/shell.json" = { source = "omarchy/shell.json", mode = "copy" }

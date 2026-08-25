@@ -1,0 +1,15 @@
+{
+  "theme": "omarchy-system",
+  "lastChangelogVersion": "0.84.2",
+  "packages": [
+    "git:github.com/fcatuhe/pi-wares"
+  ],
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-5",
+  "defaultThinkingLevel": "high",
+  "warnings": {
+    "anthropicExtraUsage": false
+  },
+  "tuiMode": "fullscreen",
+  "hideThinkingBlock": true
+}
