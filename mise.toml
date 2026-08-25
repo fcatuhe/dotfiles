@@ -7,6 +7,7 @@ experimental = true
 "~/.config/git/allowed_signers" = "git/allowed_signers"
 "~/.config/gh/config.yml" = "gh/config.yml"
 "~/.config/mise/config.toml" = "mise/config.toml"
+"~/.config/hypr/autostart.lua" = "hypr/autostart.lua"
 "~/.config/hypr/monitors.lua" = "hypr/monitors.lua"
 "~/.config/omarchy/defaults/agent" = "omarchy/defaults/agent"
 "~/.config/uwsm/env.d/bitwarden-ssh" = "uwsm/env.d/bitwarden-ssh"

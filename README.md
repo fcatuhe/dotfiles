@@ -2,7 +2,7 @@
 
 Omarchy laptop, symlinked by [mise](https://mise.jdx.dev/) `[dotfiles]`. See `mise.toml` for what maps where.
 
-Only files that diverge from Omarchy's install templates are tracked. Everything under `~/.config/hypr/` except `monitors.lua` is pristine, so tracking it would only cause conflicts on `omarchy update`.
+Only files that diverge from Omarchy's install templates are tracked. The rest of `~/.config/hypr/` is pristine, so tracking it would only cause conflicts on `omarchy update`.
 
 ## Apply
 
