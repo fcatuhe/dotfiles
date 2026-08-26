@@ -10,6 +10,9 @@ pane_scrollbars = false
 
 agent_panel_sort = "spaces"
 
+[ui.sidebar.spaces]
+row_gap = 1
+
 [experimental]
 kitty_graphics = true
 
