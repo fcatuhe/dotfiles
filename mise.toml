@@ -20,7 +20,7 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/git/config" = {}
 "~/.config/herdr/config.toml" = {}
 "~/.config/hypr/autostart.lua" = {}
-"~/.config/hypr/monitors.lua" = {}
+"~/.config/hypr/monitors.lua" = { mode = "copy" }
 "~/.config/mimeapps.list" = { mode = "copy" }
 "~/.config/mise/config.toml" = {}
 "~/.config/omarchy/defaults/agent" = {}
