@@ -33,3 +33,14 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }
 "~/.XCompose" = {}
+
+[tasks."setup:vscodium"]
+run = [
+  "codium --install-extension esbenp.prettier-vscode",
+  "codium --install-extension github.vscode-pull-request-github",
+  "codium --install-extension marcoroth.herb-lsp",
+  "codium --install-extension marcoroth.stimulus-lsp",
+  "codium --install-extension marcoroth.turbo-lsp",
+  "codium --install-extension shopify.ruby-lsp",
+  "codium --install-extension sianglim.slim",
+]
