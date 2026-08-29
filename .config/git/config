@@ -5,8 +5,20 @@
 	br = branch
 	ci = commit
 	st = status
+	sweep = "!f() { \
+		default=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null) || { echo 'sweep: origin/HEAD unset, run: git remote set-head origin --auto' >&2; return 1; }; \
+		default=${default#origin/}; \
+		git checkout -q \"$default\" || return 1; \
+		git for-each-ref --format='%(refname:short)' --merged \"$default\" refs/heads/ | grep -vxF \"$default\" | xargs -r -n1 git branch -d; \
+		git for-each-ref --format='%(refname:short)' refs/heads/ | grep -vxF \"$default\" | while read -r branch; do \
+			base=$(git merge-base \"$default\" \"$branch\") || continue; \
+			squashed=$(git commit-tree \"$branch^{tree}\" -p \"$base\" -m _); \
+			case $(git cherry \"$default\" \"$squashed\") in -*) git branch -D \"$branch\";; esac; \
+		done; \
+		git remote prune origin; \
+	}; f"
 [init]
-	defaultBranch = master
+	defaultBranch = main
 [pull]
 	rebase = true 			 # Rebase (instead of merge) on pull
 [push]
@@ -30,7 +42,6 @@
 [user]
 	name = François Catuhe
 	email = francois@hey.com
-	# Public half inline, private half stays in the Bitwarden desktop ssh agent
 	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMFiyh9/RtbSNMcP/6c/kWrJiZEY0UifmbairZxnvrDC
 [gpg]
 	format = ssh
