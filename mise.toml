@@ -29,6 +29,7 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/tmux/tmux.conf" = {}
 "~/.config/uwsm/env.d/bitwarden-ssh" = {}
 "~/.config/voxtype/config.toml" = { mode = "copy" }
+"~/.config/VSCodium/User/settings.json" = {}
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }
 "~/.XCompose" = {}
