@@ -15,11 +15,14 @@ SSH_BADGER_IP = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEQW56V2RLbFN
 SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ2taQTdKdTlpYVpPTzJCOVlxNFlDMVgvRUZ1M0FEUmZ1MXpzCnU1RmZtajY2NEtIT2lDZ2YyRmxZTEZMek1YQ1ZyY0F3c2NZOGFJdnN2L1EKLS0tIHkzcGN0cHd4alpSNXZ6QlJuVW5obEVNR0gxdUFROC9BTFhPbVpCeVB6V1kKWRzu3W5HhvlfxvAhNjz+gnIi3bFGhw6WWIBR8EgspAl3mzu0h3k" }
 
 [dotfiles]
+"~/.XCompose" = {}
+"~/.config/VSCodium/User/settings.json" = {}
 "~/.config/gh/config.yml" = {}
 "~/.config/git/allowed_signers" = {}
 "~/.config/git/config" = {}
 "~/.config/herdr/config.toml" = {}
 "~/.config/hypr/autostart.lua" = {}
+"~/.config/hypr/hyprland.lua" = {}
 "~/.config/hypr/monitors.lua" = { mode = "copy" }
 "~/.config/mimeapps.list" = { mode = "copy" }
 "~/.config/mise/config.toml" = {}
@@ -29,10 +32,8 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/tmux/tmux.conf" = {}
 "~/.config/uwsm/env.d/bitwarden-ssh" = {}
 "~/.config/voxtype/config.toml" = { mode = "copy" }
-"~/.config/VSCodium/User/settings.json" = {}
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }
-"~/.XCompose" = {}
 
 [tasks."setup:vscodium"]
 run = [
