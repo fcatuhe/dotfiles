@@ -1,8 +1,6 @@
 [settings]
 experimental = true
 
-# Rendered files inherit the source file's mode and git tracks only the exec
-# bit, so a fresh clone would render ~/.ssh/config world-readable without this.
 [bootstrap.hooks.pre-dotfiles]
 run = "chmod 600 .ssh/config.tmpl"
 
@@ -17,25 +15,20 @@ SSH_BADGER_IP = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEQW56V2RLbFN
 SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ2taQTdKdTlpYVpPTzJCOVlxNFlDMVgvRUZ1M0FEUmZ1MXpzCnU1RmZtajY2NEtIT2lDZ2YyRmxZTEZMek1YQ1ZyY0F3c2NZOGFJdnN2L1EKLS0tIHkzcGN0cHd4alpSNXZ6QlJuVW5obEVNR0gxdUFROC9BTFhPbVpCeVB6V1kKWRzu3W5HhvlfxvAhNjz+gnIi3bFGhw6WWIBR8EgspAl3mzu0h3k" }
 
 [dotfiles]
-"~/.XCompose" = {}
 "~/.config/gh/config.yml" = {}
 "~/.config/git/allowed_signers" = {}
 "~/.config/git/config" = {}
 "~/.config/herdr/config.toml" = {}
 "~/.config/hypr/autostart.lua" = {}
 "~/.config/hypr/monitors.lua" = {}
-# xdg-mime rewrites this file, so a symlink would not survive setting a default app.
 "~/.config/mimeapps.list" = { mode = "copy" }
 "~/.config/mise/config.toml" = {}
 "~/.config/omarchy/defaults/agent" = {}
-
-# The shell rewrites this file in place, which replaces a symlink with a regular
-# file. Capture edits back with: mise bootstrap dotfiles add -l ~/.config/omarchy/shell.json
 "~/.config/omarchy/shell.json" = { mode = "copy" }
 "~/.config/sunsetr/sunsetr.toml" = {}
 "~/.config/tmux/tmux.conf" = {}
 "~/.config/uwsm/env.d/bitwarden-ssh" = {}
-# The `voxtype configure` TUI rewrites this file, and voxtype rejects a partial config.
 "~/.config/voxtype/config.toml" = { mode = "copy" }
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }
+"~/.XCompose" = {}

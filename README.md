@@ -40,6 +40,12 @@ mise bootstrap dotfiles add -l ~/.config/foo/bar.toml   # track a new file, or c
 
 Run them from `~/.dotfiles`, and pass `-l` to `add` so the entry lands in `mise.toml` rather than the global config.
 
-Symlinked files are live: editing them in the repo or in `~` is the same file. The `mode = "copy"` entries are the exception, one per app that rewrites its own config file.
+Symlinked files are live: editing them in the repo or in `~` is the same file. The `mode = "copy"` entries are the exception, one per app that rewrites its own config file in place, which would replace a symlink with a regular file:
+
+- `~/.config/mimeapps.list`, rewritten by xdg-mime when a default app is set.
+- `~/.config/omarchy/shell.json`, rewritten by the shell.
+- `~/.config/voxtype/config.toml`, rewritten by the `voxtype configure` TUI, which also rejects a partial config.
+
+Edit those live, then capture them back with `add -l`. `~/.ssh/config` is the other exception, a template: the `pre-dotfiles` hook chmods its source to 600, because a rendered file inherits the source's mode and git tracks only the exec bit, so a fresh clone would otherwise render it world-readable.
 
 `~/.config/uwsm/env.d/bitwarden-ssh` points `SSH_AUTH_SOCK` at the Bitwarden desktop SSH agent. uwsm sources it once at session start, so it takes effect on next login.
