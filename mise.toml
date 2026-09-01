@@ -16,6 +16,7 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 
 [dotfiles]
 "~/.XCompose" = {}
+"~/.bashrc" = {}
 "~/.config/VSCodium/User/settings.json" = {}
 "~/.config/gh/config.yml" = {}
 "~/.config/git/allowed_signers" = {}
@@ -34,6 +35,7 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/voxtype/config.toml" = { mode = "copy" }
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }
+"~/.zshrc" = {}
 
 [tasks."setup:vscodium"]
 run = [
@@ -44,4 +46,10 @@ run = [
   "codium --install-extension marcoroth.turbo-lsp",
   "codium --install-extension shopify.ruby-lsp",
   "codium --install-extension sianglim.slim",
+]
+
+[tasks."setup:zsh"]
+run = [
+  "sudo pacman -S --needed --noconfirm omarchy-zsh zsh-autosuggestions",
+  "cp -n /usr/share/omarchy-zsh/shell/inputrc ~/.inputrc",
 ]

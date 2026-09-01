@@ -15,6 +15,14 @@ mise trust
 mise bootstrap dotfiles apply
 ```
 
+## Shell
+
+zsh, through the [omarchy-zsh](https://github.com/omacom/omarchy-zsh) package: `~/.zshrc` loads the packaged `zoptions` (completion menu, keybindings, fzf widgets, syntax highlighting) and `shell/all` (the aliases, functions and tool init shared with bash), then `zsh-autosuggestions`, which upstream shipped for a month and dropped in `4f79a29`.
+
+`~/.bashrc` hands the terminal over with `exec zsh`. `touch ~/.local/state/keep-bash` pins bash from the next terminal on, `rm` it to go back: the login shell in `/etc/passwd` stays bash either way, so scripts, `ssh <host> <cmd>` and systemd units are untouched. The bash side deliberately sources Omarchy's own `default/bash/rc` rather than the package's copy of the shared config, which is a build-time snapshot of [omadots](https://github.com/omacom/omadots) and currently lags 4.0.1 (no `a`, `h`, `mup`).
+
+`omarchy-setup-zsh` is not part of `apply`: it `cp`s its templates over `~/.zshrc` and `~/.bashrc`, which here would write through the symlinks and into this repo. Both files are tracked instead, so a template change upstream has to be diffed in by hand, and `setup:zsh` only installs the packages and drops `~/.inputrc` in place for the bash fallback.
+
 ## Secrets
 
 Encrypted values live inline in `mise.toml` as `{ age = "..." }`, decrypted by the age identity at `~/.config/mise/age.txt`. Its recipient is `age12egydh7ye67fnykrjnqv89tdjscv6xnnssykt4yvnck4trrpzu0qvsdlkj`, one identity per machine, so a second machine gets its own and values are encrypted to both recipients rather than the key being copied around.
