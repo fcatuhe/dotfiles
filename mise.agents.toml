@@ -1,7 +1,6 @@
 [dotfiles]
 "~/.pi/agent/settings.json" = "agents/pi/settings.json"
 "~/.pi/agent/extensions/pi-model-shortcuts.json" = "agents/pi/extensions/pi-model-shortcuts.json"
-"~/.pi/agent/extensions/herdr-preview.json" = "agents/pi/extensions/herdr-preview.json"
 # Extension state dir, not an extension: siblings runs/ and agents/ stay local, so link the file alone.
 "~/.pi/agent/pi-codex-subagents/config.json" = "agents/pi/pi-codex-subagents/config.json"
 "~/.config/herdr/config.toml" = "agents/herdr/config.toml"
