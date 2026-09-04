@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.84.3",
+  "lastChangelogVersion": "0.85.0",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5",
   "defaultThinkingLevel": "high",
@@ -13,9 +13,7 @@
     "anthropic/claude-fable-5",
     "anthropic/claude-opus-5",
     "anthropic/claude-sonnet-5",
-    "openai-codex/gpt-5.6-sol",
-    "fireworks/accounts/fireworks/models/glm-5p2",
-    "fireworks/accounts/fireworks/models/deepseek-v4-pro"
+    "openai-codex/gpt-5.6-sol"
   ],
   "transport": "websocket-cached",
   "warnings": {
