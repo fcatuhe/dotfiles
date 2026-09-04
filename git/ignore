@@ -3,3 +3,5 @@
 
 # Ignore TODO-FC.md
 TODO-FC.md
+
+**/.claude/settings.local.json
