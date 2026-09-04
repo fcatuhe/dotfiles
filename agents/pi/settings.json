@@ -10,7 +10,7 @@
     "enabled": true
   },
   "enabledModels": [
-    "anthropic/claude-fable-5",
+    "anthropic/claude-fable-5-1",
     "anthropic/claude-opus-5",
     "anthropic/claude-sonnet-5",
     "openai-codex/gpt-5.6-sol"
