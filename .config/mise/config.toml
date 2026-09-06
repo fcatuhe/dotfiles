@@ -3,6 +3,7 @@ age = "latest"
 codex = "latest"
 gh = "latest"
 node = "latest"
+npm = "12"
 "npm:agent-browser" = "latest"
 pi = { version = "latest", minimum_release_age = "0" }
 ruby = "latest"
