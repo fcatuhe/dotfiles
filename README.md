@@ -35,6 +35,8 @@ It repaints over what readline already drew and never touches `rl_line_buffer`, 
 
 `~/.config/hypr/input.lua` selects it: `kb_layout = "frenchy,us"`, variant `ansi`, Omarchy's three default options plus `frenchy:digitlock`. It is the whole Omarchy template with the one `hl.config` block uncommented, so an `omarchy update` changing the commented documentation shows up as a conflict worth reading.
 
+The bar widget is `~/.config/omarchy/plugins/francois.keyboard-layout/`, an `omarchy plugin clone` of `omarchy.keyboard-layout` that appends `#` to the label while the digit row is locked. Hyprland raises no event for that lock, so `KeyboardLayout.qml` reads the NumLock LED off evdev instead. `KeyboardLayoutModel.js` is untouched from the stock widget and tracked only because a clone needs every file present. `shell.json` names the plugin, which is why both have to be tracked together.
+
 ## Secrets
 
 Encrypted values live inline in `mise.toml` as `{ age = "..." }`, decrypted by the age identity at `~/.config/mise/age.txt`. Its recipient is `age12egydh7ye67fnykrjnqv89tdjscv6xnnssykt4yvnck4trrpzu0qvsdlkj`, one identity per machine, so a second machine gets its own and values are encrypted to both recipients rather than the key being copied around.

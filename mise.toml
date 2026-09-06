@@ -30,6 +30,9 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/mise/config.toml" = {}
 "~/.config/omarchy/defaults/agent" = {}
 "~/.config/omarchy/hooks/post-update.d/bash-hl.hook" = {}
+"~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayout.qml" = {}
+"~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayoutModel.js" = {}
+"~/.config/omarchy/plugins/francois.keyboard-layout/manifest.json" = {}
 "~/.config/omarchy/shell.json" = { mode = "copy" }
 "~/.config/shell/aliases" = {}
 "~/.config/sunsetr/sunsetr.toml" = {}
