@@ -29,7 +29,7 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/mimeapps.list" = { mode = "copy" }
 "~/.config/mise/config.toml" = {}
 "~/.config/omarchy/defaults/agent" = {}
-"~/.config/omarchy/hooks/post-update.d/bash-hl.hook" = {}
+"~/.config/omarchy/hooks/post-update.d/bash-highlight.hook" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayout.qml" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayoutModel.js" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/manifest.json" = {}
@@ -43,7 +43,7 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/xkb/rules/evdev.xml" = {}
 "~/.config/xkb/symbols/frenchy" = {}
 "~/.config/xkb/types/frenchy" = {}
-"~/.local/src/bash-hl/hl.c" = {}
+"~/.local/src/bash-highlight/hl.c" = {}
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }
 
@@ -51,8 +51,8 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 [tasks.bootstrap]
 depends = ["setup:*"]
 
-[tasks."setup:bash-hl"]
-run = "bash ~/.config/omarchy/hooks/post-update.d/bash-hl.hook"
+[tasks."setup:bash-highlight"]
+run = "bash ~/.config/omarchy/hooks/post-update.d/bash-highlight.hook"
 
 [tasks."setup:vscodium"]
 run = [

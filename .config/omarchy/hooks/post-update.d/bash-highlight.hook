@@ -1,4 +1,4 @@
 # The loadable ABI follows the running bash, so a bash upgrade needs this
 mkdir -p ~/.local/lib/bash
-gcc -shared -fPIC -O2 -Wall -o ~/.local/lib/bash/hl.so ~/.local/src/bash-hl/hl.c \
+gcc -shared -fPIC -O2 -Wall -o ~/.local/lib/bash/hl.so ~/.local/src/bash-highlight/hl.c \
   -I/usr/include/bash -I/usr/include/bash/include -I/usr/include/bash/builtins
