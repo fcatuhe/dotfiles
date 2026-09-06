@@ -29,6 +29,12 @@ zsh was tried through the [omarchy-zsh](https://github.com/omacom/omarchy-zsh) p
 
 It repaints over what readline already drew and never touches `rl_line_buffer`, whose column arithmetic would break on an escape sequence, and it leaves wrapped lines alone because a horizontal cursor move cannot reach a word on an earlier row. Cost measured against the alternatives: 8 ms of startup and no measurable memory, where ble.sh wanted 733 ms and 13.7 MB per shell. `hl off` disables it in a session. A bash upgrade needs the object rebuilt, since the loadable ABI follows the running bash, so the build lives in `~/.config/omarchy/hooks/post-update.d/bash-hl.hook` and `omarchy update` runs it. `setup:bash-hl` calls that same file, which is why there is one gcc line rather than two.
 
+## Keyboard
+
+`frenchy-clavier`, a custom AZERTY layout living in `~/.config/xkb/`, which libxkbcommon reads before the system tree so nothing has to be installed into `/usr/share/X11/xkb/`. `symbols/frenchy` has the `ansi` layout, `iso` including it and remapping the extra key, and the `digitlock` and `shiftlock` option groups. `types/frenchy` defines `FRENCHY_DIGITS_LOCK`, which puts accented letters on the digit row unshifted and the digits on shift, and `rules/evdev` wires the option names up per layout slot, with `rules/evdev.xml` describing the layout to anything that lists layouts.
+
+`~/.config/hypr/input.lua` selects it: `kb_layout = "frenchy,us"`, variant `ansi`, Omarchy's three default options plus `frenchy:digitlock`. It is the whole Omarchy template with the one `hl.config` block uncommented, so an `omarchy update` changing the commented documentation shows up as a conflict worth reading.
+
 ## Secrets
 
 Encrypted values live inline in `mise.toml` as `{ age = "..." }`, decrypted by the age identity at `~/.config/mise/age.txt`. Its recipient is `age12egydh7ye67fnykrjnqv89tdjscv6xnnssykt4yvnck4trrpzu0qvsdlkj`, one identity per machine, so a second machine gets its own and values are encrypted to both recipients rather than the key being copied around.

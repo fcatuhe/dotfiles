@@ -24,6 +24,7 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/herdr/config.toml" = {}
 "~/.config/hypr/autostart.lua" = {}
 "~/.config/hypr/hyprland.lua" = {}
+"~/.config/hypr/input.lua" = {}
 "~/.config/hypr/monitors.lua" = { mode = "copy" }
 "~/.config/mimeapps.list" = { mode = "copy" }
 "~/.config/mise/config.toml" = {}
@@ -35,6 +36,10 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/tmux/tmux.conf" = {}
 "~/.config/uwsm/env.d/bitwarden-ssh" = {}
 "~/.config/voxtype/config.toml" = { mode = "copy" }
+"~/.config/xkb/rules/evdev" = {}
+"~/.config/xkb/rules/evdev.xml" = {}
+"~/.config/xkb/symbols/frenchy" = {}
+"~/.config/xkb/types/frenchy" = {}
 "~/.local/src/bash-hl/hl.c" = {}
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }

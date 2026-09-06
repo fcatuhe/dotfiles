@@ -1,0 +1,46 @@
+! include %S/evdev
+
+! layout = types
+  frenchy = +frenchy(digits)
+
+! layout[1] = types
+  frenchy = +frenchy(digits)
+
+! layout[2] = types
+  frenchy = +frenchy(digits)
+
+! layout[3] = types
+  frenchy = +frenchy(digits)
+
+! layout[4] = types
+  frenchy = +frenchy(digits)
+
+! layout = compat
+  frenchy = +level5(level5_lock)
+
+! layout[1] = compat
+  frenchy = +level5(level5_lock)
+
+! layout[2] = compat
+  frenchy = +level5(level5_lock)
+
+! layout[3] = compat
+  frenchy = +level5(level5_lock)
+
+! layout[4] = compat
+  frenchy = +level5(level5_lock)
+
+! layout option = symbols
+  * frenchy:digitlock = +frenchy(digitlock)
+
+! layout[1] option = symbols
+  * frenchy:digitlock = +frenchy(digitlock):1
+
+! layout[2] option = symbols
+  * frenchy:digitlock = +frenchy(digitlock):2
+
+! layout[3] option = symbols
+  * frenchy:digitlock = +frenchy(digitlock):3
+
+! layout[4] option = symbols
+  * frenchy:digitlock = +frenchy(digitlock):4
