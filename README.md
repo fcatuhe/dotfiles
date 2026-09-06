@@ -17,11 +17,9 @@ mise bootstrap dotfiles apply
 
 ## Shell
 
-zsh, through the [omarchy-zsh](https://github.com/omacom/omarchy-zsh) package: `~/.zshrc` loads the packaged `zoptions` (completion menu, keybindings, fzf widgets, syntax highlighting) and `shell/all` (the aliases, functions and tool init shared with bash), then `zsh-autosuggestions`, which upstream shipped for a month and dropped in `4f79a29`.
+bash, Omarchy's own, with `shopt -s autocd` so a directory name on its own is a `cd` as it is in zsh. `~/.bashrc` sources Omarchy's `default/bash/rc` for the aliases, functions and tool init.
 
-`~/.bashrc` hands the terminal over with `exec zsh`. `touch ~/.local/state/keep-bash` pins bash from the next terminal on, `rm` it to go back: the login shell in `/etc/passwd` stays bash either way, so scripts, `ssh <host> <cmd>` and systemd units are untouched. The bash side deliberately sources Omarchy's own `default/bash/rc` rather than the package's copy of the shared config, which is a build-time snapshot of [omadots](https://github.com/omacom/omadots) and currently lags 4.0.1 (no `a`, `h`, `mup`).
-
-`omarchy-setup-zsh` is not part of `apply`: it `cp`s its templates over `~/.zshrc` and `~/.bashrc`, which here would write through the symlinks and into this repo. Both files are tracked instead, so a template change upstream has to be diffed in by hand, and `setup:zsh` only installs the packages and drops `~/.inputrc` in place for the bash fallback.
+zsh was tried through the [omarchy-zsh](https://github.com/omacom/omarchy-zsh) package and dropped: its shared config is a build-time snapshot of [omadots](https://github.com/omacom/omadots) that lagged 4.0.1 (no `a`, `h`, `mup`), and Omarchy is tested against bash only, so features like `omarchy-cmd-terminal-cwd` break on it ([#3994](https://github.com/omacom/omarchy/issues/3994)). What zsh had that bash lacks is highlighting, which `hl` below covers.
 
 ## Secrets
 
