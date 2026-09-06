@@ -21,6 +21,8 @@ bash, Omarchy's own, with `shopt -s autocd` so a directory name on its own is a 
 
 zsh was tried through the [omarchy-zsh](https://github.com/omacom/omarchy-zsh) package and dropped: its shared config is a build-time snapshot of [omadots](https://github.com/omacom/omadots) that lagged 4.0.1 (no `a`, `h`, `mup`), and Omarchy is tested against bash only, so features like `omarchy-cmd-terminal-cwd` break on it ([#3994](https://github.com/omacom/omarchy/issues/3994)). What zsh had that bash lacks is highlighting, which `hl` below covers.
 
+`~/.config/shell/aliases` is what the mac's oh-my-zsh setup left behind, ported and sourced by `~/.bashrc`: the omz git plugin names, `ggl` and `ggp` for the current branch, `vsc` on codium, and the pi and utility aliases. `ga` and `gd` are left to Omarchy, whose worktree helpers own those names, so `git add` and `git diff` keep theirs. `gcm` goes the other way and checks out the main branch as on the mac, which needs the `unalias` above it: a function cannot be declared over a live alias.
+
 ## Secrets
 
 Encrypted values live inline in `mise.toml` as `{ age = "..." }`, decrypted by the age identity at `~/.config/mise/age.txt`. Its recipient is `age12egydh7ye67fnykrjnqv89tdjscv6xnnssykt4yvnck4trrpzu0qvsdlkj`, one identity per machine, so a second machine gets its own and values are encrypted to both recipients rather than the key being copied around.

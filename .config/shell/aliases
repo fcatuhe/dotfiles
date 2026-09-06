@@ -1,0 +1,64 @@
+export EDITOR="codium --wait"
+export BUNDLER_EDITOR="$EDITOR"
+export NPM_CONFIG_FUND=false
+
+alias vsc='codium .'
+
+# oh-my-zsh git plugin names
+alias gst='git status'
+alias gss='git status --short'
+alias gaa='git add --all'
+alias gdca='git diff --cached'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gsw='git switch'
+alias gb='git branch'
+alias gbd='git branch --delete'
+alias gf='git fetch'
+alias gl='git pull'
+alias gp='git push'
+alias glo='git log --oneline --decorate'
+alias glog='git log --oneline --decorate --graph'
+alias gla='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --all'
+alias grb='git rebase'
+alias grbi='git rebase --interactive'
+alias grbc='git rebase --continue'
+alias grba='git rebase --abort'
+alias gsta='git stash push'
+alias gstp='git stash pop'
+alias gstl='git stash list'
+alias gcp='git cherry-pick'
+alias gm='git merge'
+alias gs='git sweep'
+
+ggl() {
+  local branch
+  branch="${1:-$(git symbolic-ref --short HEAD)}" || return
+  git pull origin "$branch"
+}
+
+ggp() {
+  local branch
+  branch="${1:-$(git symbolic-ref --short HEAD)}" || return
+  git push origin "$branch"
+}
+
+# a function cannot be declared over Omarchy's gcm alias
+unalias gcm 2>/dev/null
+gcm() {
+  local ref
+  for ref in refs/heads/main refs/heads/master refs/heads/trunk; do
+    git show-ref -q --verify "$ref" && { git checkout "${ref##*/}"; return; }
+  done
+  echo "gcm: no main, master or trunk branch here" >&2
+  return 1
+}
+
+# Pi
+alias pir='pi -r'
+alias pii='pi -p' # pi inline
+alias piu='pi update --all'
+
+# Utilities
+alias myip="curl https://ipinfo.io/json"
+alias serve='ruby -run -e httpd . -p 8000'

@@ -10,3 +10,5 @@ source "$OMARCHY_PATH/default/bash/rc"
 
 # Type a directory name to cd into it
 shopt -s autocd
+
+source ~/.config/shell/aliases
