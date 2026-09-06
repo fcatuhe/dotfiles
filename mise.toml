@@ -39,6 +39,10 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }
 
+# Run by mise bootstrap, once the dotfiles are in place
+[tasks.bootstrap]
+depends = ["setup:*"]
+
 [tasks."setup:bash-hl"]
 run = "bash ~/.config/omarchy/hooks/post-update.d/bash-hl.hook"
 

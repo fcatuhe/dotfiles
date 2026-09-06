@@ -12,8 +12,10 @@ Only files that diverge from Omarchy's install templates are tracked. The rest o
 git clone git@github.com:fcatuhe/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 mise trust
-mise bootstrap dotfiles apply
+mise bootstrap
 ```
+
+`bootstrap` applies the dotfiles, then runs the `bootstrap` task, which depends on every `setup:*` task: the highlighter gets compiled and the editor extensions installed without a second command. `mise bootstrap dotfiles apply` alone is the quicker path when only a file changed.
 
 ## Shell
 
