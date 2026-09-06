@@ -1,5 +1,6 @@
 [tools]
 age = "latest"
+claude = "latest"
 codex = "latest"
 gh = "latest"
 node = "latest"
