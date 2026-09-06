@@ -12,3 +12,6 @@ source "$OMARCHY_PATH/default/bash/rc"
 shopt -s autocd
 
 source ~/.config/shell/aliases
+
+# First word green when bash can run it, red when it cannot
+enable -f ~/.local/lib/bash/hl.so hl 2>/dev/null && hl on
