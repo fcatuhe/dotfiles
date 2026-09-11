@@ -33,8 +33,6 @@ BarWidget {
   readonly property string layoutLabel: KeyboardLayoutModel.shortLabel(layoutFull, layoutBriefs)
 
   property bool digitsLocked: false
-  readonly property string evLed: "17"
-  readonly property string ledNumLock: "0"
   readonly property bool hasDigitLock: layoutFull.indexOf("frenchy-clavier") === 0
   readonly property string displayLabel: layoutLabel + (digitsLocked && hasDigitLock ? "#" : "")
 
@@ -99,6 +97,9 @@ BarWidget {
         const named = KeyboardLayoutModel.eventKeyboardName(event)
         if (named) root.typedKeyboardName = named
       }
+
+      // INFO: fc 11sep26 the digit lock raises no Hyprland event, so bindings.lua has the key raise this one
+      if (name === "custom" && String(event.data) === "digitlock") lockSettleTimer.restart()
 
       // A reload that adds a layout to kb_layout decides whether the widget
       // shows at all, and leaves every keyboard on the layout it was already
@@ -180,16 +181,10 @@ BarWidget {
     onTriggered: root.refresh()
   }
 
-  // INFO: fc 06sep26 Hyprland raises no event for the lock, but pushes the NumLock LED to evdev on every change
-  Process {
-    command: ["sh", "-c", "for led in /sys/class/leds/*::numlock/device/event*; do exec stdbuf -oL od -An -tu2 -w24 -v /dev/input/${led##*/}; done"]
-    running: root.hasDigitLock
-    stdout: SplitParser {
-      onRead: line => {
-        const event = line.trim().split(/\s+/)
-        if (event[8] === root.evLed && event[9] === root.ledNumLock) root.refresh()
-      }
-    }
+  Timer {
+    id: lockSettleTimer
+    interval: 60
+    onTriggered: root.refresh()
   }
 
   // A query that never returns would freeze the label until the shell restarts,
