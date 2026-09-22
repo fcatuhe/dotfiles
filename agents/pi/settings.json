@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "0.87.1",
   "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-5",
+  "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
   "packages": [
     "git:github.com/fcatuhe/pi-wares"
@@ -10,10 +10,10 @@
     "enabled": true
   },
   "enabledModels": [
+    "anthropic/claude-opus-5-5",
     "anthropic/claude-fable-5-1",
-    "anthropic/claude-opus-5",
     "anthropic/claude-sonnet-5",
-    "openai-codex/gpt-5.6-sol"
+    "openai-codex/gpt-6-sol"
   ],
   "transport": "websocket-cached",
   "warnings": {
