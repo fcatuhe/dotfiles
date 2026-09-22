@@ -9,7 +9,10 @@ Host crooz
   HostName {{ vars.SSH_CROOZ_IP }}
   User {{ vars.SSH_CROOZ_USER }}
 
-Host azade
+Host azade-ts
+  HostName {{ vars.SSH_AZADE_TS_IP }}
+
+Host azade azade-ts
   HostName {{ vars.SSH_AZADE_IP }}
   User {{ vars.SSH_AZADE_USER }}
 
