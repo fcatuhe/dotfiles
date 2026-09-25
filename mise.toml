@@ -44,7 +44,11 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/xkb/rules/evdev.xml" = {}
 "~/.config/xkb/symbols/frenchy" = {}
 "~/.config/xkb/types/frenchy" = {}
-"~/.local/src/bash/line.c" = {}
+"~/.local/src/bash/line/highlight.c" = {}
+"~/.local/src/bash/line/line.c" = {}
+"~/.local/src/bash/line/line.h" = {}
+"~/.local/src/bash/line/screen.c" = {}
+"~/.local/src/bash/line/suggest.c" = {}
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }
 
