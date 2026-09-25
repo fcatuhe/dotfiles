@@ -1,6 +1,9 @@
 # Omarchy environment (OMARCHY_PATH + PATH), needed even for non-interactive shells
 [[ -r /usr/share/omarchy/default/bash/env-bootstrap ]] && source /usr/share/omarchy/default/bash/env-bootstrap
 
+# Arch ships emcc in /usr/lib/emscripten, off PATH: skyBlip's WASM build needs it
+export PATH="$PATH:/usr/lib/emscripten"
+
 # If not running interactively, don't do anything else (leave this above the rc source)
 [[ $- != *i* ]] && return
 
