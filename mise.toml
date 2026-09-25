@@ -49,6 +49,7 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.local/src/bash/line/line.h" = {}
 "~/.local/src/bash/line/screen.c" = {}
 "~/.local/src/bash/line/suggest.c" = {}
+"~/.pi/agent/keybindings.json" = {}
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }
 
