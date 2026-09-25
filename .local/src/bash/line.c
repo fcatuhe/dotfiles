@@ -151,7 +151,7 @@ static void unhook(void)
     rl_redisplay_function = painted_over;
 }
 
-int hl_builtin(WORD_LIST *list)
+int line_builtin(WORD_LIST *list)
 {
   char *word = list ? list->word->word : "on";
 
@@ -168,11 +168,11 @@ int hl_builtin(WORD_LIST *list)
   return EXECUTION_SUCCESS;
 }
 
-char *hl_doc[] = {
+char *line_doc[] = {
     "Paint the first word of the command line green when bash can run it,",
     "red when it cannot. Aliases, functions, builtins, reserved words and",
     "commands on PATH all count as runnable.",
     (char *)NULL};
 
-struct builtin hl_struct = {
-    "hl", hl_builtin, BUILTIN_ENABLED, hl_doc, "hl [on|off|status]", 0};
+struct builtin line_struct = {
+    "line", line_builtin, BUILTIN_ENABLED, line_doc, "line [on|off|status]", 0};
