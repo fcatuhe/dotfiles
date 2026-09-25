@@ -7,6 +7,7 @@ hl.config({
     kb_layout = "frenchy,us",
     kb_variant = "ansi,",
     kb_options = "compose:caps,shift:both_capslock_cancel,grp:ctrls_toggle,frenchy:digitlock",
+    numlock_by_default = false,
   },
 })
 
