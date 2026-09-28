@@ -8,7 +8,7 @@ show_agent_labels_on_pane_borders = true
 prompt_new_tab_name = false
 pane_scrollbars = false
 
-agent_panel_sort = "spaces"
+agent_panel_sort = "priority"
 
 [ui.sidebar.spaces]
 row_gap = 1
@@ -72,8 +72,8 @@ close_workspace = ["prefix+shift+k", "ctrl+alt+shift+w"]
 previous_workspace = ["prefix+shift+p", "alt+up", "ctrl+alt+k"]
 next_workspace = ["prefix+shift+n", "alt+down", "ctrl+alt+j"]
 
-# New tab running pi, focused, in one keystroke.
+# New tab running pi, focused, in one keystroke. Option composes a character out of alt+p, hence ctrl+alt+i.
 [[keys.command]]
-key = "ctrl+alt+i"
+key = ["alt+p", "ctrl+alt+i"]
 type = "shell"
-command = 'p=$(herdr tab create --focus); p=${p#*\"pane_id\":\"}; herdr pane run "${p%%\"*}" pi'
+command = 'p=$(herdr tab create --focus) && p=${p#*\"pane_id\":\"} && herdr pane run "${p%%\"*}" pi'
