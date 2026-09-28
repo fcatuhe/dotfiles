@@ -58,6 +58,28 @@
 
 [push]
   default = simple
+  autoSetupRemote = true
+
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+
+[commit]
+  verbose = true
+
+[column]
+  ui = auto
+
+[branch]
+  sort = -committerdate
+
+[tag]
+  sort = -version:refname
+
+[rerere]
+  enabled = true
+  autoupdate = true
 
 [init]
   defaultBranch = main
@@ -69,7 +91,7 @@
   mergeoptions = --no-edit
 
 [pull]
-  rebase = false
+  rebase = true
 
 [include]
   path = ~/.gitconfig.local
