@@ -17,11 +17,18 @@ Three envs, picked per machine and remembered in `~/.config/dotfiles/envs`:
 The age private key lives in Bitwarden under **"dotfiles/age-key"**. Unlock the desktop app (Touch ID), copy the note, then:
 
 ```bash
-git clone git@github.com:fcatuhe/dotfiles.git ~/fcode/dotfiles
+git clone -b macos https://github.com/fcatuhe/dotfiles.git ~/fcode/dotfiles
 mkdir -p ~/.config/mise && (umask 077; pbpaste > ~/.config/mise/age.txt) && pbcopy < /dev/null
+mise use -g age
 age-keygen -y ~/.config/mise/age.txt   # must print age1e2qkevjus09dfzmr82xppyuedlcya5283kf0u4ydsk7qgyhqgumspm36nl
 cd ~/fcode/dotfiles && ./install zsh,git,secrets,agents,darwin
+ssh -T git@github.com   # confirm the host key, fingerprint SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU
+git remote set-url origin git@github.com:fcatuhe/dotfiles.git
 ```
+
+The clone is over HTTPS on the `macos` branch: `main` is the Omarchy-only layout with no `./install`, and SSH only reaches the Bitwarden agent once `./install` has rendered `~/.ssh/config`. macOS ships without age, hence the `mise use`.
+
+`./install` refuses to replace a file already in `$HOME`, a stock `~/.zshrc` or `~/.zprofile` included. Back those up, then rerun with `--force-dotfiles`.
 
 ## Commands
 
