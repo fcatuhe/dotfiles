@@ -74,5 +74,5 @@
   // Privacy
   "telemetry.telemetryLevel": "off",
   "redhat.telemetry.enabled": false,
-  "security.workspace.trust.untrustedFiles": "open"
+  "security.workspace.trust.enabled": false
 }
