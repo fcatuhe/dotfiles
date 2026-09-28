@@ -1,5 +1,6 @@
 [dotfiles]
 "~/.gitconfig.local" = "git/identity"
+"~/.config/git/allowed_signers" = "git/allowed_signers"
 "~/.zprofile" = "zsh/zprofile"
 "~/.config/ghostty/config" = "ghostty/config"
 "~/Library/Application Support/Code/User/settings.json" = "vscode/settings.json"
