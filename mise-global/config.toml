@@ -1,0 +1,18 @@
+[tools]
+age = "latest"
+claude = "latest"
+codex = "latest"
+gh = "latest"
+herdr = "latest"
+node = "latest"
+npm = "12"
+"npm:agent-browser" = "latest"
+pi = { version = "latest", minimum_release_age = "0" }
+ruby = "latest"
+stripe = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["ruby"]
+
+[settings.ruby]
+compile = false
