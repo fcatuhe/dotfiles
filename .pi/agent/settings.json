@@ -2,7 +2,17 @@
   "theme": "omarchy-system",
   "lastChangelogVersion": "0.87.1",
   "packages": [
-    "git:github.com/fcatuhe/pi-wares"
+    {
+      "source": "git:github.com/fcatuhe/pi-wares",
+      "extensions": [
+        "+extensions/policies/policy-code-comment/index.ts",
+        "+extensions/policies/policy-engineering/index.ts",
+        "+extensions/policies/policy-frontend/index.ts",
+        "+extensions/policies/policy-git/index.ts",
+        "+extensions/policies/policy-rails/index.ts",
+        "+extensions/policies/policy-writing/index.ts"
+      ]
+    }
   ],
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5-5",
@@ -19,5 +29,9 @@
     "anthropic/claude-fable-5-1",
     "anthropic/claude-sonnet-5",
     "openai-codex/gpt-6-sol"
-  ]
+  ],
+  "transport": "auto",
+  "defaultProjectTrust": "ask",
+  "doubleEscapeAction": "tree",
+  "collapseChangelog": false
 }
