@@ -43,6 +43,10 @@ Both rewrite over what readline already drew and never touch `rl_line_buffer`, w
 
 The bar widget is `~/.config/omarchy/plugins/francois.keyboard-layout/`, an `omarchy plugin clone` of `omarchy.keyboard-layout` that appends `#` to the label while the digit row is locked. Hyprland raises no event for that lock, so `~/.config/hypr/bindings.lua` binds the key that moves it, Shift + Caps Lock, to `hl.dsp.event("digitlock")`, and `KeyboardLayout.qml` refreshes on that custom event. The bind is non-consuming, or the key would no longer reach the lock it is there to move, and it fires on release with the modifiers ignored: Shift is usually let go first, and xkb only settles the lock once the key is up. Hyprland dispatches the bind before feeding the key to xkb, so the widget waits 60ms before asking `hyprctl` what the lock now is. `KeyboardLayoutModel.js` is untouched from the stock widget and tracked only because a clone needs every file present. `shell.json` names the plugin, which is why both have to be tracked together.
 
+## Firmware
+
+`~/.config/omarchy/hooks/post-update.d/firmware-check.hook` makes every `omarchy update` check LVFS for firmware. It refreshes the fwupd metadata and, when `fwupdmgr get-updates` lists a device, sends a notification that opens `omarchy update firmware` on click. It never flashes anything itself. Omarchy does not ship `fwupd`, so `setup:fwupd` installs it at bootstrap, through `omarchy-pkg-add`, which asks for the sudo password and skips it when present.
+
 ## Secrets
 
 Encrypted values live inline in `mise.toml` as `{ age = "..." }`, decrypted by the age identity at `~/.config/mise/age.txt`. Its recipient is `age12egydh7ye67fnykrjnqv89tdjscv6xnnssykt4yvnck4trrpzu0qvsdlkj`, one identity per machine, so a second machine gets its own and values are encrypted to both recipients rather than the key being copied around.

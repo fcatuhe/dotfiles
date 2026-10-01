@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+if ! output=$(fwupdmgr refresh --force 2>&1); then
+  echo "$output" >&2
+  exit 1
+fi
+
+devices=$(fwupdmgr get-updates --json --no-unreported-check | jq -r '[.Devices[].Name] | join(", ")')
+
+if [[ -n $devices ]]; then
+  echo "Firmware updates available: $devices"
+  omarchy-notification-send -u normal -g $'\uea78' "Firmware updates available" "$devices" \
+    --exec omarchy-launch-floating-terminal-with-presentation omarchy-update-firmware
+fi

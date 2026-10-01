@@ -31,6 +31,7 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/mise/config.toml" = {}
 "~/.config/omarchy/defaults/agent" = {}
 "~/.config/omarchy/hooks/post-update.d/bash-line.hook" = {}
+"~/.config/omarchy/hooks/post-update.d/firmware-check.hook" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayout.qml" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayoutModel.js" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/manifest.json" = {}
@@ -59,6 +60,9 @@ depends = ["setup:*"]
 
 [tasks."setup:bash-line"]
 run = "bash ~/.config/omarchy/hooks/post-update.d/bash-line.hook"
+
+[tasks."setup:fwupd"]
+run = "omarchy-pkg-add fwupd"
 
 [tasks."setup:sunsetr"]
 run = "omarchy-pkg-aur-add sunsetr-bin"
