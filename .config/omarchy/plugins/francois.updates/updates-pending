@@ -2,21 +2,13 @@
 
 set -euo pipefail
 
-lines() {
-  [[ -z $1 ]] && echo 0 || wc -l <<<"$1"
-}
+pacman=$({ checkupdates --nocolor || (($? == 2)); } | awk '$1 != "omarchy" && $1 != "omarchy-dev"' | wc -l)
 
-pacman=$(checkupdates --nocolor) || (($? == 2))
-pacman=$(awk '$1 != "omarchy" && $1 != "omarchy-dev"' <<<"$pacman")
+# INFO: fc 01oct26 yay -Qua exits 1 when nothing is pending, so an error with no output passes too
+aur=$({ yay -Qua || (($? == 1)); } | wc -l)
 
-# INFO: fc 01oct26 yay -Qua exits 1 when nothing is pending, so only its output tells
-aur=$(yay -Qua) || [[ -z $aur ]]
-
-mise=$(cd ~ && MISE_MINIMUM_RELEASE_AGE=0 mise outdated --json | jq 'length')
+mise=$(cd ~ && MISE_MINIMUM_RELEASE_AGE=0 mise outdated --json | jq length)
 
 firmware=$(fwupdmgr get-updates --json --no-unreported-check --no-metadata-check | jq '.Devices | length')
 
-echo "pacman $(lines "$pacman")"
-echo "aur $(lines "$aur")"
-echo "mise $mise"
-echo "firmware $firmware"
+printf '{"pac":%d,"aur":%d,"mise":%d,"fw":%d}\n' "$pacman" "$aur" "$mise" "$firmware"

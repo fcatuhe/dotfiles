@@ -7,18 +7,12 @@ BarWidget {
   id: root
   moduleName: "francois.updates"
 
-  readonly property var sources: [
-    { name: "pacman", label: "pac" },
-    { name: "aur", label: "aur" },
-    { name: "mise", label: "mise" },
-    { name: "firmware", label: "fw" }
-  ]
   property var pending: ({})
   property bool expanded: false
-  readonly property int total: sources.reduce((sum, source) => sum + (pending[source.name] || 0), 0)
-  readonly property string breakdown: sources
-    .filter(source => pending[source.name] > 0)
-    .map(source => source.label + " " + pending[source.name])
+  readonly property int total: Object.values(pending).reduce((sum, count) => sum + count, 0)
+  readonly property string breakdown: Object.entries(pending)
+    .filter(([, count]) => count > 0)
+    .map(([source, count]) => source + " " + count)
     .join("  ")
 
   function refresh() {
@@ -26,9 +20,9 @@ BarWidget {
   }
 
   function updateCommand() {
-    if (pending.pacman || pending.aur) return "omarchy-update"
+    if (pending.pac || pending.aur) return "omarchy-update"
     if (pending.mise) return "omarchy-update-mise"
-    if (pending.firmware) return "omarchy-update-firmware"
+    if (pending.fw) return "omarchy-update-firmware"
     return ""
   }
 
@@ -37,15 +31,6 @@ BarWidget {
     if (!command || !root.bar) return
     var script = command + "; status=$?; omarchy-shell -q francois.updates refresh; (exit $status)"
     root.bar.run("omarchy-launch-floating-terminal-with-presentation " + Util.shellQuote(script))
-  }
-
-  function parse(text) {
-    var counts = {}
-    text.trim().split("\n").forEach(line => {
-      var fields = line.split(" ")
-      counts[fields[0]] = Number(fields[1])
-    })
-    return counts
   }
 
   visible: total > 0
@@ -65,7 +50,7 @@ BarWidget {
     command: [decodeURIComponent(Qt.resolvedUrl("updates-pending").toString().replace(/^file:\/\//, ""))]
     stdout: StdioCollector {
       waitForEnd: true
-      onStreamFinished: if (text.trim() !== "") root.pending = root.parse(text)
+      onStreamFinished: if (text) root.pending = JSON.parse(text)
     }
   }
 
