@@ -74,6 +74,25 @@ efibootmgr | grep -v -E '^Boot(Current|Next):' > "$dir/efibootmgr.txt"
 cat /sys/class/dmi/id/bios_version > "$dir/bios-version.txt"
 '''
 
+[tasks."bios:apply"]
+description = "Write the bios/<model> settings that differ from the firmware, effective at next reboot"
+raw = true
+run = '''
+dir=bios/$(tr '[:upper:]' '[:lower:]' < /sys/class/dmi/id/product_version | tr -cs 'a-z0-9' '-' | sed 's/-$//')
+lmi=/sys/class/firmware-attributes/thinklmi
+sudo -v
+read -rsp 'Supervisor password (Enter if none): ' pw; echo
+printf '%s' "$pw" | sudo tee $lmi/authentication/Admin/current_password > /dev/null
+unset pw
+trap "echo | sudo tee $lmi/authentication/Admin/current_password > /dev/null" EXIT
+while IFS='=' read -r name value; do
+  current=$(sudo cat "$lmi/attributes/$name/current_value")
+  [ "$current" = "$value" ] && continue
+  printf '%s' "$value" | sudo tee "$lmi/attributes/$name/current_value" > /dev/null
+  echo "$name: $current -> $value"
+done < "$dir/settings.txt"
+'''
+
 [tasks."setup:bash-line"]
 run = "bash ~/.config/omarchy/hooks/post-update.d/bash-line.hook"
 
