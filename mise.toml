@@ -66,6 +66,13 @@ run = "bash ~/.config/omarchy/hooks/post-update.d/bash-line.hook"
 [tasks."setup:fwupd"]
 run = ["omarchy-pkg-add fwupd", "sudo systemctl enable --now fwupd-refresh.timer"]
 
+[tasks."setup:limine"]
+run = [
+  "sudo sed -i -E -e '/^quiet:/d' -e 's/^#?timeout:.*/timeout: 1\\nquiet: yes/' /boot/limine.conf",
+  "sudo grep -qx 'timeout: 1' /boot/limine.conf",
+  "sudo grep -qx 'quiet: yes' /boot/limine.conf",
+]
+
 [tasks."setup:sunsetr"]
 run = "omarchy-pkg-aur-add sunsetr-bin"
 
