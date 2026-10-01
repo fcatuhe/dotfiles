@@ -17,6 +17,8 @@ mise bootstrap
 
 `bootstrap` applies the dotfiles, then runs the `bootstrap` task, which depends on every `setup:*` task: the highlighter gets compiled and the editor extensions installed without a second command. `mise bootstrap dotfiles apply` alone is the quicker path when only a file changed.
 
+`setup:sunsetr` installs `sunsetr-bin` from the AUR through `omarchy-pkg-aur-add`, since `~/.config/hypr/autostart.lua` launches `sunsetr` and Omarchy does not ship it. The helper skips a package already present, so rerunning `bootstrap` is harmless. It asks for the sudo password.
+
 ## Shell
 
 bash, Omarchy's own, with `shopt -s autocd` so a directory name on its own is a `cd` as it is in zsh. `~/.bashrc` sources Omarchy's `default/bash/rc` for the aliases, functions and tool init.

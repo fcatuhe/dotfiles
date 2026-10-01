@@ -60,6 +60,9 @@ depends = ["setup:*"]
 [tasks."setup:bash-line"]
 run = "bash ~/.config/omarchy/hooks/post-update.d/bash-line.hook"
 
+[tasks."setup:sunsetr"]
+run = "omarchy-pkg-aur-add sunsetr-bin"
+
 [tasks."setup:vscodium"]
 run = [
   "codium --install-extension esbenp.prettier-vscode",
