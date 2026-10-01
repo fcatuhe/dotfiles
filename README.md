@@ -49,7 +49,7 @@ The bar widget is `~/.config/omarchy/plugins/francois.keyboard-layout/`, an `oma
 
 ## Boot
 
-`setup:limine` sets `timeout: 1` and `quiet: yes` in `/boot/limine.conf`. The menu stays hidden, and a key pressed within that second opens it with the snapper snapshots. `timeout: 0` would skip the menu for good, and a system too broken to run `systemctl reboot --boot-loader-menu=30` is when a snapshot is needed. The file sits on the root-only vfat ESP, so it cannot be a symlink, and `omarchy-refresh-limine` copies Omarchy's template back over it: rerun `mise run setup:limine` after that.
+`setup:limine` sets `timeout: 1` and `quiet: yes` in `/boot/limine.conf`. The menu stays hidden, and holding Down from power-on opens it with the snapper snapshots. Limine's countdown runs about twice as fast as the clock here, too short to aim at, and Space, Enter and Right would boot the highlighted entry where an arrow only moves the selection. `timeout: 0` would skip the menu for good, and a system too broken to run `systemctl reboot --boot-loader-menu=30` is when a snapshot is needed. The file sits on the root-only vfat ESP, so it cannot be a symlink, and `omarchy-refresh-limine` copies Omarchy's template back over it: rerun `mise run setup:limine` after that.
 
 ## BIOS
 
