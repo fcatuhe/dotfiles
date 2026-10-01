@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "francois.updates",
+  "name": "Updates",
+  "version": "1.0.0",
+  "author": "francois",
+  "description": "Pending pacman, AUR, mise and firmware updates",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Updates.qml"
+  },
+  "barWidget": {
+    "displayName": "Updates",
+    "description": "Pending pacman, AUR, mise and firmware updates",
+    "category": "System",
+    "allowMultiple": false
+  }
+}
