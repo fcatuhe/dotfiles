@@ -57,7 +57,7 @@ gcm() {
 # Pi
 alias pir='pi -r'
 alias pii='pi -p' # pi inline
-alias piu='pi update --all'
+alias piu='pi update --extensions && mise upgrade pi --minimum-release-age 0'
 
 # Utilities
 alias myip="curl https://ipinfo.io/json"
