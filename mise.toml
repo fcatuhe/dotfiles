@@ -60,6 +60,20 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 [tasks.bootstrap]
 depends = ["setup:*"]
 
+[tasks."bios:dump"]
+description = "Snapshot the BIOS settings and UEFI boot entries into bios/<model>"
+run = '''
+dir=bios/$(tr '[:upper:]' '[:lower:]' < /sys/class/dmi/id/product_version | tr -cs 'a-z0-9' '-' | sed 's/-$//')
+mkdir -p "$dir"
+raw=$(mktemp)
+sudo -v
+sudo sh -ec 'cd /sys/class/firmware-attributes/thinklmi/attributes; for a in */; do printf "%s=" "${a%/}"; cat "$a/current_value"; done' > "$raw"
+LC_ALL=C sort "$raw" > "$dir/settings.txt"
+rm "$raw"
+efibootmgr | grep -v -E '^Boot(Current|Next):' > "$dir/efibootmgr.txt"
+cat /sys/class/dmi/id/bios_version > "$dir/bios-version.txt"
+'''
+
 [tasks."setup:bash-line"]
 run = "bash ~/.config/omarchy/hooks/post-update.d/bash-line.hook"
 

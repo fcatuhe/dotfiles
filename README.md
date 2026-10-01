@@ -51,6 +51,16 @@ The bar widget is `~/.config/omarchy/plugins/francois.keyboard-layout/`, an `oma
 
 `setup:limine` sets `timeout: 1` and `quiet: yes` in `/boot/limine.conf`. The menu stays hidden, and a key pressed within that second opens it with the snapper snapshots. `timeout: 0` would skip the menu for good, and a system too broken to run `systemctl reboot --boot-loader-menu=30` is when a snapshot is needed. The file sits on the root-only vfat ESP, so it cannot be a symlink, and `omarchy-refresh-limine` copies Omarchy's template back over it: rerun `mise run setup:limine` after that.
 
+## BIOS
+
+`bios/thinkpad-x1-carbon-7th/` is a snapshot of the laptop's firmware state, rewritten by `mise run bios:dump` from `~/.dotfiles` after any change in F1 setup or from Linux, so `git diff` shows what moved. `settings.txt` holds every Lenovo setting the `thinklmi` driver exposes under `/sys/class/firmware-attributes/`, which needs root to read. `efibootmgr.txt` holds the UEFI boot entries without `BootCurrent` and `BootNext`, which change from boot to boot. `bios-version.txt` explains a setting appearing or vanishing after a firmware update. The folder is named after the slugged `product_version` rather than the serial, because the repo is public and the serial looks up the owner's warranty.
+
+The snapshot records, it does not apply. A setting is changed by writing its value to `/sys/class/firmware-attributes/thinklmi/attributes/<name>/current_value` as root, and it takes effect at the next reboot. No supervisor password is set, so no password is needed for that. LUKS protects the disk, and the BIOS fingerprint logins are off for the same reason.
+
+The changes from the factory state are for battery and for hardware this laptop lacks. `SleepState=Linux` gives S3 `deep` suspend instead of s2idle. `AlwaysOnUSB` and both Wake-on-LAN settings are off, so nothing draws power in sleep or power-off. Ethernet, the UEFI network stacks, Lenovo Cloud, AMT, NFC, the smart card slot and WWAN are off, since there is no dongle, no network boot and no such hardware. SGX is off, as the kernel cannot run enclaves on this CPU, and libfprint does not use it despite F1 setup warning that the fingerprint reader might stop working. Absolute Persistence (Computrace) is permanently disabled, which only F1 setup can do. `AdaptiveThermalManagementAC` stays on `MaximizePerformance` and Thunderbolt security stays off, the IOMMU already blocking DMA from a device. `PreBootForThunderboltDevice=Disable` was accepted from Linux and reverted by the firmware at reboot.
+
+The boot order is `NVMe0:USBHDD`, the only devices this laptop can boot from, with F12 still reaching anything else. In UEFI, Limine is `Boot0000` and the fwupd updater `Boot0001`, last in `BootOrder`: `limine-install` finds its entry by partition and path, fwupd by its label, so both keep their numbers. `Boot0010` and above are the firmware's own, rebuilt from the Lenovo boot order.
+
 ## Secrets
 
 Encrypted values live inline in `mise.toml` as `{ age = "..." }`, decrypted by the age identity at `~/.config/mise/age.txt`. Its recipient is `age12egydh7ye67fnykrjnqv89tdjscv6xnnssykt4yvnck4trrpzu0qvsdlkj`, one identity per machine, so a second machine gets its own and values are encrypted to both recipients rather than the key being copied around.
