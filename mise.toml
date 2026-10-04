@@ -34,6 +34,7 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayout.qml" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayoutModel.js" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/manifest.json" = {}
+"~/.config/omarchy/plugins/francois.updates/Service.qml" = {}
 "~/.config/omarchy/plugins/francois.updates/Updates.qml" = {}
 "~/.config/omarchy/plugins/francois.updates/manifest.json" = {}
 "~/.config/omarchy/plugins/francois.updates/updates-pending" = {}

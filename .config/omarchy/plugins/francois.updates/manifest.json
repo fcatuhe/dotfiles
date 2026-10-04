@@ -6,9 +6,11 @@
   "author": "francois",
   "description": "Pending pacman, AUR, mise and firmware updates",
   "kinds": [
+    "service",
     "bar-widget"
   ],
   "entryPoints": {
+    "service": "Service.qml",
     "barWidget": "Updates.qml"
   },
   "barWidget": {
