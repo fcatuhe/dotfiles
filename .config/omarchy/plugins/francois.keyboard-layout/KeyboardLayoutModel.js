@@ -61,18 +61,9 @@ function follow(keyboards, previous, current) {
 }
 
 function states(keyboards) {
-  return Object.fromEntries(keyboards.map(k => [k.name, stateOf(k)]))
+  return keyboards.reduce((all, k) => Object.assign(all, { [k.name]: stateOf(k) }), {})
 }
 
 function stateOf(keyboard) {
   return keyboard.active_layout_index + "," + keyboard.numLock
-}
-
-if (typeof module !== "undefined") {
-  module.exports = {
-    follow: follow,
-    layoutBriefs: layoutBriefs,
-    shortLabel: shortLabel,
-    states: states
-  }
 }
