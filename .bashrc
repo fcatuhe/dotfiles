@@ -2,7 +2,7 @@
 [[ -r /usr/share/omarchy/default/bash/env-bootstrap ]] && source /usr/share/omarchy/default/bash/env-bootstrap
 
 # Arch ships emcc in /usr/lib/emscripten, off PATH: skyBlip's WASM build needs it
-export PATH="$PATH:/usr/lib/emscripten"
+[[ :$PATH: == *:/usr/lib/emscripten:* ]] || export PATH="$PATH:/usr/lib/emscripten"
 
 # If not running interactively, don't do anything else (leave this above the rc source)
 [[ $- != *i* ]] && return
@@ -15,6 +15,3 @@ source "$OMARCHY_PATH/default/bash/rc"
 shopt -s autocd
 
 source ~/.config/shell/aliases
-
-# First word green when bash can run it, red when it cannot
-enable -f ~/.local/lib/bash/line.so line 2>/dev/null && line on

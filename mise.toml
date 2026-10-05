@@ -31,7 +31,6 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/mimeapps.list" = { mode = "copy" }
 "~/.config/mise/config.toml" = {}
 "~/.config/omarchy/defaults/agent" = {}
-"~/.config/omarchy/hooks/post-update.d/bash-line.hook" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayout.qml" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayoutModel.js" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/manifest.json" = {}
@@ -49,14 +48,10 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/xkb/rules/evdev.xml" = {}
 "~/.config/xkb/symbols/frenchy" = {}
 "~/.config/xkb/types/frenchy" = {}
-"~/.local/src/bash/line/highlight.c" = {}
-"~/.local/src/bash/line/line.c" = {}
-"~/.local/src/bash/line/line.h" = {}
-"~/.local/src/bash/line/screen.c" = {}
-"~/.local/src/bash/line/suggest.c" = {}
 "~/.pi/agent/keybindings.json" = {}
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }
+"~/.zshrc" = {}
 
 # Run by mise bootstrap, once the dotfiles are in place
 [tasks.bootstrap]
@@ -95,9 +90,6 @@ while IFS='=' read -r name value; do
 done < "$dir/settings.txt"
 '''
 
-[tasks."setup:bash-line"]
-run = "bash ~/.config/omarchy/hooks/post-update.d/bash-line.hook"
-
 [tasks."setup:fwupd"]
 run = ["omarchy-pkg-add fwupd", "sudo systemctl enable --now fwupd-refresh.timer"]
 
@@ -123,4 +115,10 @@ run = [
   "codium --install-extension marcoroth.turbo-lsp",
   "codium --install-extension shopify.ruby-lsp",
   "codium --install-extension sianglim.slim",
+]
+
+[tasks."setup:zsh"]
+run = [
+  "omarchy-pkg-add zsh zsh-autosuggestions zsh-syntax-highlighting",
+  "[ -d ~/.oh-my-zsh ] || git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh",
 ]
