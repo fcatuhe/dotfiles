@@ -1,0 +1,5 @@
+# Omarchy's default editor stays in charge until VSCodium is installed
+if command -v codium >/dev/null; then
+  export EDITOR="codium --wait"
+  export BUNDLER_EDITOR="$EDITOR"
+fi

@@ -43,6 +43,9 @@ SSH_BADGER_USER = { age = "YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZGNSZWtHQ
 "~/.config/sunsetr/sunsetr.toml" = {}
 "~/.config/tmux/tmux.conf" = {}
 "~/.config/uwsm/env.d/bitwarden-ssh" = {}
+"~/.config/uwsm/env.d/console1984" = {}
+"~/.config/uwsm/env.d/editor" = {}
+"~/.config/uwsm/env.d/npm" = {}
 "~/.config/voxtype/config.toml" = { mode = "copy" }
 "~/.config/xkb/rules/evdev" = {}
 "~/.config/xkb/rules/evdev.xml" = {}

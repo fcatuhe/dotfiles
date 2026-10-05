@@ -29,7 +29,7 @@ None of Omarchy's bash config reaches zsh: no starship, no zoxide, and none of i
 
 bash is Omarchy's own, with `shopt -s autocd` so a directory name on its own is a `cd` as it is in zsh. `~/.bashrc` sources Omarchy's `default/bash/rc` for the aliases, functions and tool init.
 
-`~/.config/shell/aliases` is what the mac's oh-my-zsh setup added on top of the plugins, sourced by both shells: the editor variables, `gs` for `git sweep`, and the pi and utility aliases. The omz git and vscode names exist in zsh only, so bash keeps Omarchy's own `g`, `gcm`, `ga` and `gd`.
+`~/.config/shell/aliases` is what the mac's oh-my-zsh setup added on top of the plugins, sourced by both shells: `gs` for `git sweep`, and the pi and utility aliases. Environment variables live in `~/.config/uwsm/env.d/` instead, see Commands. The omz git and vscode names exist in zsh only, so bash keeps Omarchy's own `g`, `gcm`, `ga` and `gd`.
 
 ## Keyboard
 
@@ -96,4 +96,4 @@ Symlinked files are live: editing them in the repo or in `~` is the same file. T
 
 Edit those live, then capture them back with `add -l`. `~/.ssh/config` is the other exception, a template: the `pre-dotfiles` hook chmods its source to 600, because a rendered file inherits the source's mode and git tracks only the exec bit, so a fresh clone would otherwise render it world-readable.
 
-`~/.config/uwsm/env.d/bitwarden-ssh` points `SSH_AUTH_SOCK` at the Bitwarden desktop SSH agent. uwsm sources it once at session start, so it takes effect on next login.
+`~/.config/uwsm/env.d/` holds the session environment, which every app and both shells inherit: uwsm sources these files once at session start, after Omarchy's own defaults, so a change takes effect on next login. `bitwarden-ssh` points `SSH_AUTH_SOCK` at the Bitwarden desktop SSH agent. `editor` sets `EDITOR` and `BUNDLER_EDITOR` to `codium --wait` when VSCodium is installed, and leaves Omarchy's `omarchy-launch-editor` in place otherwise, since an editor that is not there would break `git commit`. `console1984` sets `CONSOLE_USER`, which the console1984 gem asks for at a Rails console, and `npm` silences npm's funding notice.
