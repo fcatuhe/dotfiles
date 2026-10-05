@@ -108,6 +108,9 @@ run = [
   "sudo grep -qx 'quiet: yes' /boot/limine.conf",
 ]
 
+[tasks."setup:power-profile"]
+run = "omarchy-powerprofiles-set ac balanced"
+
 [tasks."setup:sunsetr"]
 run = "omarchy-pkg-aur-add sunsetr-bin"
 
