@@ -93,6 +93,33 @@ while IFS='=' read -r name value; do
 done < "$dir/settings.txt"
 '''
 
+[tasks."vscodium:dump"]
+description = "Snapshot VSCodium's activity bar, status bar and view layout into vscodium/layout.sql"
+run = '''
+sqlite3 -readonly ~/.config/VSCodium/User/globalStorage/state.vscdb ".mode insert ItemTable" "
+  SELECT key, value FROM ItemTable WHERE key IN (
+    'workbench.activity.pinnedViewlets2',
+    'workbench.activity.showAccounts',
+    'workbench.explorer.views.state.hidden',
+    'workbench.scm.views.state.hidden',
+    'workbench.statusbar.hidden'
+  ) ORDER BY key" > vscodium/layout.sql
+'''
+
+[tasks."vscodium:apply"]
+description = "Write vscodium/layout.sql into VSCodium's state, effective at next launch"
+run = '''
+if pgrep -x codium > /dev/null; then
+  echo "vscodium:apply: quit VSCodium first, it writes its state back on exit" >&2
+  exit 1
+fi
+mkdir -p ~/.config/VSCodium/User/globalStorage
+{
+  echo "CREATE TABLE IF NOT EXISTS ItemTable (key TEXT UNIQUE ON CONFLICT REPLACE, value BLOB);"
+  cat vscodium/layout.sql
+} | sqlite3 ~/.config/VSCodium/User/globalStorage/state.vscdb
+'''
+
 [tasks."setup:fwupd"]
 run = ["omarchy-pkg-add fwupd", "sudo systemctl enable --now fwupd-refresh.timer"]
 
@@ -111,6 +138,7 @@ run = "omarchy-pkg-aur-add sunsetr-bin"
 
 [tasks."setup:vscodium"]
 run = [
+  "omarchy-pkg-aur-add vscodium-bin",
   "codium --install-extension esbenp.prettier-vscode",
   "codium --install-extension github.vscode-pull-request-github",
   "codium --install-extension marcoroth.herb-lsp",

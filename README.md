@@ -19,6 +19,8 @@ mise bootstrap
 
 `setup:sunsetr` installs `sunsetr-bin` from the AUR through `omarchy-pkg-aur-add`, since `~/.config/hypr/autostart.lua` launches `sunsetr` and Omarchy does not ship it. The helper skips a package already present, so rerunning `bootstrap` is harmless. It asks for the sudo password.
 
+`setup:vscodium` installs `vscodium-bin` the same way, Omarchy's repo carrying only Microsoft's `visual-studio-code-bin`, then the extensions.
+
 ## Shell
 
 zsh inside herdr, bash everywhere else. `default_shell` in `~/.config/herdr/config.toml` starts zsh in every herdr pane, while the login shell, Alacritty outside herdr and Omarchy's scripts stay on bash: every `omarchy-*` command carries its own `#!/bin/bash` or Python shebang, so the shell typed in never runs them.
@@ -44,6 +46,10 @@ Hyprland keeps the layout and the locks per device, and lists the headphone jack
 ## Updates
 
 `~/.config/omarchy/plugins/francois.updates/` is a bar widget for everything the stock `omarchy.system-update` icon ignores: pacman packages other than `omarchy`, AUR, mise tools and firmware. Every 6 hours `updates-pending` prints one count per source, and the widget shows their total, hidden at zero. The check runs once in the plugin's service and every screen's widget reads it, so the bars never run `checkupdates` against each other. A failed check shows `!` in the urgent color, with the error in the tooltip. Left click toggles the per-source counts, middle click checks again, right click opens the narrowest command that clears them: `omarchy update` for pacman or AUR, which upgrades mise too, `omarchy-update-mise` when only mise is behind, `omarchy update firmware` when only firmware is. The widget checks again once that command exits. mise is checked with its release-age cooldown off, matching how `omarchy update` runs `mise up`. Firmware is read from the local fwupd metadata without touching the network, so `setup:fwupd` installs fwupd and enables `fwupd-refresh.timer`, which downloads it daily.
+
+## VSCodium
+
+`~/.config/VSCodium/User/settings.json` is a dotfile, but the layout is not a setting: pinned activity bar icons, the Accounts icon, hidden status bar items and hidden sidebar views live in VSCodium's SQLite state, `~/.config/VSCodium/User/globalStorage/state.vscdb`, next to machine IDs and caches that do not belong in the repo. `vscodium/layout.sql` holds only those keys. After changing the layout, `mise run vscodium:dump` rewrites it from the live state, so `git diff` shows what moved. `mise run vscodium:apply` writes it back, creating the database on a machine where VSCodium never ran, and refuses while VSCodium is open, since it saves its whole state again on exit and would undo the write. Per-project state, like which sidebar sections are collapsed, stays in each workspace's own database and is not tracked.
 
 ## Boot
 

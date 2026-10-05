@@ -38,7 +38,11 @@
   "update.mode": "none",
   "update.showReleaseNotes": false,
 
+  "window.commandCenter": false,
+
+  "workbench.browser.showInTitleBar": false,
   "workbench.colorTheme": "Ocean Green: Dark",
+  "workbench.layoutControl.enabled": false,
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
