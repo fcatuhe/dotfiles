@@ -6,6 +6,7 @@ codex = "latest"
 gh = "latest"
 node = "latest"
 npm = "latest"
+"npm:@doist/outline-cli" = { version = "latest", allow_low_downloads = true }
 "npm:agent-browser" = "latest"
 pi = { version = "latest", minimum_release_age = "0" }
 ruby = "latest"
