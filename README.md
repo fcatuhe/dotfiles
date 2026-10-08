@@ -2,7 +2,7 @@
 
 Symlinked and templated by [mise](https://mise.jdx.dev/) `[dotfiles]`, secrets [age](https://age-encryption.org/)-encrypted inline in `mise.toml`. See `mise.toml` for what maps where.
 
-Three envs, picked per machine and remembered in `~/.config/dotfiles/envs`:
+Three envs, picked per machine and remembered in `~/.config/dotfiles/envs`. `./install` copies them into `.miserc.local.toml`, so a plain `mise` command run in the repo loads the same envs:
 
 | env | machine |
 |---|---|
@@ -35,7 +35,7 @@ The clone is over HTTPS on the `macos` branch: `main` is the Omarchy-only layout
 ```bash
 ./install                                    # apply everything for this machine's envs
 ./install zsh,git,secrets,agents,omarchy        # change this machine's envs, then apply
-mise -E "$(cat ~/.config/dotfiles/envs)" dotfiles status   # what is out of sync
+mise dotfiles status                         # what is out of sync
 mise set --age-encrypt --prompt NAME         # add or change a private value, then ./install
 ```
 

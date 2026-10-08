@@ -1,5 +1,8 @@
 # Machine-local mise overrides
 mise.local.toml
 
+# Written by ./install from ~/.config/dotfiles/envs
+.miserc.local.toml
+
 # Ignore MacOS Desktop Services Store files
 .DS_Store

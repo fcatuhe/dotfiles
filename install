@@ -14,5 +14,7 @@ if [[ ! -f "$envs_file" ]]; then
   exit 1
 fi
 
+envs=$(cat "$envs_file")
+printf 'env = ["%s"]\n' "${envs//,/\", \"}" > .miserc.local.toml
 mise trust --quiet .
-exec mise bootstrap --only dotfiles,task -E "$(cat "$envs_file")" "$@"
+exec mise bootstrap --only dotfiles,task "$@"
