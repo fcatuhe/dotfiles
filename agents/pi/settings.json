@@ -3,6 +3,7 @@
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
+  "defaultTools": ["+codemode"],
   "packages": [
     "git:github.com/fcatuhe/pi-wares"
   ],
