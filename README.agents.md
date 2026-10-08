@@ -16,8 +16,8 @@ git is not only for the clone below: pi shells out to it to fetch skills from `g
 
 ```bash
 curl https://mise.run | sh
-git clone https://github.com/fcatuhe/dotfiles.git ~/dotfiles
-cd ~/dotfiles && ./install agents
+git clone https://github.com/fcatuhe/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles && ./install agents
 ```
 
 This links pi's settings, its model-shortcuts and markdown-preview extension configs, the subagents config, and the herdr config, then installs whatever is missing:

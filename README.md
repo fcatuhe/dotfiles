@@ -17,10 +17,10 @@ Three envs, picked per machine and remembered in `~/.config/dotfiles/envs`. `./i
 The age private key lives in Bitwarden under **"dotfiles/age-key"**. Unlock the desktop app (Touch ID), copy the note, then:
 
 ```bash
-git clone -b macos https://github.com/fcatuhe/dotfiles.git ~/fcode/dotfiles
+git clone -b macos https://github.com/fcatuhe/dotfiles.git ~/.dotfiles
 mkdir -p ~/.config/mise && (umask 077; pbpaste > ~/.config/mise/age.txt) && pbcopy < /dev/null
 mise x age -- age-keygen -y ~/.config/mise/age.txt   # must print age1e2qkevjus09dfzmr82xppyuedlcya5283kf0u4ydsk7qgyhqgumspm36nl
-cd ~/fcode/dotfiles && ./install zsh,git,secrets,agents,darwin
+cd ~/.dotfiles && ./install zsh,git,secrets,agents,darwin
 mise install   # the global tools ./install just linked in
 ssh -T git@github.com   # confirm the host key, fingerprint SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU
 git remote set-url origin git@github.com:fcatuhe/dotfiles.git
