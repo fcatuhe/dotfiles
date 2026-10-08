@@ -7,6 +7,7 @@ herdr = "latest"
 node = "latest"
 npm = "12"
 "npm:agent-browser" = "latest"
+"npm:@doist/outline-cli" = { version = "latest", allow_low_downloads = true }
 pi = { version = "latest", minimum_release_age = "0" }
 ruby = "latest"
 stripe = "latest"
