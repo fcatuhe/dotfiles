@@ -40,3 +40,7 @@ mise set --age-encrypt --prompt NAME         # add or change a private value, th
 ```
 
 Plain files are symlinked, so editing them in the repo is enough. Templates (`*.tmpl`) need `./install` to re-render.
+
+## VSCodium
+
+`vscodium/settings.json` is a dotfile, but the layout is not a setting: pinned activity bar icons, the Accounts icon, hidden status bar items and hidden sidebar views live in VSCodium's SQLite state, `~/Library/Application Support/VSCodium/User/globalStorage/state.vscdb`, next to machine IDs and caches that do not belong in the repo. `vscodium/layout.sql` holds only those keys. After changing the layout, `mise run vscodium:dump` rewrites it from the live state, so `git diff` shows what moved. `mise run vscodium:apply` writes it back, creating the database on a machine where VSCodium never ran, and refuses while VSCodium is open, since it saves its whole state again on exit and would undo the write. `setup:vscodium` installs the cask and the extensions.

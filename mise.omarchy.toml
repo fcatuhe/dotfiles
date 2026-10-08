@@ -1,7 +1,7 @@
 [dotfiles]
 "~/.gitconfig.local" = "git/identity"
 "~/.config/git/allowed_signers" = "git/allowed_signers"
-"~/.config/Code/User/settings.json" = "vscode/settings.json"
+"~/.config/VSCodium/User/settings.json" = "vscodium/settings.json"
 "~/.config/ghostty/config" = "ghostty/config"
 "~/.config/hypr" = "hypr"
 "~/.config/waybar" = "waybar"
