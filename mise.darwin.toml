@@ -8,3 +8,11 @@
 # openlogi rewrites its config in place, which breaks a symlink. Capture edits
 # back into the repo with: mise dotfiles add ~/.config/openlogi/config.toml
 "~/.config/openlogi/config.toml" = { source = "openlogi/config.toml", mode = "copy" }
+
+# Hotkey 60 is "Select the previous input source" on ctrl+space, which swallows the key before the terminal sees it.
+# activateSettings applies it without a logout. The XML value keeps enabled a real boolean: the old-style { enabled = 0 } stores a string that activateSettings ignores.
+[tasks."setup:darwin"]
+run = [
+  "defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 '<dict><key>enabled</key><false/><key>value</key><dict><key>type</key><string>standard</string><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>262144</integer></array></dict></dict>'",
+  "/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u",
+]
