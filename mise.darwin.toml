@@ -11,6 +11,7 @@
 
 # Hotkey 60 is "Select the previous input source" on ctrl+space, which swallows the key before the terminal sees it.
 # activateSettings applies it without a logout. The XML value keeps enabled a real boolean: the old-style { enabled = 0 } stores a string that activateSettings ignores.
+# mru-spaces off stops macOS reordering Spaces by recent use. The Dock reads it only at launch, so it restarts once, when the value changes.
 # Key repeat at the System Settings maximum, in 15ms units: 30ms per repeat after a 225ms delay. Apps pick it up at launch.
 [tasks."setup:darwin"]
 run = [
@@ -18,4 +19,5 @@ run = [
   "defaults write -g KeyRepeat -float 2",
   "defaults write -g InitialKeyRepeat -float 15",
   "/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u",
+  "[ \"$(defaults read com.apple.dock mru-spaces 2>/dev/null)\" = 0 ] || { defaults write com.apple.dock mru-spaces -bool false && killall Dock; }",
 ]
