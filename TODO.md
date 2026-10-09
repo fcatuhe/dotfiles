@@ -12,13 +12,13 @@ Clone the working repositories and install their tools on bootstrap.
 
 ## Secrets
 
-Keep secrets in three tiers, all unlocked from the password manager.
+Extend to the projects what the dotfiles already do: Bitwarden as the source, fnox reading it, git holding only references. The README's Secrets section has the naming rules.
 
-- Root: the age identity, backed up in Bitwarden. Unlocking the desktop app also brings up the SSH agent, so cloning works first.
-- Project environment variables: age-encrypted inline in each project's own `mise.toml` with `mise set --age-encrypt`, replacing untracked env files. Public repositories keep high-value values out, encrypted or not.
-- Secret files that must exist on disk: one Bitwarden secure note per file, named by its path, grouped in one folder. A `secrets:pull` task unlocks the CLI, writes each note to its path with owner-only permissions, and refuses to overwrite a local file that differs.
-- Deploy-time secrets: fetch them from the password manager at deploy time rather than keeping them on disk.
-- Never export a production decryption key as a global environment variable, since frameworks read it before per-environment key files and break the other environments.
+- Each project gets a secure note named after it, with one hidden custom field per environment variable, and commits an `fnox.toml` of references such as `project/VARIABLE`.
+- mise hands a secret only to the task listing it in `secrets = [...]`, redacted from its output, so the shell, `mise env`, shims and agents never see it. Needs mise 2026.10.4 or newer.
+- A production decryption key goes only to the deploy task, never into a global environment, since frameworks read it before per-environment key files.
+- Secret files that must sit at a fixed path go through a dotfiles template entry reading a `[bootstrap.secrets]` input, owner-only permissions to check.
+- Unlock `bw` by fingerprint through the desktop app once that lands in a release, merged upstream but unreleased, then document it in the README.
 
 ## Auth
 
@@ -26,7 +26,7 @@ Log in again on each machine rather than copying tokens.
 
 - Add an `auth` task that runs each CLI's login only when its status check fails.
 - Tokens are per-device, revocable, and some rotate on refresh, so a copied one can log out the other machine.
-- Static API keys are the exception: store them as secret files and restore them through `secrets:pull`.
+- Static API keys are the exception: store them in Bitwarden and write them through a dotfiles template.
 
 ## Not doing
 
@@ -34,9 +34,6 @@ Mirroring whole folder trees into the password manager: git already holds everyt
 
 ## Fresh machine
 
-1. Unlock the password manager and restore the age identity.
-2. `mise bootstrap`: dotfiles, tools, projects.
-3. `mise run secrets:pull`
-4. `mise run auth`
+After the README's Apply steps, which already read the dotfiles secrets through fnox, the projects come with `mise bootstrap` and the logins with `mise run auth`.
 
 Then document the result in the README and delete this file.
