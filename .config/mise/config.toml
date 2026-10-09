@@ -1,12 +1,13 @@
 [tools]
+"aqua:modem-dev/hunk" = "latest"
 bun = "latest"
-claude = "latest"
-codex = "latest"
 fnox = "latest"
 gh = "latest"
+"github:basecamp/hey-cli" = "latest"
 node = "latest"
 npm = "latest"
 "npm:@doist/outline-cli" = { version = "latest", allow_low_downloads = true }
+"npm:@kitlangton/ghui" = "latest"
 "npm:agent-browser" = "latest"
 pi = { version = "latest", minimum_release_age = "0" }
 ruby = "latest"
