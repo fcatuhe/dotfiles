@@ -8,14 +8,35 @@ Only files that diverge from Omarchy's install templates are tracked. The rest o
 
 ## Apply
 
-```bash
-git clone git@github.com:fcatuhe/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-mise trust
-mise bootstrap
-```
+A fresh machine goes Bitwarden first, since it holds the SSH key that clones the repo and the secrets the templates render.
 
-`bootstrap` applies the dotfiles, then runs the `bootstrap` task, which depends on every `setup:*` task: zsh and the editor extensions get installed without a second command. `mise bootstrap dotfiles apply` alone is the quicker path when only a file changed.
+1. Install the Bitwarden desktop app and CLI, then log in to the app on the `bitwarden.eu` region. In its settings, turn on the SSH agent and unlock with system authentication, which goes through polkit and so takes the fingerprint.
+
+   ```bash
+   omarchy-pkg-add bitwarden bitwarden-cli
+   ```
+
+2. Log the CLI in to the EU server and unlock it. The server can only be changed while logged out, and `bw login --apikey` with the personal API key from the web vault's Settings, Security, Keys gets past a blocked new device.
+
+   ```bash
+   bw config server https://vault.bitwarden.eu
+   bw login
+   export BW_SESSION=$(bw unlock --raw)
+   bw status   # serverUrl https://vault.bitwarden.eu, status unlocked
+   ```
+
+3. Clone and apply through fnox, which reads the secrets from the vault, see [Secrets](#secrets). `SSH_AUTH_SOCK` points at Bitwarden's agent only from the next login, once `~/.config/uwsm/env.d/bitwarden-ssh` is in place, so the clone sets it itself. fnox is not installed yet, so `mise x` fetches it for this one run.
+
+   ```bash
+   SSH_AUTH_SOCK=~/.bitwarden-ssh-agent.sock git clone git@github.com:fcatuhe/dotfiles.git ~/.dotfiles
+   cd ~/.dotfiles
+   mise trust
+   mise x fnox -- fnox exec -- mise bootstrap
+   ```
+
+4. Log out and back in, so the session picks up `~/.config/uwsm/env.d/`.
+
+`bootstrap` applies the dotfiles, then runs the `bootstrap` task, which depends on every `setup:*` task: zsh and the editor extensions get installed without a second command. `mise bootstrap dotfiles apply` alone is the quicker path when only a file changed, prefixed with `fnox exec --` when it is the SSH config.
 
 `setup:sunsetr` installs `sunsetr-bin` from the AUR through `omarchy-pkg-aur-add`, since `~/.config/hypr/autostart.lua` launches `sunsetr` and Omarchy does not ship it. The helper skips a package already present, so rerunning `bootstrap` is harmless. It asks for the sudo password.
 
@@ -71,18 +92,11 @@ The boot order is `NVMe0:USBHDD`, the only devices this laptop can boot from. In
 
 ## Secrets
 
-Encrypted values live inline in `mise.toml` as `{ age = "..." }`, decrypted by the age identity at `~/.config/mise/age.txt`. Its recipient is `age12egydh7ye67fnykrjnqv89tdjscv6xnnssykt4yvnck4trrpzu0qvsdlkj`, one identity per machine, so a second machine gets its own and values are encrypted to both recipients rather than the key being copied around.
+Secrets live in Bitwarden, and the repo holds only references to them, so nothing secret is published, not even as ciphertext. `fnox.toml` maps each one to a field of the `dotfiles` secure note, as `dotfiles/NAME`, and `[bootstrap.secrets]` in `mise.toml` declares the names the templates read with `{{ secret(name="NAME") }}`. `fnox exec -- mise bootstrap` reads them through the `bw` CLI, which needs `BW_SESSION` from `bw unlock --raw`, and hands them to mise as environment variables for that run only.
 
-The identity is backed up in Bitwarden as a note named `~/.config/mise/age.txt`. On a fresh machine, unlock the desktop app, copy the note, then:
+Without fnox, a template reading a secret fails to render, and `mise bootstrap` stops before writing anything, so a missing secret never leaves a half-written file. `mise bootstrap secrets status` lists which ones the environment holds, without printing them.
 
-```bash
-mkdir -p ~/.config/mise
-(umask 077; wl-paste > ~/.config/mise/age.txt)
-wl-copy --clear
-age-keygen -y ~/.config/mise/age.txt   # must print the recipient above
-```
-
-Add or change a secret with `mise set --age-encrypt --prompt NAME`. It writes to `[env]`, which reaches processes mise activates. A secret rendered into a config file has to be moved to `[vars]` by hand and referenced as `{{ vars.NAME }}`, because a template's `env` namespace is the process environment, not the `[env]` section.
+Add one by creating a hidden custom field on the `dotfiles` note named after it, then a line in `fnox.toml` and one in `[bootstrap.secrets]`. fnox splits a reference at its first `/` into item and field, so an item name cannot hold one, and `bw` finds an item by searching its name, which must therefore match a single item.
 
 ## Commands
 

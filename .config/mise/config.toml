@@ -1,8 +1,8 @@
 [tools]
-age = "latest"
 bun = "latest"
 claude = "latest"
 codex = "latest"
+fnox = "latest"
 gh = "latest"
 node = "latest"
 npm = "latest"
