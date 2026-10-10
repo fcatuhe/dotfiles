@@ -8,24 +8,25 @@ Only files that diverge from Omarchy's install templates are tracked. The rest o
 
 ## Apply
 
-A fresh machine goes Bitwarden first, since it holds the SSH key that clones the repo and the secrets the templates render.
+On a new computer, do these steps in this sequence.
 
-1. Install the Bitwarden desktop app and CLI, then log in to the app on the `bitwarden.eu` region. In its settings, turn on the SSH agent and unlock with system authentication, which goes through polkit and so takes the fingerprint.
+1. Install Bitwarden.
 
    ```bash
    omarchy-pkg-add bitwarden bitwarden-cli
    ```
 
-2. Log the CLI in to the EU server and unlock it. The server can only be changed while logged out, and `bw login --apikey` with the personal API key from the web vault's Settings, Security, Keys gets past a blocked new device.
+2. Open the Bitwarden app. Log in to the `bitwarden.eu` region. In the settings, turn on the SSH agent and "Unlock with system authentication".
+
+3. Log in to the Bitwarden CLI and unlock the vault. If Bitwarden blocks the new device, use `bw login --apikey` with the personal API key (web vault, Settings, Security, Keys).
 
    ```bash
    bw config server https://vault.bitwarden.eu
    bw login
    export BW_SESSION=$(bw unlock --raw)
-   bw status   # serverUrl https://vault.bitwarden.eu, status unlocked
    ```
 
-3. Clone and apply through fnox, which reads the secrets from the vault, see [Secrets](#secrets). `SSH_AUTH_SOCK` points at Bitwarden's agent only from the next login, once `~/.config/uwsm/env.d/bitwarden-ssh` is in place, so this shell sets it for the clones. fnox is not installed yet, so `mise x` fetches it for this one run.
+4. Clone the dotfiles and apply them. Use the same shell as step 3.
 
    ```bash
    export SSH_AUTH_SOCK=~/.bitwarden-ssh-agent.sock
@@ -35,13 +36,38 @@ A fresh machine goes Bitwarden first, since it holds the SSH key that clones the
    mise x fnox -- fnox exec -- mise bootstrap
    ```
 
-4. Log out and back in, so the session picks up `~/.config/uwsm/env.d/`.
+5. Log out. Log in again.
 
-`bootstrap` installs the packages in `[bootstrap.packages]`, enables `[bootstrap.services]`, clones the repositories, applies the dotfiles, then runs the `bootstrap` task, which depends on every `setup:*` task. The declared parts change only what differs from the machine, and `mise bootstrap --dry-run` shows what would. The tasks rerun every time, so each is safe to repeat. The packages include Bitwarden, installed by hand in step 1 since the bootstrap needs the vault, so the bootstrap only keeps it there. `mise bootstrap dotfiles apply` alone is the quicker path when only a file changed, prefixed with `fnox exec --` when it renders a secret.
+6. Log in to the CLIs.
 
-`[bootstrap.repos]` lists oh-my-zsh, at `~/.oh-my-zsh` where its own updater keeps it current, and the repositories under `~/fcode`, crooz, patoumatic, pi-wares and skyblip, cloned when missing and otherwise left on whatever branch they are on. mise clones them before it applies the dotfiles, which matters because the dotfiles write each Rails project's `config/master.key`, and would otherwise create the directory the clone then refuses. Git worktrees are left out: their branches live on GitHub and are recreated on demand. `setup:repos` then runs `mise trust` and `mise install` in each, so a repository's own tools, such as its Ruby, are in place and its tasks need no trust prompt. mise refuses a checkout with local changes, so rerun the whole bootstrap with `--skip-dirty` while work is in progress.
+   ```bash
+   gh auth login
+   hey auth login
+   ol auth login
+   ```
 
-`sunsetr-bin` comes from the AUR, since `~/.config/hypr/autostart.lua` launches `sunsetr` and Omarchy does not ship it, and so does `vscodium-bin`, Omarchy's repo carrying only Microsoft's `visual-studio-code-bin`. mise builds AUR packages through yay with `--noconfirm`, so read a PKGBUILD on aur.archlinux.org before its first install. Installing asks for the sudo password. `setup:vscodium` then installs the extensions.
+   In pi, type `/login`. To receive Stripe webhooks in patoumatic, do `stripe login --project-name development`. Log in to the sites in the agent-browser Chrome profile.
+
+### What the bootstrap does
+
+It does these steps in this sequence:
+
+1. Installs `[bootstrap.packages]`, with sudo. The AUR packages use yay with `--noconfirm`, so read their PKGBUILD on aur.archlinux.org before the first install.
+2. Enables `[bootstrap.services]`.
+3. Clones `[bootstrap.repos]`: oh-my-zsh, and crooz, patoumatic, pi-wares and skyblip in `~/fcode`. It does not move a checkout that exists.
+4. Applies `[dotfiles]`. The templates get their secrets from Bitwarden through fnox, see [Secrets](#secrets).
+5. Installs the mise tools.
+6. Runs the `setup:*` tasks. `setup:repos` does `mise trust` and `mise install` in each repository.
+
+The repositories must exist before the dotfiles, because the dotfiles write `config/master.key` into crooz and patoumatic.
+
+### Again, later
+
+```bash
+fnox exec -- mise bootstrap --skip-dirty        # all, but not the repositories with local changes
+fnox exec -- mise bootstrap dotfiles apply      # only the files
+fnox exec -- mise bootstrap --dry-run           # show the changes, do not apply them
+```
 
 ## Shell
 
@@ -105,7 +131,7 @@ Add one by creating a hidden custom field on the `dotfiles-repository` note name
 
 ```bash
 mise bootstrap dotfiles status   # what is out of sync
-mise bootstrap dotfiles apply    # symlink everything into place
+fnox exec -- mise bootstrap dotfiles apply    # symlink everything into place
 mise bootstrap dotfiles add -l ~/.config/foo/bar.toml   # track a new file, or capture a copy-mode one after editing it live
 ```
 
