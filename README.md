@@ -92,11 +92,11 @@ The boot order is `NVMe0:USBHDD`, the only devices this laptop can boot from. In
 
 ## Secrets
 
-Secrets live in Bitwarden, and the repo holds only references to them, so nothing secret is published, not even as ciphertext. `fnox.toml` maps each one to a field of the `dotfiles` secure note, as `dotfiles/NAME`, and `[bootstrap.secrets]` in `mise.toml` declares the names the templates read with `{{ secret(name="NAME") }}`. `fnox exec -- mise bootstrap` reads them through the `bw` CLI, which needs `BW_SESSION` from `bw unlock --raw`, and hands them to mise as environment variables for that run only.
+Secrets live in Bitwarden, and the repo holds only references to them, so nothing secret is published, not even as ciphertext. `fnox.toml` maps each one to a field of the `dotfiles-repository` secure note, as `dotfiles-repository/NAME`, and `[bootstrap.secrets]` in `mise.toml` declares the names the templates read with `{{ secret(name="NAME") }}`. `fnox exec -- mise bootstrap` reads them through the `bw` CLI, which needs `BW_SESSION` from `bw unlock --raw`, and hands them to mise as environment variables for that run only.
 
 Without fnox, a template reading a secret fails to render, and `mise bootstrap` stops before writing anything, so a missing secret never leaves a half-written file. `mise bootstrap secrets status` lists which ones the environment holds, without printing them.
 
-Add one by creating a hidden custom field on the `dotfiles` note named after it, then a line in `fnox.toml` and one in `[bootstrap.secrets]`. fnox splits a reference at its first `/` into item and field, so an item name cannot hold one, and `bw` finds an item by searching its name, which must therefore match a single item.
+Add one by creating a hidden custom field on the `dotfiles-repository` note named after it, then a line in `fnox.toml` and one in `[bootstrap.secrets]`. fnox splits a reference at its first `/` into item and field, so an item name cannot hold one, and `bw` finds an item by searching names, usernames and URLs, so the name must match a single item.
 
 ## Commands
 

@@ -1,15 +1,16 @@
 root = true
 if_missing = "error"
+env = "exec"
 
 [providers.bitwarden]
 type = "bitwarden"
 
 [secrets]
-SSH_PATOUMATIC_IP = { provider = "bitwarden", value = "dotfiles/SSH_PATOUMATIC_IP" }
-SSH_PATOUMATIC_USER = { provider = "bitwarden", value = "dotfiles/SSH_PATOUMATIC_USER" }
-SSH_CROOZ_IP = { provider = "bitwarden", value = "dotfiles/SSH_CROOZ_IP" }
-SSH_CROOZ_USER = { provider = "bitwarden", value = "dotfiles/SSH_CROOZ_USER" }
-SSH_AZADE_IP = { provider = "bitwarden", value = "dotfiles/SSH_AZADE_IP" }
-SSH_AZADE_USER = { provider = "bitwarden", value = "dotfiles/SSH_AZADE_USER" }
-SSH_BADGER_IP = { provider = "bitwarden", value = "dotfiles/SSH_BADGER_IP" }
-SSH_BADGER_USER = { provider = "bitwarden", value = "dotfiles/SSH_BADGER_USER" }
+PATOUMATIC_SERVER_IP = { provider = "bitwarden", value = "dotfiles-repository/PATOUMATIC_SERVER_IP" }
+PATOUMATIC_SERVER_USER = { provider = "bitwarden", value = "dotfiles-repository/PATOUMATIC_SERVER_USER" }
+CROOZ_SERVER_IP = { provider = "bitwarden", value = "dotfiles-repository/CROOZ_SERVER_IP" }
+CROOZ_SERVER_USER = { provider = "bitwarden", value = "dotfiles-repository/CROOZ_SERVER_USER" }
+AZADE_SERVER_IP = { provider = "bitwarden", value = "dotfiles-repository/AZADE_SERVER_IP" }
+AZADE_SERVER_USER = { provider = "bitwarden", value = "dotfiles-repository/AZADE_SERVER_USER" }
+BADGER_SERVER_IP = { provider = "bitwarden", value = "dotfiles-repository/BADGER_SERVER_IP" }
+BADGER_SERVER_USER = { provider = "bitwarden", value = "dotfiles-repository/BADGER_SERVER_USER" }
