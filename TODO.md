@@ -7,17 +7,18 @@ A fresh machine should end up with every project cloned, its tools installed, it
 Clone the working repositories and install their tools on bootstrap.
 
 - Trust the projects directory in the global mise settings, so a fresh clone does not stop at a trust prompt.
-- Add a `setup:projects` task listing the repositories: clone each one that is missing, then run `mise install` inside it.
+- Clone each missing repository in the `pre-dotfiles` hook rather than a `setup:*` task, since the dotfiles write key files into the projects and would otherwise create their directories before the clone. Then run `mise install` inside each.
 - Skip git worktrees: their branches live on the remote and are recreated on demand.
 
 ## Secrets
 
 Extend to the projects what the dotfiles already do: Bitwarden as the source, fnox reading it, git holding only references. The README's Secrets section has the naming rules.
 
-- Each project gets a secure note named after it, with one hidden custom field per environment variable, and commits an `fnox.toml` of references such as `project/VARIABLE`.
-- mise hands a secret only to the task listing it in `secrets = [...]`, redacted from its output, so the shell, `mise env`, shims and agents never see it. Needs mise 2026.10.4 or newer.
+- Each project gets a secure note named `<project>-repository`, since `bw` also matches usernames and URLs and a login for the project's site would make the bare name ambiguous, with one hidden custom field per value, named after what it holds, and commits an `fnox.toml` of references such as `<project>-repository/VARIABLE`.
+- mise hands a secret only to the task listing it in `secrets = [...]`, redacted from its output, so the shell, `mise env`, shims and agents never see it.
+- A key another service uses is an item of its own, of Bitwarden's SSH key type when it is one, named `<project>-<user>`, such as `<project>-github-actions` for the CI deploy key, since a private key spans lines that a single-line custom field may lose.
+- CI secrets live in the GitHub `production` environment, limited to `main`, as copies of Bitwarden, under the names the workflow reads, since the environment already says production: the production key as `RAILS_MASTER_KEY`, the deploy key as `DEPLOY_SSH_KEY`, then the repository-level secrets go.
 - A production decryption key goes only to the deploy task, never into a global environment, since frameworks read it before per-environment key files.
-- Secret files that must sit at a fixed path go through a dotfiles template entry reading a `[bootstrap.secrets]` input, owner-only permissions to check.
 - Unlock `bw` by fingerprint through the desktop app once that lands in a release, merged upstream but unreleased, then document it in the README.
 
 ## Auth
