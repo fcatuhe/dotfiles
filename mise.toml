@@ -2,7 +2,7 @@
 experimental = true
 
 [bootstrap.hooks.pre-dotfiles]
-run = "chmod 600 .ssh/config.tmpl"
+run = "chmod 600 .ssh/config.tmpl fcode/*/config/master.key.tmpl"
 
 [bootstrap.secrets]
 PATOUMATIC_SERVER_IP = "PATOUMATIC_SERVER_IP"
@@ -13,6 +13,8 @@ AZADE_SERVER_IP = "AZADE_SERVER_IP"
 AZADE_SERVER_USER = "AZADE_SERVER_USER"
 BADGER_SERVER_IP = "BADGER_SERVER_IP"
 BADGER_SERVER_USER = "BADGER_SERVER_USER"
+PATOUMATIC_RAILS_DEVELOPMENT_KEY = "PATOUMATIC_RAILS_DEVELOPMENT_KEY"
+CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
 
 [dotfiles]
 "~/.XCompose" = {}
@@ -54,6 +56,8 @@ BADGER_SERVER_USER = "BADGER_SERVER_USER"
 "~/.pi/agent/keybindings.json" = {}
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template" }
+"~/fcode/crooz/config/master.key" = { source = "fcode/crooz/config/master.key.tmpl", mode = "template" }
+"~/fcode/patoumatic/config/master.key" = { source = "fcode/patoumatic/config/master.key.tmpl", mode = "template" }
 "~/.zshrc" = {}
 
 # Run by mise bootstrap, once the dotfiles are in place
