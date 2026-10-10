@@ -3,6 +3,9 @@ ZSH_THEME="robbyrussell"
 plugins=(git history-substring-search kamal mise vscode)
 source "$ZSH/oh-my-zsh.sh"
 
+# Oh My Zsh sets LESS=-R, which stops git adding -F: short output then opens a pager
+export LESS=-FR
+
 # Arch ships emcc in /usr/lib/emscripten, off PATH: skyBlip's WASM build needs it
 typeset -U path
 path+=(/usr/lib/emscripten)
