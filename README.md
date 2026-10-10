@@ -25,10 +25,11 @@ A fresh machine goes Bitwarden first, since it holds the SSH key that clones the
    bw status   # serverUrl https://vault.bitwarden.eu, status unlocked
    ```
 
-3. Clone and apply through fnox, which reads the secrets from the vault, see [Secrets](#secrets). `SSH_AUTH_SOCK` points at Bitwarden's agent only from the next login, once `~/.config/uwsm/env.d/bitwarden-ssh` is in place, so the clone sets it itself. fnox is not installed yet, so `mise x` fetches it for this one run.
+3. Clone and apply through fnox, which reads the secrets from the vault, see [Secrets](#secrets). `SSH_AUTH_SOCK` points at Bitwarden's agent only from the next login, once `~/.config/uwsm/env.d/bitwarden-ssh` is in place, so this shell sets it for the clones. fnox is not installed yet, so `mise x` fetches it for this one run.
 
    ```bash
-   SSH_AUTH_SOCK=~/.bitwarden-ssh-agent.sock git clone git@github.com:fcatuhe/dotfiles.git ~/.dotfiles
+   export SSH_AUTH_SOCK=~/.bitwarden-ssh-agent.sock
+   git clone git@github.com:fcatuhe/dotfiles.git ~/.dotfiles
    cd ~/.dotfiles
    mise trust
    mise x fnox -- fnox exec -- mise bootstrap
@@ -36,7 +37,9 @@ A fresh machine goes Bitwarden first, since it holds the SSH key that clones the
 
 4. Log out and back in, so the session picks up `~/.config/uwsm/env.d/`.
 
-`bootstrap` installs the packages in `[bootstrap.packages]`, enables `[bootstrap.services]`, clones oh-my-zsh from `[bootstrap.repos]`, applies the dotfiles, then runs the `bootstrap` task, which depends on every `setup:*` task. The declared parts change only what differs from the machine, and `mise bootstrap --dry-run` shows what would. The tasks rerun every time, so each is safe to repeat. The packages include Bitwarden, installed by hand in step 1 since the bootstrap needs the vault, so the bootstrap only keeps it there. `mise bootstrap dotfiles apply` alone is the quicker path when only a file changed, prefixed with `fnox exec --` when it is the SSH config.
+`bootstrap` installs the packages in `[bootstrap.packages]`, enables `[bootstrap.services]`, clones the repositories, applies the dotfiles, then runs the `bootstrap` task, which depends on every `setup:*` task. The declared parts change only what differs from the machine, and `mise bootstrap --dry-run` shows what would. The tasks rerun every time, so each is safe to repeat. The packages include Bitwarden, installed by hand in step 1 since the bootstrap needs the vault, so the bootstrap only keeps it there. `mise bootstrap dotfiles apply` alone is the quicker path when only a file changed, prefixed with `fnox exec --` when it renders a secret.
+
+`[bootstrap.repos]` lists oh-my-zsh, at `~/.oh-my-zsh` where its own updater keeps it current, and the repositories under `~/fcode`, crooz, patoumatic, pi-wares and skyblip, cloned when missing and otherwise left on whatever branch they are on. mise clones them before it applies the dotfiles, which matters because the dotfiles write each Rails project's `config/master.key`, and would otherwise create the directory the clone then refuses. Git worktrees are left out: their branches live on GitHub and are recreated on demand. `setup:repos` then runs `mise trust` and `mise install` in each, so a repository's own tools, such as its Ruby, are in place and its tasks need no trust prompt. mise refuses a checkout with local changes, so rerun the whole bootstrap with `--skip-dirty` while work is in progress.
 
 `sunsetr-bin` comes from the AUR, since `~/.config/hypr/autostart.lua` launches `sunsetr` and Omarchy does not ship it, and so does `vscodium-bin`, Omarchy's repo carrying only Microsoft's `visual-studio-code-bin`. mise builds AUR packages through yay with `--noconfirm`, so read a PKGBUILD on aur.archlinux.org before its first install. Installing asks for the sudo password. `setup:vscodium` then installs the extensions.
 

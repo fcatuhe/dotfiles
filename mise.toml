@@ -16,8 +16,13 @@ experimental = true
 [bootstrap.services."fwupd-refresh.timer"]
 enabled = true
 
+# Repositories cloned before the dotfiles, which write key files into them
 [bootstrap.repos]
 "~/.oh-my-zsh" = { url = "https://github.com/ohmyzsh/ohmyzsh.git" }
+"~/fcode/crooz" = { url = "git@github.com:fcatuhe/crooz.git" }
+"~/fcode/patoumatic" = { url = "git@github.com:fcatuhe/patoumatic.git" }
+"~/fcode/pi-wares" = { url = "git@github.com:fcatuhe/pi-wares.git" }
+"~/fcode/skyblip" = { url = "git@github.com:fcatuhe/skyblip.git" }
 
 [bootstrap.secrets]
 PATOUMATIC_SERVER_IP = "PATOUMATIC_SERVER_IP"
@@ -148,6 +153,12 @@ run = [
 
 [tasks."setup:power-profile"]
 run = "omarchy-powerprofiles-set ac balanced"
+
+[tasks."setup:repos"]
+run = [
+  "mise bootstrap repos exec -- mise trust --quiet",
+  "mise bootstrap repos exec -- mise install",
+]
 
 [tasks."setup:vscodium"]
 run = [
