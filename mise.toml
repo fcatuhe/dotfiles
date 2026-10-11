@@ -150,9 +150,13 @@ mkdir -p ~/.config/VSCodium/User/globalStorage
 } | sqlite3 ~/.config/VSCodium/User/globalStorage/state.vscdb
 '''
 
-# Omarchy's theme color policy folder, Wayland flags and browser extensions
+# Omarchy's theme color policy folder, Wayland flags and browser extensions, then Web Bluetooth
 [tasks."setup:brave-origin"]
-run = "omarchy-install-browser brave-origin"
+run = [
+  "omarchy-install-browser brave-origin",
+  "sed -i -E 's/^--enable-features=.*/&,BraveWebBluetoothAPI,WebBluetooth/' ~/.config/brave-origin-flags.conf",
+  "grep -q '^--enable-features=.*,BraveWebBluetoothAPI,WebBluetooth$' ~/.config/brave-origin-flags.conf",
+]
 
 [tasks."setup:limine"]
 run = [
