@@ -12,6 +12,9 @@ path+=(/usr/lib/emscripten)
 
 source ~/.config/shell/aliases
 
+# scw ships its zsh completion as a script, not a file on fpath
+eval "$(scw autocomplete script shell=zsh)"
+
 # Syntax highlighting has to come last, it wraps every widget defined before it
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
