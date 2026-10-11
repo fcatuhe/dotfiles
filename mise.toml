@@ -5,6 +5,7 @@ experimental = true
 [bootstrap.packages]
 "pacman:bitwarden" = "latest"
 "pacman:bitwarden-cli" = "latest"
+"pacman:brave-origin-bin" = "latest"
 "pacman:fwupd" = "latest"
 "pacman:zsh" = "latest"
 "pacman:zsh-autosuggestions" = "latest"
@@ -148,6 +149,10 @@ mkdir -p ~/.config/VSCodium/User/globalStorage
   cat vscodium/layout.sql
 } | sqlite3 ~/.config/VSCodium/User/globalStorage/state.vscdb
 '''
+
+# Omarchy's theme color policy folder, Wayland flags and browser extensions
+[tasks."setup:brave-origin"]
+run = "omarchy-install-browser brave-origin"
 
 [tasks."setup:limine"]
 run = [
