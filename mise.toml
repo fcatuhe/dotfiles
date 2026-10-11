@@ -33,6 +33,10 @@ AZADE_SERVER_IP = "AZADE_SERVER_IP"
 AZADE_SERVER_USER = "AZADE_SERVER_USER"
 BADGER_SERVER_IP = "BADGER_SERVER_IP"
 BADGER_SERVER_USER = "BADGER_SERVER_USER"
+SCALEWAY_ACCESS_KEY = "SCALEWAY_ACCESS_KEY"
+SCALEWAY_SECRET_KEY = "SCALEWAY_SECRET_KEY"
+SCALEWAY_ORGANIZATION_ID = "SCALEWAY_ORGANIZATION_ID"
+SCALEWAY_PROJECT_ID = "SCALEWAY_PROJECT_ID"
 PATOUMATIC_RAILS_DEVELOPMENT_KEY = "PATOUMATIC_RAILS_DEVELOPMENT_KEY"
 CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
 
@@ -61,6 +65,7 @@ CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
 "~/.config/omarchy/plugins/francois.updates/manifest.json" = {}
 "~/.config/omarchy/plugins/francois.updates/updates-pending" = {}
 "~/.config/omarchy/shell.json" = { mode = "copy" }
+"~/.config/scw/config.yaml" = { source = ".config/scw/config.yaml.tmpl", mode = "template", permissions = "0600" }
 "~/.config/shell/aliases" = {}
 "~/.config/sunsetr/sunsetr.toml" = {}
 "~/.config/tmux/tmux.conf" = {}
