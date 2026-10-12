@@ -48,6 +48,8 @@ On a new computer, do these steps in this sequence.
 
    In pi, type `/login`. To receive Stripe webhooks in patoumatic, do `stripe login --project-name development`. Log in to the sites in the agent-browser Chrome profile.
 
+7. Join the Brave Sync chain. In Brave Origin, open Settings, Sync, "I have a Sync Code", and type a code shown by another device in the chain under Settings, Sync, "Add new device". A saved code does not work, since its last word expires. See [Browser](#browser) for what it brings back.
+
 ### What the bootstrap does
 
 It does these steps in this sequence:
@@ -93,7 +95,11 @@ Hyprland keeps the layout and the locks per device, and lists the headphone jack
 
 ## Browser
 
-Brave Origin, the default in `~/.config/mimeapps.list`, so links and Omarchy's web apps open in it. It is Brave with Leo, News, Rewards, Wallet, VPN, Tor, telemetry and the other extras compiled out, keeping Shields, a native ad blocker that the end of Manifest V2 in Chromium does not reach. It costs money on Windows and macOS only, and `brave-origin-bin` comes from Omarchy's own repo. `setup:brave-origin` runs `omarchy-install-browser brave-origin`, which the package alone skips: it creates the root-owned `/etc/brave/policies/managed` that the theme color is written to, and copies Omarchy's Wayland flags and extensions into `~/.config/brave-origin-flags.conf`. It asks for the sudo password. The task then appends `BraveWebBluetoothAPI,WebBluetooth` to that file's `--enable-features` line, the two `brave://flags` toggles for Web Bluetooth, kept out of the browser's own state so a new computer gets them: without Chromium's `WebBluetooth`, Linux has no `navigator.bluetooth`, and without Brave's `BraveWebBluetoothAPI`, `requestDevice()` rejects with "Web Bluetooth API globally disabled". They go on the existing line because a second `--enable-features` replaces the first. The file is not tracked, since `omarchy-install-browser` overwrites it on every bootstrap.
+Brave Origin, the default in `~/.config/mimeapps.list`, so links and Omarchy's web apps open in it. It is Brave without Leo, News, Rewards, Wallet, VPN, Tor and the other extras, keeping Shields, and `brave-origin-bin` comes from Omarchy's own repo.
+
+The bootstrap installs it and nothing more. `setup:brave-origin` runs `omarchy-install-browser brave-origin`, which writes Omarchy's theme color, Wayland flags and extensions, and asks for the sudo password. It then appends `BraveWebBluetoothAPI,WebBluetooth` to the `--enable-features` line of `~/.config/brave-origin-flags.conf`: Linux has no `navigator.bluetooth` without both, and a second `--enable-features` line would replace the first. The file is not tracked, since `omarchy-install-browser` overwrites it.
+
+Everything else comes from Brave Sync, step 7: bookmarks, extensions, settings, search engines, tab groups and per-site Shields. Passwords live in Bitwarden. Sync skips what Brave keeps outside the profile, such as the crash report choice, so turn crash reports off again on a new computer.
 
 ## Updates
 
