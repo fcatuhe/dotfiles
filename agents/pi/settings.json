@@ -1,9 +1,11 @@
 {
-  "lastChangelogVersion": "1.0.4",
+  "lastChangelogVersion": "1.2.0",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
-  "defaultTools": ["+codemode"],
+  "defaultTools": [
+    "+codemode"
+  ],
   "packages": [
     "git:github.com/fcatuhe/pi-wares"
   ],
