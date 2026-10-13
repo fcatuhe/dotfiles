@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "outline": {
+      "url": "https://outline.ridecell.tech/mcp",
+      "description": "Search and edit the Ridecell Outline wiki",
+      "oauth": { "clientRegistration": "cimd" }
+    }
+  }
+}
