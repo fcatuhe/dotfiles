@@ -41,7 +41,7 @@ On a new computer, do these steps in this sequence.
 3. Applies `[dotfiles]`. The templates get their secrets from Bitwarden through fnox, see [Secrets](#secrets).
 4. Writes the macOS defaults: key repeat, hot corners, Spaces kept in order, and ctrl+space freed for the terminal. Dock reads them at launch, so `killall Dock` or log out once.
 5. Installs the mise tools.
-6. Runs the `setup:*` tasks. `setup:repos` does `mise trust` and `mise install` in each repository, `setup:vscodium` installs the extensions.
+6. Runs the `setup:*` tasks. `setup:repos` does `mise trust` and `mise install` in each `~/fcode` and `~/rcode` repository, not in oh-my-zsh or its plugins. `setup:vscodium` installs the extensions.
 
 ### Again, later
 

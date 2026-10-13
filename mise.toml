@@ -90,9 +90,9 @@ post-defaults = "/System/Library/PrivateFrameworks/SystemAdministration.framewor
 [tasks.bootstrap]
 depends = ["setup:*"]
 
-# oh-my-zsh and its plugins are not projects: zsh-autosuggestions pins ruby 2.5.3 for its own tests
+# Own projects only: a third-party repo gets its mise config trusted, and zsh-autosuggestions pins ruby 2.5.3
 [tasks."setup:repos"]
-run = '''mise bootstrap repos exec -- sh -c 'case "$PWD" in "$HOME"/.oh-my-zsh*) ;; *) mise trust --quiet && mise install ;; esac' '''
+run = '''mise bootstrap repos exec -- sh -c 'case "$PWD" in "$HOME"/fcode/*|"$HOME"/rcode/*) mise trust --quiet && mise install ;; esac' '''
 
 [tasks."setup:vscodium"]
 run = [
