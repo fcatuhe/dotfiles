@@ -168,11 +168,9 @@ run = [
 [tasks."setup:power-profile"]
 run = "omarchy-powerprofiles-set ac balanced"
 
+# Own projects only: a third-party repo like oh-my-zsh would get its mise config trusted
 [tasks."setup:repos"]
-run = [
-  "mise bootstrap repos exec -- mise trust --quiet",
-  "mise bootstrap repos exec -- mise install",
-]
+run = '''mise bootstrap repos exec -- sh -c 'case "$PWD" in "$HOME"/fcode/*) mise trust --quiet && mise install ;; esac' '''
 
 [tasks."setup:vscodium"]
 run = [

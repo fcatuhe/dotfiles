@@ -59,7 +59,7 @@ It does these steps in this sequence:
 3. Clones `[bootstrap.repos]`: oh-my-zsh, and crooz, patoumatic, pi-wares and skyblip in `~/fcode`. It does not move a checkout that exists.
 4. Applies `[dotfiles]`. The templates get their secrets from Bitwarden through fnox, see [Secrets](#secrets).
 5. Installs the mise tools.
-6. Runs the `setup:*` tasks. `setup:repos` does `mise trust` and `mise install` in each repository.
+6. Runs the `setup:*` tasks. `setup:repos` does `mise trust` and `mise install` in each `~/fcode` repository, not in a third-party one like oh-my-zsh.
 
 The repositories must exist before the dotfiles, because the dotfiles write `config/master.key` into crooz and patoumatic.
 
