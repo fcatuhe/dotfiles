@@ -15,12 +15,8 @@ AZADE_SERVER_USER = { provider = "bitwarden", value = "dotfiles-repository/AZADE
 AZADE_TAILSCALE_IP = { provider = "bitwarden", value = "dotfiles-repository/AZADE_TAILSCALE_IP" }
 FLYZILLA_SERVER_IP = { provider = "bitwarden", value = "dotfiles-repository/FLYZILLA_SERVER_IP" }
 FLYZILLA_SERVER_USER = { provider = "bitwarden", value = "dotfiles-repository/FLYZILLA_SERVER_USER" }
-VAST_AI_SERVER_IP = { provider = "bitwarden", value = "dotfiles-repository/VAST_AI_SERVER_IP" }
-VAST_AI_SERVER_PORT = { provider = "bitwarden", value = "dotfiles-repository/VAST_AI_SERVER_PORT" }
-VAST_AI_SERVER_USER = { provider = "bitwarden", value = "dotfiles-repository/VAST_AI_SERVER_USER" }
 RIDECELL_AWS_SSO_START_URL = { provider = "bitwarden", value = "dotfiles-repository/RIDECELL_AWS_SSO_START_URL" }
 RIDECELL_AWS_SSO_ACCOUNT_ID = { provider = "bitwarden", value = "dotfiles-repository/RIDECELL_AWS_SSO_ACCOUNT_ID" }
 BRAVE_API_KEY = { provider = "bitwarden", value = "dotfiles-repository/BRAVE_API_KEY" }
-AGENT_BROWSER_ENCRYPTION_KEY = { provider = "bitwarden", value = "dotfiles-repository/AGENT_BROWSER_ENCRYPTION_KEY" }
 PATOUMATIC_RAILS_DEVELOPMENT_KEY = { provider = "bitwarden", value = "patoumatic-repository/RAILS_DEVELOPMENT_KEY" }
 CROOZ_RAILS_DEVELOPMENT_KEY = { provider = "bitwarden", value = "crooz-repository/RAILS_DEVELOPMENT_KEY" }
