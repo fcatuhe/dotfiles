@@ -1,7 +1,5 @@
 [tools]
 age = "latest"
-claude = "latest"
-codex = "latest"
 gh = "latest"
 herdr = "latest"
 node = "latest"
