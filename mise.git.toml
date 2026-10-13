@@ -1,4 +1,0 @@
-[dotfiles]
-"~/.gitconfig" = "git/config"
-"~/.config/git/ignore" = "git/ignore"
-"~/.config/gh/config.yml" = "gh/config.yml"

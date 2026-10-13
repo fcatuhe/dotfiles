@@ -1,0 +1,18 @@
+[tools]
+bitwarden = "latest"
+fnox = "latest"
+gh = "latest"
+herdr = "latest"
+node = "latest"
+npm = "12"
+"npm:agent-browser" = "latest"
+pi = { version = "latest", minimum_release_age = "0" }
+ruby = "latest"
+stripe = "latest"
+uv = "0.12.19"
+
+[settings]
+idiomatic_version_file_enable_tools = ["ruby"]
+
+[settings.ruby]
+compile = false
