@@ -15,7 +15,8 @@
   "enabledModels": [
     "anthropic/claude-opus-5-5",
     "anthropic/claude-fable-5-1",
-    "anthropic/claude-sonnet-5",
+    "anthropic/claude-sonnet-5-5",
+    "anthropic/claude-haiku-5-5",
     "fireworks/accounts/fireworks/models/glm-5p3-flash"
   ],
   "transport": "websocket-cached",
