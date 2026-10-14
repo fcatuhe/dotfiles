@@ -4,6 +4,11 @@
       "url": "https://outline.ridecell.tech/mcp",
       "description": "Search and edit the Ridecell Outline wiki",
       "oauth": { "clientRegistration": "cimd" }
+    },
+    "badger": {
+      "url": "https://badger.ridecell.tech/mcp",
+      "description": "Read the meetings captured in badger: captures, transcripts and summaries",
+      "oauth": { "clientRegistration": "cimd" }
     }
   }
 }
