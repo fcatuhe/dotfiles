@@ -1,4 +1,5 @@
 alias gs='git sweep'
+alias wt='git wt'
 
 # Pi
 alias pir='pi -r'

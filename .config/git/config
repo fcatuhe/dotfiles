@@ -47,3 +47,5 @@
 	format = ssh
 [gpg "ssh"]
 	allowedSignersFile = ~/.config/git/allowed_signers
+[include]
+	path = ~/.pi/agent/git/github.com/fcatuhe/pi-wares/config/git/config  # git wt, from pi-wares
