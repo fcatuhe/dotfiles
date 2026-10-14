@@ -17,7 +17,7 @@ new_cwd = "follow"
 # zsh in herdr panes only, the login shell and Omarchy's scripts stay on bash
 default_shell = "/usr/bin/zsh"
 
-# Beside the repos, as ~/fcode/worktrees/<repo>/<branch>, so the agent git policy can point there
+# Worktrees beside the repos, as ~/fcode/worktrees/<repo>/<branch>, rather than hidden in ~/.herdr
 [worktrees]
 directory = "~/fcode/worktrees"
 
