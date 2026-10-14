@@ -80,6 +80,7 @@ CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
 "~/.config/xkb/symbols/frenchy" = {}
 "~/.config/xkb/types/frenchy" = {}
 "~/.pi/agent/keybindings.json" = {}
+"~/.pi/agent/mcp.json" = {}
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template", permissions = "0600" }
 "~/fcode/crooz/config/master.key" = { source = "fcode/crooz/config/master.key.tmpl", mode = "template", permissions = "0600" }
