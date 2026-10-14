@@ -5,7 +5,7 @@ alias gs='git sweep'
 # Pi
 alias pir='pi -r'
 alias pii='pi -p' # pi inline
-alias piu='pi update --extensions && mise upgrade pi --minimum-release-age 0'
+alias piu='pi update --extensions && mise upgrade pi'
 
 # Utilities
 alias myip="curl https://ipinfo.io/json"
