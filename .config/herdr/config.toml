@@ -16,6 +16,10 @@ row_gap = 1
 [experimental]
 kitty_graphics = true
 
+# Worktrees beside the repos, as ~/fcode/worktrees/<repo>/<branch>, rather than hidden in ~/.herdr
+[worktrees]
+directory = "~/fcode/worktrees"
+
 # omarchy's config/herdr/config.toml is the standard, one file for both machines.
 # Three layers: its prefix chords verbatim, its alt chords verbatim, and a ctrl+alt
 # chord where macOS never delivers the alt one. Hyprland owns every super chord and
