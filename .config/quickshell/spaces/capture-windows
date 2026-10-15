@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -euo pipefail
+
+(($# > 0)) || { echo "usage: capture-windows <address>..." >&2; exit 1; }
+
+cmdline() {
+  [[ -r /proc/$1/cmdline ]] || { echo '[]'; return; }
+  jq -R -s 'split("\u0000") | map(select(. != ""))' < "/proc/$1/cmdline"
+}
+
+clients=$(hyprctl clients -j)
+
+for address in "$@"; do
+  window=$(jq -c --arg address "$address" '.[] | select(.address == $address) | {address, class, pid}' <<<"$clients")
+  [[ -n $window ]] || continue
+  pid=$(jq -r .pid <<<"$window")
+  shell=$(pgrep -P "$pid" | tail -n1 || true)
+  shell_cwd=""
+  shell_child='[]'
+  if [[ -n $shell ]] && grep -Fqsx "$(readlink -f "/proc/$shell/exe")" /etc/shells; then
+    shell_cwd=$(readlink -f "/proc/$shell/cwd")
+    child=$(pgrep -P "$shell" | head -n1 || true)
+    [[ -n $child ]] && shell_child=$(cmdline "$child")
+  fi
+  jq -c --argjson cmdline "$(cmdline "$pid")" --arg shellCwd "$shell_cwd" --argjson shellChild "$shell_child" \
+    '. + {cmdline: $cmdline, shellCwd: $shellCwd, shellChild: $shellChild} | del(.pid)' <<<"$window"
+done | jq -s .

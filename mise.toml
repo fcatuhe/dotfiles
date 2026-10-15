@@ -66,6 +66,16 @@ CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
 "~/.config/omarchy/plugins/francois.updates/manifest.json" = {}
 "~/.config/omarchy/plugins/francois.updates/updates-pending" = {}
 "~/.config/omarchy/shell.json" = { mode = "copy" }
+"~/.config/quickshell/spaces/CloseButton.qml" = {}
+"~/.config/quickshell/spaces/Commons" = {}
+"~/.config/quickshell/spaces/Favicon.qml" = {}
+"~/.config/quickshell/spaces/Prompt.qml" = {}
+"~/.config/quickshell/spaces/Sidebar.qml" = {}
+"~/.config/quickshell/spaces/SpacesModel.js" = {}
+"~/.config/quickshell/spaces/TabRow.qml" = {}
+"~/.config/quickshell/spaces/capture-windows" = {}
+"~/.config/quickshell/spaces/layout.lua" = {}
+"~/.config/quickshell/spaces/shell.qml" = {}
 "~/.config/scw/config.yaml" = { source = ".config/scw/config.yaml.tmpl", mode = "template", permissions = "0600" }
 "~/.config/shell/aliases" = {}
 "~/.config/sunsetr/sunsetr.toml" = {}
