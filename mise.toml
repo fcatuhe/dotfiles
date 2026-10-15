@@ -45,6 +45,7 @@ CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
 "~/.XCompose" = {}
 "~/.bashrc" = {}
 "~/.config/VSCodium/User/settings.json" = {}
+"~/.config/foot/foot.ini" = { mode = "copy" }
 "~/.config/gh/config.yml" = {}
 "~/.config/git/allowed_signers" = {}
 "~/.config/git/config" = {}
@@ -83,9 +84,9 @@ CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
 "~/.pi/agent/mcp.json" = {}
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template", permissions = "0600" }
+"~/.zshrc" = {}
 "~/fcode/crooz/config/master.key" = { source = "fcode/crooz/config/master.key.tmpl", mode = "template", permissions = "0600" }
 "~/fcode/patoumatic/config/master.key" = { source = "fcode/patoumatic/config/master.key.tmpl", mode = "template", permissions = "0600" }
-"~/.zshrc" = {}
 
 # Run by mise bootstrap, once the dotfiles are in place
 [tasks.bootstrap]

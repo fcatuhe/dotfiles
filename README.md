@@ -151,6 +151,7 @@ Symlinked files are live: editing them in the repo or in `~` is the same file. T
 
 - `~/.config/mimeapps.list`, rewritten by xdg-mime when a default app is set.
 - `~/.config/omarchy/shell.json`, rewritten by the shell.
+- `~/.config/foot/foot.ini`, rewritten by `omarchy-display-text-size` and by `omarchy-font-set`, which puts the size back to 9pt. It sets 10pt, the 13px Brave uses for code at the same display scale.
 - `~/.config/voxtype/config.toml`, rewritten by the `voxtype configure` TUI, which also rejects a partial config.
 
 Edit those live, then capture them back with `add -l`. `~/.ssh/config` and `~/.config/scw/config.yaml` are the other exception, templates with `permissions = "0600"`, because a rendered file otherwise inherits the source's mode and git tracks only the exec bit, so a fresh clone would render it world-readable. The scw one holds the `agent-readonly` API key, so a change made with `scw config set` or `scw init` goes in `.config/scw/config.yaml.tmpl`, or the next apply overwrites it.
