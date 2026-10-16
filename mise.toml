@@ -66,4 +66,4 @@ depends = ["setup:*"]
 
 # Tailnet only, with a Tailscale certificate. Serving a socket needs root, even for the operator
 [tasks."setup:tailscale-serve"]
-run = 'sudo tailscale serve --bg --https=6081 "unix:/run/user/$(id -u)/novnc.sock"'
+run = 'sudo tailscale serve --bg --https=6080 "unix:/run/user/$(id -u)/novnc.sock"'

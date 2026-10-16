@@ -38,14 +38,14 @@ The herdr config is the one azade already had, with the Mac chords, plus `defaul
 
 Brave Origin from Brave's apt repository, which builds it for arm64. agent-browser drives it headed on display `:1`, through the pi-wares `agent-browser` skill, whose `setup.sh` writes `~/.agent-browser/config.json` once.
 
-The display is `https://azade.airplane-catfish.ts.net:6081/vnc.html`, reachable from the tailnet only. Every hop is private to francois:
+The display is `https://azade.airplane-catfish.ts.net:6080/vnc.html`, reachable from the tailnet only. It has a port of its own because noVNC asks for its websocket at the root of the address, so under a path it needs `?path=` in every URL. Every hop is private to francois:
 
 - `dev.mise.xvfb` runs Xvfb on `:1`, 1440x900, with an X cookie in `~/.Xauthority` written at each start. Without it, any local user could open the display, the `azade` user included.
 - `dev.mise.x11vnc` serves that display on `/run/user/1001/x11vnc.sock` and on no TCP port.
 - `dev.mise.novnc` runs websockify with the noVNC client on `/run/user/1001/novnc.sock`.
-- `tailscale serve` proxies HTTPS on port 6081 to that socket, with the Tailscale certificate. Serving a socket needs root even for the operator, so the task uses sudo. The setting lives in tailscaled, not in a file, and survives reboots.
+- `tailscale serve` proxies HTTPS port 6080 to that socket, with the Tailscale certificate. Serving a socket needs root even for the operator, so the task uses sudo. The setting lives in tailscaled, not in a file, and survives reboots.
 
-The `azade` user has her own display `:99`, x11vnc and noVNC on port 6080, for her Chromium. This setup does not touch them.
+The `azade` user has her own display `:99`, x11vnc and noVNC, for openclaw's Chromium. Her noVNC moved from 6080 to 6081 on 16oct26, in `/home/azade/.config/systemd/user/novnc-websockify.service`, which this repo does not manage.
 
 ## Commands
 
