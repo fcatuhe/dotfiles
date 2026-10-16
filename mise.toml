@@ -3,6 +3,7 @@ experimental = true
 
 # Bitwarden comes first by hand, the bootstrap only keeps it installed
 [bootstrap.packages]
+"pacman:ansible" = "latest"
 "pacman:bitwarden" = "latest"
 "pacman:bitwarden-cli" = "latest"
 "pacman:brave-origin-bin" = "latest"
