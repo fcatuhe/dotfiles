@@ -42,20 +42,20 @@ fingerprint = "2596 A99E AAB3 3821 893C  0A79 458C A832 957F 5868"
 
 # The display, VNC and noVNC talk over the cookie and runtime-dir sockets only francois can open, never over TCP
 [bootstrap.linux.systemd.units.xvfb]
-description = "Virtual display :1 for the headed browser"
-exec_start_pre = ["/bin/sh -c 'xauth -f %h/.Xauthority add :1 . $$(mcookie)'"]
-exec_start = "/usr/bin/Xvfb :1 -screen 0 1440x900x24 -auth %h/.Xauthority -nolisten tcp"
+description = "Virtual display :99 for the headed browser"
+exec_start_pre = ["/bin/sh -c 'xauth -f %h/.Xauthority add :99 . $$(mcookie)'"]
+exec_start = "/usr/bin/Xvfb :99 -screen 0 1440x900x24 -auth %h/.Xauthority -nolisten tcp"
 restart = "always"
 
 [bootstrap.linux.systemd.units.x11vnc]
-description = "VNC server for display :1"
+description = "VNC server for display :99"
 after = ["dev.mise.xvfb.service"]
 binds_to = ["dev.mise.xvfb.service"]
-exec_start = "/usr/bin/x11vnc -display :1 -auth %h/.Xauthority -unixsock %t/x11vnc.sock -rfbport 0 -forever -shared -noxdamage"
+exec_start = "/usr/bin/x11vnc -display :99 -auth %h/.Xauthority -unixsock %t/x11vnc.sock -rfbport 0 -forever -shared -noxdamage"
 restart = "always"
 
 [bootstrap.linux.systemd.units.novnc]
-description = "noVNC for display :1, served on the tailnet by tailscale serve"
+description = "noVNC for display :99, served on the tailnet by tailscale serve"
 after = ["dev.mise.x11vnc.service"]
 exec_start = "/usr/bin/websockify --web=/usr/share/novnc --unix-listen=%t/novnc.sock --unix-target=%t/x11vnc.sock"
 restart = "always"

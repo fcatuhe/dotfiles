@@ -7,7 +7,7 @@ source "$ZSH/oh-my-zsh.sh"
 export LESS=-FR
 
 # The virtual display noVNC shows, where agent-browser opens Brave Origin headed
-export DISPLAY=:1
+export DISPLAY=:99
 
 source ~/.config/shell/aliases
 

@@ -30,22 +30,22 @@ In pi, type `/login`. Then open noVNC and log in to the sites in the agent-brows
 
 ## Shell
 
-zsh inside herdr, bash everywhere else. `default_shell` in `~/.config/herdr/config.toml` starts zsh in every herdr pane, the login shell stays bash. `~/.zshrc` is the laptop's, minus the Arch paths and scw: Debian puts zsh-autosuggestions and zsh-syntax-highlighting in `/usr/share/<name>/`. It exports `DISPLAY=:1`, so pi and agent-browser started in herdr open their windows on the virtual display.
+zsh inside herdr, bash everywhere else. `default_shell` in `~/.config/herdr/config.toml` starts zsh in every herdr pane, the login shell stays bash. `~/.zshrc` is the laptop's, minus the Arch paths and scw: Debian puts zsh-autosuggestions and zsh-syntax-highlighting in `/usr/share/<name>/`. It exports `DISPLAY=:99`, so pi and agent-browser started in herdr open their windows on the virtual display.
 
 The herdr config is the one azade already had, with the Mac chords, plus `default_shell`. Reload it with `prefix+q`. Panes opened before keep bash.
 
 ## Browser
 
-Brave Origin from Brave's apt repository, which builds it for arm64. agent-browser drives it headed on display `:1`, through the pi-wares `agent-browser` skill, whose `setup.sh` writes `~/.agent-browser/config.json` once.
+Brave Origin from Brave's apt repository, which builds it for arm64. agent-browser drives it headed on display `:99`, through the pi-wares `agent-browser` skill, whose `setup.sh` writes `~/.agent-browser/config.json` once.
 
 The display is `https://azade.airplane-catfish.ts.net:6080/vnc.html`, reachable from the tailnet only. It has a port of its own because noVNC asks for its websocket at the root of the address, so under a path it needs `?path=` in every URL. Every hop is private to francois:
 
-- `dev.mise.xvfb` runs Xvfb on `:1`, 1440x900, with an X cookie in `~/.Xauthority` written at each start. Without it, any local user could open the display, the `azade` user included.
+- `dev.mise.xvfb` runs Xvfb on `:99`, 1440x900, with an X cookie in `~/.Xauthority` written at each start. Without it, any local user could open the display, the `azade` user included.
 - `dev.mise.x11vnc` serves that display on `/run/user/1001/x11vnc.sock` and on no TCP port.
 - `dev.mise.novnc` runs websockify with the noVNC client on `/run/user/1001/novnc.sock`.
 - `tailscale serve` proxies HTTPS port 6080 to that socket, with the Tailscale certificate. Serving a socket needs root even for the operator, so the task uses sudo. The setting lives in tailscaled, not in a file, and survives reboots.
 
-The `azade` user has her own display `:99`, x11vnc and noVNC, for openclaw's Chromium. Her noVNC moved from 6080 to 6081 on 16oct26, in `/home/azade/.config/systemd/user/novnc-websockify.service`, which this repo does not manage.
+The `azade` user has her own display `:100`, x11vnc and noVNC, for openclaw's Chromium. On 16oct26 her display moved from `:99` and her noVNC from 6080 to 6081, in her `xvfb`, `x11vnc` and `novnc-websockify` user units and `~/.openclaw/gateway.systemd.env`, which this repo does not manage.
 
 ## Commands
 
