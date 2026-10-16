@@ -97,9 +97,9 @@ Hyprland keeps the layout and the locks per device, and lists the headphone jack
 
 Brave Origin, the default in `~/.config/mimeapps.list`, so links and Omarchy's web apps open in it. It is Brave without Leo, News, Rewards, Wallet, VPN, Tor and the other extras, keeping Shields, and `brave-origin-bin` comes from Omarchy's own repo.
 
-The bootstrap installs it and nothing more. `setup:brave-origin` runs `omarchy-install-browser brave-origin`, which writes Omarchy's theme color, Wayland flags and extensions, and asks for the sudo password. It then appends `BraveWebBluetoothAPI,WebBluetooth` to the `--enable-features` line of `~/.config/brave-origin-flags.conf`: Linux has no `navigator.bluetooth` without both, and a second `--enable-features` line would replace the first. The file is not tracked, since `omarchy-install-browser` overwrites it.
+The bootstrap installs it and nothing more. `setup:brave-origin` runs `omarchy-install-browser brave-origin`, which writes Omarchy's theme color, Wayland flags and extensions, and asks for the sudo password. It then appends `BraveWebBluetoothAPI,WebBluetooth` to the `--enable-features` line of `~/.config/brave-origin-flags.conf`: Linux has no `navigator.bluetooth` without both, and a second `--enable-features` line would replace the first. The file is not tracked, since `omarchy-install-browser` overwrites it. Last, it installs `brave-origin/metrics.json` as a root-owned policy in `/etc/brave/policies/managed`, which turns crash reports off and locks them. Omarchy's policy refresh only deletes files there that root does not own.
 
-Everything else comes from Brave Sync, step 7: bookmarks, extensions, settings, search engines, tab groups and per-site Shields. Passwords live in Bitwarden. Sync skips what Brave keeps outside the profile, such as the crash report choice, so turn crash reports off again on a new computer.
+Everything else comes from Brave Sync, step 7: bookmarks, extensions, settings, search engines, tab groups and per-site Shields. Passwords live in Bitwarden.
 
 ## Updates
 
