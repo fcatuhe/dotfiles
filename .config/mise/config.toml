@@ -7,7 +7,7 @@ gh = "latest"
 herdr = "latest"
 node = "latest"
 npm = "latest"
-"npm:@kitlangton/ghui" = "latest"
+"npm:@kitlangton/ghui" = { version = "latest", allow_low_downloads = true }
 "npm:agent-browser" = "latest"
 pi = { version = "latest", minimum_release_age = "0" }
 ruby = "latest"
