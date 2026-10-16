@@ -48,7 +48,7 @@ On a new computer, do these steps in this sequence.
 
    In pi, type `/login`. To receive Stripe webhooks in patoumatic, do `stripe login --project-name development`. Log in to the sites in the agent-browser Chrome profile.
 
-7. Join the Brave Sync chain. In Brave Origin, open Settings, Sync, "I have a Sync Code", and type a code shown by another device in the chain under Settings, Sync, "Add new device". A saved code does not work, since its last word expires. See [Browser](#browser) for what it brings back.
+7. Join the Brave Sync chain. In Brave Origin, open Settings, Sync, "I have a Sync Code", and type a code shown by another device in the chain under Settings, Sync, "Add new device". A saved code does not work, since its last word expires. Then quit Brave Origin and run `mise run brave-origin:apply` for the settings Sync skips. See [Browser](#browser) for what it brings back.
 
 ### What the bootstrap does
 
@@ -99,7 +99,7 @@ Brave Origin, the default in `~/.config/mimeapps.list`, so links and Omarchy's w
 
 The bootstrap installs it and nothing more. `setup:brave-origin` runs `omarchy-install-browser brave-origin`, which writes Omarchy's theme color, Wayland flags and extensions, and asks for the sudo password. It then appends `BraveWebBluetoothAPI,WebBluetooth` to the `--enable-features` line of `~/.config/brave-origin-flags.conf`: Linux has no `navigator.bluetooth` without both, and a second `--enable-features` line would replace the first. The file is not tracked, since `omarchy-install-browser` overwrites it. Last, it installs `brave-origin/metrics.json` as a root-owned policy in `/etc/brave/policies/managed`, which turns crash reports off and locks them. Omarchy's policy refresh only deletes files there that root does not own.
 
-Everything else comes from Brave Sync, step 7: bookmarks, extensions, settings, search engines, tab groups and per-site Shields. Passwords live in Bitwarden.
+Most of the rest comes from Brave Sync, step 7: bookmarks, extensions, search engines, tab groups, Shields and the Chromium settings. Passwords live in Bitwarden. Sync carries a setting only if it is on Chromium's syncable allowlist, and Brave adds only Shields, the private window search engine and a few others to that list. So vertical tabs, the new tab page, history retention and everything in `Local State`, such as Memory Saver, stay on the machine. `brave-origin/preferences.json` and `brave-origin/local-state.json` hold those, and `mise run brave-origin:apply` deep-merges them into the profile. It refuses while Brave Origin is open, since Brave writes its preferences back on exit, and it needs the profile that the first launch creates. A key goes in these files only when its value differs from the default: the sidebar is hidden by default on Origin, so it is not there.
 
 ## Updates
 

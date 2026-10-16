@@ -152,6 +152,27 @@ mkdir -p ~/.config/VSCodium/User/globalStorage
 } | sqlite3 ~/.config/VSCodium/User/globalStorage/state.vscdb
 '''
 
+[tasks."brave-origin:apply"]
+description = "Merge the settings Brave Sync skips into the Brave Origin profile, effective at next launch"
+run = '''
+set -e
+if pgrep -x brave > /dev/null; then
+  echo "brave-origin:apply: quit Brave Origin first, it writes its preferences back on exit" >&2
+  exit 1
+fi
+profile=~/.config/BraveSoftware/Brave-Origin
+if [ ! -f "$profile/Default/Preferences" ]; then
+  echo "brave-origin:apply: launch Brave Origin once first, to create its profile" >&2
+  exit 1
+fi
+umask 077
+for pair in "Default/Preferences:brave-origin/preferences.json" "Local State:brave-origin/local-state.json"; do
+  target="$profile/${pair%%:*}"
+  jq -s '.[0] * .[1]' "$target" "${pair#*:}" > "$target.tmp"
+  mv "$target.tmp" "$target"
+done
+'''
+
 # Omarchy's theme color policy folder, Wayland flags and browser extensions, then Web Bluetooth and crash reports off
 [tasks."setup:brave-origin"]
 run = [
