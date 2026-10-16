@@ -93,9 +93,9 @@ CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
 depends = ["setup:*"]
 
 [tasks."bios:dump"]
-description = "Snapshot the BIOS settings and UEFI boot entries into bios/<model>"
+description = "Snapshot the BIOS settings and UEFI boot entries into bios/<model>-<machine type>"
 run = '''
-dir=bios/$(tr '[:upper:]' '[:lower:]' < /sys/class/dmi/id/product_version | tr -cs 'a-z0-9' '-' | sed 's/-$//')
+dir=bios/$(printf '%s-%.4s' "$(cat /sys/class/dmi/id/product_version)" "$(cat /sys/class/dmi/id/product_name)" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-' | sed 's/-$//')
 mkdir -p "$dir"
 raw=$(mktemp)
 sudo -v
@@ -107,10 +107,10 @@ cat /sys/class/dmi/id/bios_version > "$dir/bios-version.txt"
 '''
 
 [tasks."bios:apply"]
-description = "Write the bios/<model> settings that differ from the firmware, effective at next reboot"
+description = "Write the bios/<model>-<machine type> settings that differ from the firmware, effective at next reboot"
 raw = true
 run = '''
-dir=bios/$(tr '[:upper:]' '[:lower:]' < /sys/class/dmi/id/product_version | tr -cs 'a-z0-9' '-' | sed 's/-$//')
+dir=bios/$(printf '%s-%.4s' "$(cat /sys/class/dmi/id/product_version)" "$(cat /sys/class/dmi/id/product_name)" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-' | sed 's/-$//')
 lmi=/sys/class/firmware-attributes/thinklmi
 sudo -v
 read -rsp 'Supervisor password (Enter if none): ' pw; echo

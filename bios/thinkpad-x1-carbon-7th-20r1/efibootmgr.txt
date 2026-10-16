@@ -1,6 +1,6 @@
 Timeout: 0 seconds
 BootOrder: 0000,001B,001F,0019,001C,001D,001E,001A,0020,0021,0022,0023,0024,0001
-Boot0000* Limine	HD(1,GPT,da9c5465-54e4-4f85-9352-2769fd23e7b8,0x800,0x400000)/\EFI\limine\limine_x64.efi
+Boot0000* Limine	HD(1,GPT,25487c24-cddd-44aa-aece-21482702e3a4,0x800,0x400000)/\EFI\limine\limine_x64.efi
 Boot0001* Linux-Firmware-Updater	HD(1,GPT,da9c5465-54e4-4f85-9352-2769fd23e7b8,0x800,0x400000)/\EFI\omarchy\fwupdx64.efi
 Boot0010  Setup	FvFile(721c8b66-426c-4e86-8e99-3457c46ab0b9)
 Boot0011  Boot Menu	FvFile(126a762d-5758-4fca-8531-201a7f57f850)
