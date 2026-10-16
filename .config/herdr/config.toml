@@ -1,112 +1,69 @@
 onboarding = false
-# Mirrors the Omarchy tmux config in config/tmux/tmux.conf
-# tmux session -> herdr workspace, tmux window -> herdr tab, tmux pane -> herdr pane
 
 [theme]
-# tmux ran on the terminal's own palette (bg=default, fg=default, ANSI blue accents)
-name = "terminal"
-
-[theme.custom]
-# The active tab is drawn as panel_bg text on an accent background, so panel_bg
-# has to be dark for it to read - same colors as status-left's "#[fg=black,bg=blue]"
-panel_bg = "black"
+name = "catppuccin"
 
 [terminal]
-# Matches -c "#{pane_current_path}" on every split, window, and session
-new_cwd = "follow"
-# zsh in herdr panes only, the login shell and Omarchy's scripts stay on bash
+# zsh in herdr panes only, the login shell stays on bash
 default_shell = "/usr/bin/zsh"
-
-# Worktrees beside the repos, as ~/fcode/worktrees/<repo>/<branch>, rather than hidden in ~/.herdr
-[worktrees]
-directory = "~/fcode/worktrees"
 
 [keys]
 prefix = "ctrl+space"
-
-# Config and help
-reload_config = "prefix+q"
-help = "prefix+?"
-detach = "prefix+d"
-
-# Copy mode
-copy_mode = "prefix+["
-
-# Panes
-split_horizontal = ["prefix+h", "alt+enter"]
-split_vertical = ["prefix+v", "alt+shift+enter"]
-close_pane = ["prefix+x", "alt+esc"]
-zoom = "prefix+z"
-last_pane = "prefix+;"
-
+previous_tab = ["cmd+shift+left", "prefix+p", "alt+left", "ctrl+alt+h"]
+next_tab = ["cmd+shift+right", "prefix+n", "alt+right", "ctrl+alt+l"]
+previous_workspace = ["cmd+shift+up", "prefix+shift+p", "alt+up", "ctrl+alt+k"]
+next_workspace = ["cmd+shift+down", "prefix+shift+n", "alt+down", "ctrl+alt+j"]
+new_tab = ["cmd+shift+t", "prefix+c", "ctrl+alt+t"]
+close_tab = ["cmd+shift+w", "prefix+k", "ctrl+alt+w"]
+rename_tab = ["cmd+shift+r", "prefix+r", "ctrl+alt+r"]
+close_pane = ["cmd+alt+w", "prefix+x", "alt+esc", "ctrl+alt+esc"]
 focus_pane_left = "ctrl+alt+left"
 focus_pane_down = "ctrl+alt+down"
 focus_pane_up = "ctrl+alt+up"
 focus_pane_right = "ctrl+alt+right"
-
+# Config and help
+reload_config = "prefix+q"
+help = "prefix+?"
+detach = "prefix+d"
+# Copy mode
+copy_mode = "prefix+["
+# Panes. Option composes no character out of enter and esc, so those alt chords do arrive on macOS.
+split_horizontal = ["prefix+h", "alt+enter", "ctrl+alt+enter"]
+split_vertical = ["prefix+v", "alt+shift+enter", "ctrl+alt+shift+enter"]
+zoom = "prefix+z"
+last_pane = "prefix+;"
+# No tmux equivalent; herdr's default prefix+shift+p is taken by previous workspace
+rename_pane = "prefix+shift+o"
 resize_mode = ["prefix+ctrl+left", "prefix+ctrl+down", "prefix+ctrl+up", "prefix+ctrl+right"]
-
-# Like resize-pane on C-M-S-arrows
 resize_pane_left = "ctrl+alt+shift+left"
 resize_pane_down = "ctrl+alt+shift+down"
 resize_pane_up = "ctrl+alt+shift+up"
 resize_pane_right = "ctrl+alt+shift+right"
+switch_tab = ["prefix+1..9", "alt+1..9", "ctrl+alt+1..9"]
+move_tab_previous = ["alt+shift+left", "ctrl+alt+shift+h"]
+move_tab_next = ["alt+shift+right", "ctrl+alt+shift+l"]
+# Sessions -> workspaces, the tab chords with shift
+new_workspace = ["prefix+shift+c", "ctrl+alt+shift+t"]
+rename_workspace = ["prefix+shift+r", "ctrl+alt+shift+r"]
+close_workspace = ["prefix+shift+k", "ctrl+alt+shift+w"]
 
-# No tmux equivalent; herdr's default prefix+shift+p is taken by previous session
-rename_pane = "prefix+shift+o"
-
-# Windows -> tabs
-new_tab = ["prefix+c", "alt+t"]
-rename_tab = ["prefix+r", "alt+r"]
-close_tab = ["prefix+k", "alt+w"]
-switch_tab = ["prefix+1..9", "alt+1..9"]
-previous_tab = ["prefix+p", "alt+left"]
-next_tab = ["prefix+n", "alt+right"]
-
-# Like swap-window -t -1/+1 on M-S-Left/Right
-move_tab_previous = "alt+shift+left"
-move_tab_next = "alt+shift+right"
-
-# Sessions -> workspaces
-new_workspace = "prefix+shift+c"
-rename_workspace = "prefix+shift+r"
-close_workspace = "prefix+shift+k"
-previous_workspace = ["prefix+shift+p", "alt+up"]
-next_workspace = ["prefix+shift+n", "alt+down"]
-
-# New tab running pi, in the focused pane's directory
 [[keys.command]]
-key = "alt+p"
+key = "cmd+shift+i"
 type = "shell"
-command = 'p=$(herdr tab create --focus) && p=${p#*\"pane_id\":\"} && herdr pane run "${p%%\"*}" pi'
+command = 'p=$(herdr tab create --focus); p=${p#*\"pane_id\":\"}; herdr pane run "${p%%\"*}" pi'
 
 [ui]
-accent = "blue"
-
-# tmux drew single-line dividers between adjacent panes and no outer frame
-pane_gaps = false
-pane_outer_borders = false
-
-# tmux had no scrollbar column beside its panes
-pane_scrollbars = false
-
-# kill-window and kill-session never asked
-confirm_close = false
-
-# automatic-rename gave windows a name without prompting
+show_agent_labels_on_pane_borders = true
 prompt_new_tab_name = false
 
-# set -g mouse on
-mouse_capture = true
+agent_panel_sort = "spaces"
+pane_scrollbars = false
+[experimental]
+kitty_graphics = true
+pane_history = true
 
-# status-right had the zoom flag followed by #h
-tab_bar_right = [{ type = "zoom" }, { type = "hostname" }]
-
-# set -g set-titles on / set -g set-titles-string '#h:#W', where tmux's #W was
-# the basename of the pane cwd. This is what Hyprland shows in the group bar,
-# and it resolves on the server so remote sessions name the remote host.
-window_title = "{hostname}: {workspace}"
-
-agent_panel_sort = "priority"
-[ui.sidebar.spaces]
-row_gap = 1
+# New tab running pi, focused, in one keystroke.
+[[keys.command]]
+key = "ctrl+alt+i"
+type = "shell"
+command = 'p=$(herdr tab create --focus); p=${p#*\"pane_id\":\"}; herdr pane run "${p%%\"*}" pi'

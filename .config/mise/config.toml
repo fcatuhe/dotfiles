@@ -1,21 +1,4 @@
 [tools]
-"aqua:modem-dev/hunk" = "latest"
-bun = "latest"
-fnox = "latest"
-gh = "latest"
-"github:basecamp/hey-cli" = "latest"
-herdr = "latest"
 node = "latest"
-npm = "latest"
-"npm:@kitlangton/ghui" = { version = "latest", allow_low_downloads = true }
 "npm:agent-browser" = "latest"
 pi = { version = "latest", minimum_release_age = "0" }
-ruby = "latest"
-scaleway = "latest"
-stripe = "latest"
-
-[settings]
-idiomatic_version_file_enable_tools = ["ruby"]
-
-[settings.ruby]
-compile = false

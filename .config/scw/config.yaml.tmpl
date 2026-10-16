@@ -1,9 +1,0 @@
-active_profile: agent-readonly
-profiles:
-  agent-readonly:
-    access_key: {{ secret(name="SCALEWAY_ACCESS_KEY") }}
-    secret_key: {{ secret(name="SCALEWAY_SECRET_KEY") }}
-    default_organization_id: {{ secret(name="SCALEWAY_ORGANIZATION_ID") }}
-    default_project_id: {{ secret(name="SCALEWAY_PROJECT_ID") }}
-    default_region: fr-par
-    default_zone: fr-par-1
