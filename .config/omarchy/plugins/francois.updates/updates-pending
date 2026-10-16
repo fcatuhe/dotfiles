@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+readonly offline=75
+
+[[ $(nmcli networking connectivity) == full ]] || exit $offline
+
 pacman=$({ checkupdates --nocolor || (($? == 2)); } | awk '$1 != "omarchy" && $1 != "omarchy-dev"' | wc -l)
 
 # INFO: fc 01oct26 yay -Qua exits 1 when nothing is pending, so an error with no output passes too

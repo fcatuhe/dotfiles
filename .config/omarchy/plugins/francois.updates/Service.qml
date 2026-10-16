@@ -6,6 +6,7 @@ Item {
 
   property var pending: ({})
   property string lastError: ""
+  readonly property int offlineExitCode: 75
   readonly property int total: Object.values(pending).reduce((sum, count) => sum + count, 0)
   readonly property string breakdown: Object.entries(pending)
     .filter(([, count]) => count > 0)
@@ -40,7 +41,7 @@ Item {
       if (exitCode === 0) {
         root.pending = JSON.parse(checkStdout.text)
         root.lastError = ""
-      } else {
+      } else if (exitCode !== root.offlineExitCode) {
         root.lastError = checkStderr.text.trim() || "updates-pending exited with " + exitCode
       }
     }
