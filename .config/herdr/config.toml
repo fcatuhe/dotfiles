@@ -64,6 +64,6 @@ pane_history = true
 
 # New tab running pi, focused, in one keystroke.
 [[keys.command]]
-key = "ctrl+alt+i"
+key = ["alt+p", "ctrl+alt+i"]
 type = "shell"
 command = 'p=$(herdr tab create --focus); p=${p#*\"pane_id\":\"}; herdr pane run "${p%%\"*}" pi'
