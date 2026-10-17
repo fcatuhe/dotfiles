@@ -1,3 +1,5 @@
+alias gs='git sweep'
+
 # Pi
 alias pir='pi -r'
 alias pii='pi -p' # pi inline
