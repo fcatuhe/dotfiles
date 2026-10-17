@@ -12,6 +12,9 @@ path+=(/usr/lib/emscripten)
 
 source ~/.config/shell/aliases
 
+# Ctrl+U deletes to the start of the line like in pi, Hyprland sends it for Alt+Backspace
+bindkey '^U' backward-kill-line
+
 # scw ships its zsh completion as a script, not a file on fpath
 eval "$(scw autocomplete script shell=zsh)"
 

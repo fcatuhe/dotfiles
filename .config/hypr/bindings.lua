@@ -7,6 +7,50 @@ hl.bind("Multi_key", hl.dsp.event("digitlock"), { non_consuming = true, release 
 -- INFO: fc 25sep26 the ThinkPad star key reports press and release together, so it can only toggle
 o.bind("XF86Favorites", "Toggle dictation", "voxtype record toggle")
 
+local function active_window_is_terminal()
+  local window = hl.get_active_window()
+  if not window then
+    return false
+  end
+
+  for _, tag in ipairs(window.tags or {}) do
+    if tag:gsub("%*$", "") == "terminal" then
+      return true
+    end
+  end
+
+  return false
+end
+
+-- INFO: fc 17oct26 down and up are split like Omarchy's clipboard.lua, send_shortcut can leave keys stuck
+local function send_keys(chords)
+  local delay = 0
+  for _, chord in ipairs(chords) do
+    for _, state in ipairs({ "down", "up" }) do
+      hl.timer(function()
+        hl.dispatch(hl.dsp.send_key_state({ mods = chord[1], key = chord[2], state = state }))
+      end, { timeout = delay + 1, type = "oneshot" })
+      delay = delay + 20
+    end
+  end
+end
+
+o.bind("CTRL + BACKSPACE", "Delete previous word", function()
+  if active_window_is_terminal() then
+    send_keys({ { "ALT", "BackSpace" } })
+  else
+    send_keys({ { "CTRL", "BackSpace" } })
+  end
+end, { repeating = true })
+
+o.bind("ALT + BACKSPACE", "Delete to start of line", function()
+  if active_window_is_terminal() then
+    send_keys({ { "CTRL", "U" } })
+  else
+    send_keys({ { "SHIFT", "Home" }, { "", "BackSpace" } })
+  end
+end)
+
 -- See current bindings and descriptions:
 --   omarchy menu keybindings --print
 
