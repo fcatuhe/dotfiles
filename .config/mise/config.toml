@@ -1,6 +1,7 @@
 [tools]
 "aqua:modem-dev/hunk" = "latest"
 bun = "latest"
+codex = "latest"
 fnox = "latest"
 gh = "latest"
 "github:basecamp/hey-cli" = "latest"
