@@ -46,7 +46,7 @@ On a new computer, do these steps in this sequence.
    ol auth login
    ```
 
-   In pi, type `/login`. To receive Stripe webhooks in patoumatic, do `stripe login --project-name development`. Log in to the sites in the agent-browser Chrome profile.
+   In pi, type `/login`, then `/wares-doctor:apply` for the pi-wares model shortcuts and subagent config, which it only writes for models a login can run. To receive Stripe webhooks in patoumatic, do `stripe login --project-name development`. Log in to the sites in the agent-browser Chrome profile.
 
 7. Join the Brave Sync chain. In Brave Origin, open Settings, Sync, "I have a Sync Code", and type a code shown by another device in the chain under Settings, Sync, "Add new device". A saved code does not work, since its last word expires. Then quit Brave Origin and run `mise run brave-origin:apply` for the settings Sync skips. See [Browser](#browser) for what it brings back.
 
