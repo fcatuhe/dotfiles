@@ -41,10 +41,13 @@
           "id": "omarchy.tailscale"
         },
         {
-          "id": "omarchy.bluetooth"
+          "id": "io.github.x3me.nexthop"
         },
         {
           "id": "omarchy.network"
+        },
+        {
+          "id": "omarchy.bluetooth"
         },
         {
           "id": "omarchy.audio"
