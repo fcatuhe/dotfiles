@@ -20,3 +20,4 @@ SCALEWAY_ORGANIZATION_ID = { provider = "bitwarden", value = "dotfiles-repositor
 SCALEWAY_PROJECT_ID = { provider = "bitwarden", value = "dotfiles-repository/SCALEWAY_PROJECT_ID" }
 PATOUMATIC_RAILS_DEVELOPMENT_KEY = { provider = "bitwarden", value = "patoumatic-repository/RAILS_DEVELOPMENT_KEY" }
 CROOZ_RAILS_DEVELOPMENT_KEY = { provider = "bitwarden", value = "crooz-repository/RAILS_DEVELOPMENT_KEY" }
+SKYBLIP_RAILS_DEVELOPMENT_KEY = { provider = "bitwarden", value = "skyblip-repository/RAILS_DEVELOPMENT_KEY" }

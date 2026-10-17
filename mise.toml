@@ -42,6 +42,7 @@ SCALEWAY_ORGANIZATION_ID = "SCALEWAY_ORGANIZATION_ID"
 SCALEWAY_PROJECT_ID = "SCALEWAY_PROJECT_ID"
 PATOUMATIC_RAILS_DEVELOPMENT_KEY = "PATOUMATIC_RAILS_DEVELOPMENT_KEY"
 CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
+SKYBLIP_RAILS_DEVELOPMENT_KEY = "SKYBLIP_RAILS_DEVELOPMENT_KEY"
 
 [dotfiles]
 "~/.XCompose" = {}
@@ -89,6 +90,7 @@ CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
 "~/.zshrc" = {}
 "~/fcode/crooz/config/master.key" = { source = "fcode/crooz/config/master.key.tmpl", mode = "template", permissions = "0600" }
 "~/fcode/patoumatic/config/master.key" = { source = "fcode/patoumatic/config/master.key.tmpl", mode = "template", permissions = "0600" }
+"~/fcode/skyblip/server/config/master.key" = { source = "fcode/skyblip/server/config/master.key.tmpl", mode = "template", permissions = "0600" }
 
 # Run by mise bootstrap, once the dotfiles are in place
 [tasks.bootstrap]
