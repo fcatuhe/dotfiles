@@ -1,5 +1,6 @@
 {
   "brave": {
+    "enable_window_closing_confirm": false,
     "tabs": {
       "vertical_tabs_enabled": true
     },

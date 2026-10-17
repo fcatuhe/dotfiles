@@ -3,5 +3,29 @@
     "high_efficiency_mode": {
       "state": 2
     }
+  },
+  "brave": {
+    "ad_block": {
+      "regional_filters": {
+        "67E792D4-AE03-4D1A-9EDE-80E01C81F9B8": { "enabled": true },
+        "6b91e355-1421-4c03-9a30-911b4d0fb277": { "enabled": true },
+        "690FF3B4-8B6B-4709-8505-FEC6643D7BD9": { "enabled": true },
+        "7911A1CB-304E-4CDB-ABB3-E2A94A37E4DD": { "enabled": true },
+        "9E8EC586-4E17-4E5E-99D7-35172C4CEA74": { "enabled": true },
+        "5c6a6c95-b60a-4695-9efb-539359022531": { "enabled": true },
+        "7f11b964-4f36-4e06-9d75-bd16381b9386": { "enabled": true },
+        "d579f370-6de3-4507-aa9a-cee4227e59f5": { "enabled": true },
+        "49958da7-f532-4a84-a765-9501729b8e75": { "enabled": true },
+        "E2FA7D98-0BD5-493E-8AF4-950604ADE9CB": { "enabled": true },
+        "1ED1870B-997C-4BFE-AEBC-B67D679BAF3B": { "enabled": true },
+        "78672887-A098-4D2C-B0CB-A3DEC4834DA7": { "enabled": true },
+        "F61D6B7B-4110-4EA4-9C81-38FB4CE90AEC": { "enabled": true },
+        "9852EFC4-99E4-4F2D-A915-9C3196C7A1DE": { "enabled": true }
+      }
+    },
+    "shields": {
+      "fb_embed_default": false,
+      "twitter_embed_default": false
+    }
   }
 }
