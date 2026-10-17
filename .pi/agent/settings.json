@@ -37,5 +37,6 @@
   "transport": "auto",
   "defaultProjectTrust": "ask",
   "doubleEscapeAction": "tree",
-  "collapseChangelog": false
+  "collapseChangelog": false,
+  "deviceId": "5ef8d2f6-c971-4f60-b92f-65da4fdf7e1b"
 }
