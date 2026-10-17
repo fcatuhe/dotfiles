@@ -67,3 +67,7 @@ pane_history = true
 key = ["alt+p", "ctrl+alt+i"]
 type = "shell"
 command = 'p=$(herdr tab create --focus); p=${p#*\"pane_id\":\"}; herdr pane run "${p%%\"*}" pi'
+
+# Beside the repos, where git wt puts its worktrees too
+[worktrees]
+directory = "~/fcode/worktrees"
