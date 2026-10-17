@@ -29,7 +29,9 @@ fingerprint = "2596 A99E AAB3 3821 893C  0A79 458C A832 957F 5868"
 "apt:zsh-autosuggestions" = "latest"
 "apt:zsh-syntax-highlighting" = "latest"
 
+# gh-signoff is a script extension, which gh runs from a clone in its extensions directory
 [bootstrap.repos]
+"~/.local/share/gh/extensions/gh-signoff" = { url = "https://github.com/basecamp/gh-signoff.git" }
 "~/.oh-my-zsh" = { url = "https://github.com/ohmyzsh/ohmyzsh.git" }
 
 [dotfiles]
