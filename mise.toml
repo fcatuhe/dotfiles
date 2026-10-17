@@ -18,8 +18,9 @@ experimental = true
 [bootstrap.services."fwupd-refresh.timer"]
 enabled = true
 
-# Repositories cloned before the dotfiles, which write key files into them
+# Repositories cloned before the dotfiles, which write key files into the fcode ones. gh runs script extensions like gh-signoff from a clone
 [bootstrap.repos]
+"~/.local/share/gh/extensions/gh-signoff" = { url = "https://github.com/basecamp/gh-signoff.git" }
 "~/.oh-my-zsh" = { url = "https://github.com/ohmyzsh/ohmyzsh.git" }
 "~/fcode/crooz" = { url = "git@github.com:fcatuhe/crooz.git" }
 "~/fcode/patoumatic" = { url = "git@github.com:fcatuhe/patoumatic.git" }
