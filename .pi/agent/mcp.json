@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "outline-patoumatic": {
+      "url": "https://patoumatic.getoutline.com/mcp",
+      "description": "Search, read and edit the Patoumatic Outline wiki"
+    }
+  }
+}

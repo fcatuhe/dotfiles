@@ -39,6 +39,7 @@ fingerprint = "2596 A99E AAB3 3821 893C  0A79 458C A832 957F 5868"
 "~/.config/mise/config.toml" = {}
 "~/.config/shell/aliases" = {}
 "~/.pi/agent/keybindings.json" = {}
+"~/.pi/agent/mcp.json" = {}
 "~/.pi/agent/settings.json" = {}
 "~/.zshrc" = {}
 
