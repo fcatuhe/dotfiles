@@ -157,11 +157,12 @@ mkdir -p ~/.config/VSCodium/User/globalStorage
 description = "Merge the settings Brave Sync skips into the Brave Origin profile, effective at next launch"
 run = '''
 set -e
-if pgrep -x brave > /dev/null; then
+profile=~/.config/BraveSoftware/Brave-Origin
+lock=$(readlink "$profile/SingletonLock" || true)
+if [ -n "$lock" ] && kill -0 "${lock##*-}" 2> /dev/null; then
   echo "brave-origin:apply: quit Brave Origin first, it writes its preferences back on exit" >&2
   exit 1
 fi
-profile=~/.config/BraveSoftware/Brave-Origin
 if [ ! -f "$profile/Default/Preferences" ]; then
   echo "brave-origin:apply: launch Brave Origin once first, to create its profile" >&2
   exit 1
