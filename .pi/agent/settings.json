@@ -17,6 +17,9 @@
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
+  "defaultTools": [
+    "+codemode"
+  ],
   "warnings": {
     "anthropicExtraUsage": false
   },
