@@ -56,12 +56,12 @@ It does these steps in this sequence:
 
 1. Installs `[bootstrap.packages]`, with sudo. The AUR packages use yay with `--noconfirm`, so read their PKGBUILD on aur.archlinux.org before the first install.
 2. Enables `[bootstrap.services]`.
-3. Clones `[bootstrap.repos]`: oh-my-zsh, and crooz, patoumatic, pi-wares and skyblip in `~/fcode`. It does not move a checkout that exists.
+3. Clones `[bootstrap.repos]`: oh-my-zsh, and crooz, patoumatic, pi-wares, skyblip and vps-ansible in `~/fcode`. It does not move a checkout that exists.
 4. Applies `[dotfiles]`. The templates get their secrets from Bitwarden through fnox, see [Secrets](#secrets).
 5. Installs the mise tools.
 6. Runs the `setup:*` tasks. `setup:repos` does `mise trust` and `mise install` in each `~/fcode` repository, not in a third-party one like oh-my-zsh.
 
-The repositories must exist before the dotfiles, because the dotfiles write `config/master.key` into crooz, patoumatic and skyblip.
+The repositories must exist before the dotfiles, because the dotfiles write `config/master.key` into crooz, patoumatic and skyblip, and `inventory.yml` into vps-ansible.
 
 ### Again, later
 
@@ -133,7 +133,7 @@ The boot order is `NVMe0:USBHDD`, the only devices this laptop can boot from. In
 
 Secrets live in Bitwarden, and the repo holds only references to them, so nothing secret is published, not even as ciphertext. `fnox.toml` maps each one to a field of the `dotfiles-repository` secure note, as `dotfiles-repository/NAME`, and `[bootstrap.secrets]` in `mise.toml` declares the names the templates read with `{{ secret(name="NAME") }}`. `fnox exec -- mise bootstrap` reads them through the `bw` CLI, which needs `BW_SESSION` from `bw unlock --raw`, and hands them to mise as environment variables for that run only.
 
-A project file that must sit at a fixed path goes the same way: `~/fcode/<project>/config/master.key`, the development credentials key of patoumatic and crooz, renders from `fcode/<project>/config/master.key.tmpl` with the `<project>-repository` note's `RAILS_DEVELOPMENT_KEY`. skyblip's Rails app lives in `server/`, so its key goes the same way one level down, as `~/fcode/skyblip/server/config/master.key`. Its entry sets `permissions = "0600"`, since a rendered file would otherwise take its source's mode, and git tracks only the exec bit. The project has to be cloned first, or the entry creates `~/fcode/<project>/config/` and the clone then refuses a non-empty directory.
+A project file that must sit at a fixed path goes the same way: `~/fcode/<project>/config/master.key`, the development credentials key of patoumatic and crooz, renders from `fcode/<project>/config/master.key.tmpl` with the `<project>-repository` note's `RAILS_DEVELOPMENT_KEY`. skyblip's Rails app lives in `server/`, so its key goes the same way one level down, as `~/fcode/skyblip/server/config/master.key`. vps-ansible's `inventory.yml`, which that repo git-ignores because it names real machines, renders whole from the `vps-ansible-repository` note's `INVENTORY`: edit the note, not the rendered file, or the next apply overwrites it. Its entry sets `permissions = "0600"`, since a rendered file would otherwise take its source's mode, and git tracks only the exec bit. The project has to be cloned first, or the entry creates `~/fcode/<project>/config/` and the clone then refuses a non-empty directory.
 
 Without fnox, a template reading a secret fails to render, and `mise bootstrap` stops before writing anything, so a missing secret never leaves a half-written file. `mise bootstrap secrets status` lists which ones the environment holds, without printing them.
 

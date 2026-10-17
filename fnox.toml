@@ -21,3 +21,4 @@ SCALEWAY_PROJECT_ID = { provider = "bitwarden", value = "dotfiles-repository/SCA
 PATOUMATIC_RAILS_DEVELOPMENT_KEY = { provider = "bitwarden", value = "patoumatic-repository/RAILS_DEVELOPMENT_KEY" }
 CROOZ_RAILS_DEVELOPMENT_KEY = { provider = "bitwarden", value = "crooz-repository/RAILS_DEVELOPMENT_KEY" }
 SKYBLIP_RAILS_DEVELOPMENT_KEY = { provider = "bitwarden", value = "skyblip-repository/RAILS_DEVELOPMENT_KEY" }
+VPS_ANSIBLE_INVENTORY = { provider = "bitwarden", value = "vps-ansible-repository/INVENTORY" }

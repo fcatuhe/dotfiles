@@ -26,6 +26,7 @@ enabled = true
 "~/fcode/patoumatic" = { url = "git@github.com:fcatuhe/patoumatic.git" }
 "~/fcode/pi-wares" = { url = "git@github.com:fcatuhe/pi-wares.git" }
 "~/fcode/skyblip" = { url = "git@github.com:fcatuhe/skyblip.git" }
+"~/fcode/vps-ansible" = { url = "git@github.com:fcatuhe/vps-ansible.git" }
 
 [bootstrap.secrets]
 PATOUMATIC_SERVER_IP = "PATOUMATIC_SERVER_IP"
@@ -43,6 +44,7 @@ SCALEWAY_PROJECT_ID = "SCALEWAY_PROJECT_ID"
 PATOUMATIC_RAILS_DEVELOPMENT_KEY = "PATOUMATIC_RAILS_DEVELOPMENT_KEY"
 CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
 SKYBLIP_RAILS_DEVELOPMENT_KEY = "SKYBLIP_RAILS_DEVELOPMENT_KEY"
+VPS_ANSIBLE_INVENTORY = "VPS_ANSIBLE_INVENTORY"
 
 [dotfiles]
 "~/.XCompose" = {}
@@ -91,6 +93,7 @@ SKYBLIP_RAILS_DEVELOPMENT_KEY = "SKYBLIP_RAILS_DEVELOPMENT_KEY"
 "~/fcode/crooz/config/master.key" = { source = "fcode/crooz/config/master.key.tmpl", mode = "template", permissions = "0600" }
 "~/fcode/patoumatic/config/master.key" = { source = "fcode/patoumatic/config/master.key.tmpl", mode = "template", permissions = "0600" }
 "~/fcode/skyblip/server/config/master.key" = { source = "fcode/skyblip/server/config/master.key.tmpl", mode = "template", permissions = "0600" }
+"~/fcode/vps-ansible/inventory.yml" = { source = "fcode/vps-ansible/inventory.yml.tmpl", mode = "template", permissions = "0600" }
 
 # Run by mise bootstrap, once the dotfiles are in place
 [tasks.bootstrap]
