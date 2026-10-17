@@ -8,8 +8,19 @@ Nothing here is secret, so the server needs neither Bitwarden nor fnox.
 
 Over SSH as francois, who has sudo and lingers, so the user units run without a login session. mise and herdr come from their own installers, in `~/.local/bin`.
 
+GitHub goes over SSH, with a key of azade's own, never the laptop's Bitwarden one. Pin GitHub's host keys from its API, then add the public key on GitHub twice, as an authentication key and as a signing key. `gh auth login -w` prints a code to enter at github.com/login/device from any computer.
+
 ```bash
-git clone -b azade https://github.com/fcatuhe/dotfiles.git ~/.dotfiles
+ssh-keygen -t ed25519 -N '' -C 'francois@azade' -f ~/.ssh/id_ed25519
+curl -fsS https://api.github.com/meta | python3 -c 'import json,sys; [print("github.com", k) for k in json.load(sys.stdin)["ssh_keys"]]' >> ~/.ssh/known_hosts
+sudo apt install gh
+gh auth login -h github.com -p ssh -w
+```
+
+Then:
+
+```bash
+git clone -b azade git@github.com:fcatuhe/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 mise trust
 mise bootstrap
