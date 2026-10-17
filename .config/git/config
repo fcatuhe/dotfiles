@@ -1,0 +1,51 @@
+# See https://git-scm.com/docs/git-config
+
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	sweep = "!f() { \
+		default=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null) || { echo 'sweep: origin/HEAD unset, run: git remote set-head origin --auto' >&2; return 1; }; \
+		default=${default#origin/}; \
+		git checkout -q \"$default\" || return 1; \
+		git for-each-ref --format='%(refname:short)' --merged \"$default\" refs/heads/ | grep -vxF \"$default\" | xargs -r -n1 git branch -d; \
+		git for-each-ref --format='%(refname:short)' refs/heads/ | grep -vxF \"$default\" | while read -r branch; do \
+			base=$(git merge-base \"$default\" \"$branch\") || continue; \
+			squashed=$(git commit-tree \"$branch^{tree}\" -p \"$base\" -m _); \
+			case $(git cherry \"$default\" \"$squashed\") in -*) git branch -D \"$branch\";; esac; \
+		done; \
+		git remote prune origin; \
+	}; f"
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true 			 # Rebase (instead of merge) on pull
+[push]
+	autoSetupRemote = true   # Automatically set upstream branch on push
+[diff]
+	algorithm = histogram    # Clearer diffs on moved/edited lines
+	colorMoved = plain       # Highlight moved blocks in diffs
+	mnemonicPrefix = true    # More intuitive refs in diff output
+[commit]
+	verbose = true           # Include diff comment in commit message template
+	gpgsign = true           # Sign every commit with the ssh key below
+[column]
+	ui = auto 			     # Output in columns when possible
+[branch]
+	sort = -committerdate    # Sort branches by most recent commit first
+[tag]
+	sort = -version:refname  # Sort version numbers as you would expect
+[rerere]
+	enabled = true           # Record and reuse conflict resolutions
+	autoupdate = true        # Apply stored conflict resolutions automatically
+[user]
+	name = François Catuhe
+	email = francois@hey.com
+	signingkey = ~/.ssh/id_ed25519
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+[include]
+	path = ~/.pi/agent/git/github.com/fcatuhe/pi-wares/config/git/config  # git wt, from pi-wares

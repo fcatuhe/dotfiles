@@ -33,6 +33,8 @@ fingerprint = "2596 A99E AAB3 3821 893C  0A79 458C A832 957F 5868"
 "~/.oh-my-zsh" = { url = "https://github.com/ohmyzsh/ohmyzsh.git" }
 
 [dotfiles]
+"~/.config/git/allowed_signers" = {}
+"~/.config/git/config" = {}
 "~/.config/herdr/config.toml" = {}
 "~/.config/mise/config.toml" = {}
 "~/.config/shell/aliases" = {}

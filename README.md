@@ -45,6 +45,10 @@ zsh inside herdr, bash everywhere else. `default_shell` in `~/.config/herdr/conf
 
 The herdr config is the one azade already had, with the Mac chords, plus `default_shell`. Reload it with `prefix+q`. Panes opened before keep bash.
 
+## Git
+
+`~/.config/git/config` is the laptop's, except that it signs with the file `~/.ssh/id_ed25519`, since the server has no SSH agent to hold the key. `allowed_signers` lists both keys, the laptop's and azade's, so `git log --show-signature` verifies commits from either machine.
+
 ## Browser
 
 Brave Origin from Brave's apt repository, which builds it for arm64. agent-browser drives it headed on display `:99`, through the pi-wares `agent-browser` skill, whose `setup.sh` writes `~/.agent-browser/config.json` once.
