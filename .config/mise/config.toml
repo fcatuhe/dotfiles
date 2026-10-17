@@ -2,3 +2,4 @@
 node = "latest"
 "npm:agent-browser" = "latest"
 pi = { version = "latest", minimum_release_age = "0" }
+ruby = "4.0.7"
