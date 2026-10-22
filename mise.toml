@@ -85,6 +85,7 @@ VPS_ANSIBLE_INVENTORY = "VPS_ANSIBLE_INVENTORY"
 "~/.config/xkb/rules/evdev.xml" = {}
 "~/.config/xkb/symbols/frenchy" = {}
 "~/.config/xkb/types/frenchy" = {}
+"~/.local/bin/webapp-handler-office" = {}
 "~/.pi/agent/keybindings.json" = {}
 "~/.pi/agent/mcp.json" = {}
 "~/.pi/agent/settings.json" = {}
@@ -195,6 +196,14 @@ run = [
   "sudo sed -i -E -e '/^quiet:/d' -e 's/^#?timeout:.*/timeout: 1\\nquiet: yes/' /boot/limine.conf",
   "sudo grep -qx 'timeout: 1' /boot/limine.conf",
   "sudo grep -qx 'quiet: yes' /boot/limine.conf",
+]
+
+# Microsoft 365 web apps in Chrome, whose Default profile holds the Ridecell account, opening the Office files
+[tasks."setup:office-webapps"]
+run = [
+  "omarchy-webapp-install Word https://word.cloud.microsoft/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-word.png 'webapp-handler-office word %f' 'application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/msword;'",
+  "omarchy-webapp-install Excel https://excel.cloud.microsoft/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-excel.png 'webapp-handler-office excel %f' 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;application/vnd.ms-excel;'",
+  "omarchy-webapp-install PowerPoint https://powerpoint.cloud.microsoft/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-powerpoint.png 'webapp-handler-office powerpoint %f' 'application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.ms-powerpoint;'",
 ]
 
 [tasks."setup:power-profile"]

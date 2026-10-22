@@ -1,0 +1,21 @@
+#!/bin/bash
+
+app="$1"
+file="$2"
+
+case $app in
+word | excel | powerpoint) ;;
+*)
+  echo "Usage: webapp-handler-office <word|excel|powerpoint> [file]" >&2
+  exit 1
+  ;;
+esac
+
+# INFO: fc 22oct26 Office web apps cannot open a local file, so its path goes to the clipboard for Upload
+if [[ -n $file ]]; then
+  path=$(realpath -- "$file")
+  printf '%s' "$path" | wl-copy
+  notify-send "$(basename -- "$path") path copied" "Click Upload, then Ctrl+L and Ctrl+V in the file dialog"
+fi
+
+exec google-chrome-stable --profile-directory=Default --app="https://$app.cloud.microsoft/"
