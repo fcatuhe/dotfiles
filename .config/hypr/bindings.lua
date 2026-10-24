@@ -1,8 +1,8 @@
 -- Keep only your personal keybinding overrides here. Add new bindings or
 -- unbind defaults before replacing them.
 
--- INFO: fc 11sep26 Shift + Caps Lock moves the digit lock, which Hyprland raises no event for
-hl.bind("Multi_key", hl.dsp.event("digitlock"), { non_consuming = true, release = true, ignore_mods = true })
+-- INFO: fc 11sep26 AltGr + Caps Lock moves the digit lock, which Hyprland raises no event for
+hl.bind("Caps_Lock", hl.dsp.event("digitlock"), { non_consuming = true, release = true, ignore_mods = true })
 
 -- INFO: fc 25sep26 the ThinkPad star key reports press and release together, so it can only toggle
 o.bind("XF86Favorites", "Toggle dictation", "voxtype record toggle")

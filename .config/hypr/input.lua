@@ -1,12 +1,11 @@
 -- Keep only your personal input overrides here. Uncommented settings below
 -- replace Omarchy's defaults.
 
--- INFO: fc 30sep26 no shift:both_capslock_cancel, frenchy(shiftlock) does it without the Caps_Lock keysym that breaks Xwayland's Shift
 hl.config({
   input = {
     kb_layout = "frenchy,us",
     kb_variant = "ansi,",
-    kb_options = "compose:caps,grp:ctrls_toggle,frenchy:digitlock",
+    kb_options = "omarchy:shift_caps_compose,grp:ctrls_toggle,frenchy:digitlock",
     numlock_by_default = false,
   },
 })

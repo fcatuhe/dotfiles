@@ -36,7 +36,7 @@
       <option>
         <configItem>
           <name>frenchy:digitlock</name>
-          <description>Digit row on the Num Lock state, locked by Shift + Caps Lock</description>
+          <description>Digit row on the Num Lock state, locked by AltGr + Caps Lock</description>
         </configItem>
       </option>
     </group>
