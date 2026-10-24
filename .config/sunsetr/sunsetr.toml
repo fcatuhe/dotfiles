@@ -35,5 +35,5 @@ transition_duration = 45
 
 #[Geolocation]
 # See https://psi4j.github.io/sunsetr/configuration/geographic.html
-latitude = 48.853410
-longitude = 2.348800
+latitude = 44.833333
+longitude = -0.566667
