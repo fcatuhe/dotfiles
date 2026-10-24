@@ -71,6 +71,7 @@ VPS_ANSIBLE_INVENTORY = "VPS_ANSIBLE_INVENTORY"
 "~/.config/omarchy/plugins/francois.power/Model.js" = {}
 "~/.config/omarchy/plugins/francois.power/Panel.qml" = {}
 "~/.config/omarchy/plugins/francois.power/manifest.json" = {}
+"~/.config/omarchy/plugins/francois.power/omarchy-battery-charge-limit" = {}
 "~/.config/omarchy/plugins/francois.updates/Service.qml" = {}
 "~/.config/omarchy/plugins/francois.updates/Updates.qml" = {}
 "~/.config/omarchy/plugins/francois.updates/manifest.json" = {}

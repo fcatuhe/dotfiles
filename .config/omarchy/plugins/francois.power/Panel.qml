@@ -21,12 +21,15 @@ Panel {
   property int profileIndex: 0
   property bool cursorActive: false
   property bool chargeLimitOn: false
-  property bool chargeLimitKnown: false
+  property int chargeLimitEnd: 0
+  readonly property bool chargeLimitAvailable: chargeLimitEnd > 0 && chargeLimitEnd < 100
   property int chargeLimitIndex: 0
   property string cursorSection: "profiles"
-  readonly property var chargeLimitOptions: ["80%", "100%"]
-  property string chargeLimitError: ""
-  readonly property string upowerBattery: "/org/freedesktop/UPower/devices/battery_BAT0"
+  readonly property var chargeLimitOptions: [chargeLimitEnd + "%", "100%"]
+  property string chargeLimitReadError: ""
+  property string chargeLimitSetError: ""
+  property bool discardChargeLimitRead: false
+  readonly property string chargeLimitCommand: decodeURIComponent(String(Qt.resolvedUrl("omarchy-battery-charge-limit")).replace(/^file:\/\//, ""))
   readonly property bool showPercentage: setting("showPercentage", false) === true
   // With the percentage shown the button paints a text block wider than an
   // icon, so the open-panel mark takes the painted width instead of the
@@ -57,23 +60,26 @@ Panel {
 
   function moveCursor(dx, dy) {
     if (!cursorActive) { cursorActive = true; return }
-    if (chargeLimitKnown && dy !== 0) {
-      cursorSection = dy < 0 ? "chargeLimit" : "profiles"
+    if (chargeLimitAvailable && dy !== 0) {
+      if (dy < 0 && cursorSection !== "chargeLimit") {
+        cursorSection = "chargeLimit"
+        chargeLimitIndex = chargeLimitOn ? 0 : 1
+      } else if (dy > 0) {
+        cursorSection = "profiles"
+      }
       return
     }
-    if (cursorSection === "chargeLimit") chargeLimitIndex = Math.max(0, Math.min(1, chargeLimitIndex + dx))
-    else selectProfileByDelta(dx)
+    if (cursorSection === "chargeLimit") chargeLimitIndex = Math.max(0, Math.min(chargeLimitOptions.length - 1, chargeLimitIndex + dx))
+    else selectProfileByDelta(dx !== 0 ? dx : dy)
   }
 
   function activateCursor() {
     if (!cursorActive) return
-    if (cursorSection === "chargeLimit") chooseChargeLimit(chargeLimitOptions[chargeLimitIndex])
+    if (cursorSection === "chargeLimit" && chargeLimitAvailable) setChargeLimit(chargeLimitIndex === 0)
     else activateSelectedProfile()
   }
 
-  function chooseChargeLimit(option) {
-    if ((option === "80%") !== chargeLimitOn) toggleChargeLimit()
-  }
+  onChargeLimitAvailableChanged: if (!chargeLimitAvailable && cursorSection === "chargeLimit") cursorSection = "profiles"
 
   function batteryIcon() {
     var device = UPower.displayDevice
@@ -166,22 +172,22 @@ Panel {
     if (!batteryProc.running) batteryProc.running = true
     if (!profilesProc.running) profilesProc.running = true
     if (!systemProc.running) systemProc.running = true
-    if (!chargeLimitProc.running) chargeLimitProc.running = true
+    if (!chargeLimitProc.running && !chargeLimitSetProc.running) chargeLimitProc.running = true
   }
 
   function updateChargeLimit(raw) {
-    var value = String(raw || "").trim()
-    if (value !== "b true" && value !== "b false") return
-    chargeLimitOn = value === "b true"
-    chargeLimitKnown = true
+    var info = Model.parseKeyValue(raw)
+    chargeLimitOn = info.limit === "on"
+    chargeLimitEnd = parseInt(info.end, 10) || 0
   }
 
-  function toggleChargeLimit() {
-    if (chargeLimitToggleProc.running) return
-    chargeLimitError = ""
-    chargeLimitToggleProc.command = ["busctl", "--system", "call", "org.freedesktop.UPower", upowerBattery,
-      "org.freedesktop.UPower.Device", "EnableChargeThreshold", "b", chargeLimitOn ? "false" : "true"]
-    chargeLimitToggleProc.running = true
+  function setChargeLimit(on) {
+    if (chargeLimitSetProc.running) return
+    chargeLimitSetError = ""
+    // A read started before this change would land after it with the old state.
+    if (chargeLimitProc.running) discardChargeLimitRead = true
+    chargeLimitSetProc.command = [chargeLimitCommand, on ? "on" : "off"]
+    chargeLimitSetProc.running = true
   }
 
   function updateKeyValue(raw, targetName) {
@@ -275,15 +281,24 @@ Panel {
 
   Process {
     id: chargeLimitProc
-    command: ["busctl", "--system", "get-property", "org.freedesktop.UPower", root.upowerBattery,
-      "org.freedesktop.UPower.Device", "ChargeThresholdEnabled"]
-    stdout: StdioCollector { waitForEnd: true; onStreamFinished: root.updateChargeLimit(text) }
-    stderr: StdioCollector { waitForEnd: true; onStreamFinished: if (text.trim() !== "") root.chargeLimitError = text.trim() }
+    command: [root.chargeLimitCommand]
+    stdout: StdioCollector {
+      waitForEnd: true
+      onStreamFinished: {
+        if (root.discardChargeLimitRead) {
+          root.discardChargeLimitRead = false
+          return
+        }
+        root.updateChargeLimit(text)
+      }
+    }
+    stderr: StdioCollector { waitForEnd: true; onStreamFinished: root.chargeLimitReadError = text.trim() }
   }
 
   Process {
-    id: chargeLimitToggleProc
-    stderr: StdioCollector { waitForEnd: true; onStreamFinished: if (text.trim() !== "") root.chargeLimitError = text.trim() }
+    id: chargeLimitSetProc
+    stdout: StdioCollector { waitForEnd: true; onStreamFinished: if (text.trim() !== "") root.updateChargeLimit(text) }
+    stderr: StdioCollector { waitForEnd: true; onStreamFinished: root.chargeLimitSetError = text.trim() }
     onExited: root.refresh()
   }
 
@@ -505,7 +520,7 @@ Panel {
             }
 
             Item {
-              visible: root.chargeLimitKnown
+              visible: root.chargeLimitAvailable
               width: parent.width
               implicitHeight: chargeLimitChoice.implicitHeight
 
@@ -521,7 +536,7 @@ Panel {
                 anchors.verticalCenter: parent.verticalCenter
                 spacing: Style.space(6)
                 options: root.chargeLimitOptions
-                value: root.chargeLimitOn ? "80%" : "100%"
+                value: root.chargeLimitOptions[root.chargeLimitOn ? 0 : 1]
                 focusable: false
                 cursorIndex: root.cursorActive && root.cursorSection === "chargeLimit" ? root.chargeLimitIndex : -1
                 onHovered: function(index, h) {
@@ -535,18 +550,18 @@ Panel {
                 background: "transparent"
                 fontFamily: root.bar.fontFamily
                 fontSize: Style.font.bodySmall
-                onChanged: function(v) { root.chooseChargeLimit(v) }
+                onChanged: function(v) { root.setChargeLimit(root.chargeLimitOptions.indexOf(v) === 0) }
               }
             }
           }
         }
 
         Text {
-          visible: root.chargeLimitError !== ""
+          visible: text !== ""
           width: parent.width
           textFormat: Text.PlainText
-          text: root.chargeLimitError
-          color: Commons.Color.urgent
+          text: root.chargeLimitSetError || root.chargeLimitReadError
+          color: root.bar.urgent
           font.family: root.bar.fontFamily
           font.pixelSize: Style.font.caption
           wrapMode: Text.WordWrap
