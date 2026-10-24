@@ -4,7 +4,7 @@ node = "latest"
 "npm:@kitlangton/ghui" = { version = "latest", allow_low_downloads = true }
 "npm:agent-browser" = "latest"
 pi = { version = "latest", minimum_release_age = "0" }
-ruby = "4.0.7"
+ruby = "4.0.9"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
