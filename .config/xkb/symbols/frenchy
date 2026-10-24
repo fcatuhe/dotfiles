@@ -51,6 +51,10 @@ xkb_symbols "ansi" {
     key <AB09> { [ comma           , periodcentered ] };
     key <AB10> { [ colon           , semicolon ] };
     key <SPCE> { [ space           , space           , nobreakspace    , U202F ] };
+    key <CAPS> { type[Group1] = "FOUR_LEVEL", symbols[Group1] = [ Caps_Lock, Multi_key, ISO_Level5_Lock ], actions[Group1] = [ LockMods(modifiers=Lock), NoAction(), LockMods(modifiers=NumLock) ] };
+    key <LFSH> { [ Shift_L ] };
+    key <RTSH> { [ Shift_R ] };
+
     include "level3(ralt_switch)"
     include "keypad(oss)"
 };
@@ -69,5 +73,5 @@ xkb_symbols "iso" {
 partial modifier_keys
 xkb_symbols "digitlock" {
 
-    key <CAPS> { type[Group1] = "FOUR_LEVEL", symbols[Group1] = [ NoSymbol, NoSymbol, ISO_Level5_Lock, ISO_Level5_Lock ], actions[Group1] = [ NoAction(), NoAction(), LockMods(modifiers=NumLock), LockMods(modifiers=NumLock) ] };
+    key <CAPS> { type[Group1] = "FOUR_LEVEL", symbols[Group1] = [ Caps_Lock, Multi_key, ISO_Level5_Lock ], actions[Group1] = [ LockMods(modifiers=Lock), NoAction(), LockMods(modifiers=NumLock) ] };
 };
