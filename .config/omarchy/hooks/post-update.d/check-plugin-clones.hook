@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+catalog=$(omarchy-plugin-catalog)
+
+for upstream in ~/.dotfiles/.config/omarchy/plugins/*/upstream; do
+  clone=$(dirname "$upstream")
+  source_id=$(jq -r .omarchy.clonedFrom "$clone/manifest.json")
+  read -r source_dir source_manifest < <(jq -r --arg id "$source_id" '.[] | select(.id == $id) | [.sourceDir, .manifestPath] | @tsv' <<<"$catalog")
+
+  for file in "$upstream"/*; do
+    name=$(basename "$file")
+    [[ $name == manifest.json ]] && current=$source_manifest || current=$source_dir/$name
+    cmp --quiet "$file" "$current" && continue
+
+    echo "$source_id changed upstream: git merge-file $clone/$name $file $current, then cp $current $file"
+    omarchy-notification-send -u critical "Plugin clone out of date" "$source_id changed $name"
+  done
+done

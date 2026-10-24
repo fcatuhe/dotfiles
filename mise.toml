@@ -64,6 +64,7 @@ VPS_ANSIBLE_INVENTORY = "VPS_ANSIBLE_INVENTORY"
 "~/.config/mimeapps.list" = { mode = "copy" }
 "~/.config/mise/config.toml" = {}
 "~/.config/omarchy/defaults/agent" = {}
+"~/.config/omarchy/hooks/post-update.d/check-plugin-clones.hook" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayout.qml" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/KeyboardLayoutModel.js" = {}
 "~/.config/omarchy/plugins/francois.keyboard-layout/manifest.json" = {}
