@@ -47,6 +47,8 @@ PATOUMATIC_RAILS_DEVELOPMENT_KEY = "PATOUMATIC_RAILS_DEVELOPMENT_KEY"
 CROOZ_RAILS_DEVELOPMENT_KEY = "CROOZ_RAILS_DEVELOPMENT_KEY"
 SKYBLIP_RAILS_DEVELOPMENT_KEY = "SKYBLIP_RAILS_DEVELOPMENT_KEY"
 VPS_ANSIBLE_INVENTORY = "VPS_ANSIBLE_INVENTORY"
+SLACK_RIDECELL_MCP_CLIENT_ID = "SLACK_RIDECELL_MCP_CLIENT_ID"
+SLACK_RIDECELL_MCP_CLIENT_SECRET = "SLACK_RIDECELL_MCP_CLIENT_SECRET"
 
 [dotfiles]
 "~/.XCompose" = {}
@@ -94,7 +96,7 @@ VPS_ANSIBLE_INVENTORY = "VPS_ANSIBLE_INVENTORY"
 "~/.config/xkb/types/frenchy" = {}
 "~/.local/bin/webapp-handler-office" = {}
 "~/.pi/agent/keybindings.json" = {}
-"~/.pi/agent/mcp.json" = {}
+"~/.pi/agent/mcp.json" = { source = ".pi/agent/mcp.json.tmpl", mode = "template", permissions = "0600" }
 "~/.pi/agent/settings.json" = {}
 "~/.ssh/config" = { source = ".ssh/config.tmpl", mode = "template", permissions = "0600" }
 "~/.zshrc" = {}

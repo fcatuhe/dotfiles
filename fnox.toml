@@ -24,3 +24,5 @@ PATOUMATIC_RAILS_DEVELOPMENT_KEY = { provider = "bitwarden", value = "patoumatic
 CROOZ_RAILS_DEVELOPMENT_KEY = { provider = "bitwarden", value = "crooz-repository/RAILS_DEVELOPMENT_KEY" }
 SKYBLIP_RAILS_DEVELOPMENT_KEY = { provider = "bitwarden", value = "skyblip-repository/RAILS_DEVELOPMENT_KEY" }
 VPS_ANSIBLE_INVENTORY = { provider = "bitwarden", value = "vps-ansible-repository/INVENTORY" }
+SLACK_RIDECELL_MCP_CLIENT_ID = { provider = "bitwarden", value = "dotfiles-repository/SLACK_RIDECELL_MCP_CLIENT_ID" }
+SLACK_RIDECELL_MCP_CLIENT_SECRET = { provider = "bitwarden", value = "dotfiles-repository/SLACK_RIDECELL_MCP_CLIENT_SECRET" }
