@@ -1,11 +1,11 @@
 [tools]
 "aqua:modem-dev/hunk" = "latest"
 bun = "latest"
-codex = "latest"
 fnox = "latest"
 gh = "latest"
 "github:basecamp/hey-cli" = "latest"
 "github:getpaseo/paseo" = { version = "latest", asset_pattern = "Paseo-*-x64.tar.gz", strip_components = 1, bin_path = "resources/bin" }
+"github:steipete/gogcli" = "latest"
 herdr = "latest"
 node = "latest"
 npm = "latest"
