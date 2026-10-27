@@ -1,6 +1,6 @@
 {
   "theme": "omarchy-system",
-  "lastChangelogVersion": "1.3.0",
+  "lastChangelogVersion": "1.4.0",
   "packages": [
     {
       "source": "git:github.com/fcatuhe/pi-wares",
@@ -17,7 +17,9 @@
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
-  "defaultTools": ["+codemode"],
+  "defaultTools": [
+    "+codemode"
+  ],
   "warnings": {
     "anthropicExtraUsage": false
   },
