@@ -22,15 +22,17 @@ It refuses to replace a file already in `$HOME`, such as a `~/.config/mise/confi
 
 1. Adds Tailscale's apt repository in `/etc/apt/sources.list.d/mise-tailscale.sources`, then installs `tailscale`, whose package enables `tailscaled`.
 2. Applies `[dotfiles]`.
-3. Installs the mise tools.
-4. Runs `setup:tailscale-operator`, so francois runs `tailscale serve` without sudo, as patoumatic's `bin/dev --tailscale` does.
+3. Writes the `dev.mise.mise-upgrade` user service and its timer, at 04:00 Paris time. It runs `mise upgrade` from the home directory, so it upgrades the global tools and leaves the versions that projects pin alone. Then it restarts the Paseo daemon when the daemon runs an older version than the one installed, which interrupts the agents running at that time. mise removes the replaced versions 24 hours later. francois lingers, so the timer runs without a login session.
+4. Installs the mise tools.
+5. Runs `setup:tailscale-operator`, so francois runs `tailscale serve` without sudo, as patoumatic's `bin/dev --tailscale` does.
 
-vps-ansible must not declare the Tailscale repository in `apt_repositories` for this host: apt refuses two sources for the same URL signed by different keyrings.
+vps-ansible must not declare the Tailscale repository in `apt_repositories` for this host: apt refuses two sources for the same URL signed by different keyrings. It lists `origin=Tailscale` in `security_autoupdate_origins` instead, so unattended-upgrades installs new Tailscale releases daily with the Debian packages.
 
 ## Commands
 
 ```bash
 mise bootstrap dotfiles status   # what is out of sync
 mise bootstrap plan              # what an apply would change
-mise bootstrap packages upgrade  # upgrade tailscale from its repository
+systemctl --user list-timers     # when the next mise upgrade runs
+journalctl --user -u dev.mise.mise-upgrade   # what the last ones upgraded
 ```

@@ -12,6 +12,21 @@ fingerprint = "2596 A99E AAB3 3821 893C  0A79 458C A832 957F 5868"
 [dotfiles]
 "~/.config/mise/config.toml" = {}
 
+# The global tools only, from the home directory: projects pin their own versions. Paseo restarts when the daemon runs an older version than the one installed
+[bootstrap.linux.systemd.units.mise-upgrade]
+description = "Upgrade the global mise tools"
+type = "oneshot"
+exec_start = "/usr/bin/mise upgrade"
+exec_start_post = ['''/bin/sh -c 'test "$$(%h/.local/share/mise/shims/paseo daemon status --json | jq -r .daemonVersion)" = "$$(%h/.local/share/mise/shims/paseo --version)" || systemctl --user restart paseo'''']
+start = false
+wanted_by = []
+
+[bootstrap.linux.systemd.units.mise-upgrade-daily]
+description = "Upgrade the global mise tools daily"
+on_calendar = "*-*-* 04:00 Europe/Paris"
+persistent = true
+unit = "mise-upgrade"
+
 # Run by mise bootstrap, once the dotfiles are in place
 [tasks.bootstrap]
 depends = ["setup:*"]
