@@ -22,7 +22,7 @@ DELAY_RANGE=0
 UMASK=0022
 """
 
-# Samples every minute instead of every 10, so short peaks show
+# Samples on each minute instead of every 10, so short peaks show and every sample covers the same 60 seconds
 [bootstrap.directories."/etc/systemd/system/sysstat-collect.timer.d"]
 
 [bootstrap.files."/etc/systemd/system/sysstat-collect.timer.d/every-minute.conf"]
@@ -30,6 +30,7 @@ content = """
 [Timer]
 OnCalendar=
 OnCalendar=*:*:00
+AccuracySec=1s
 """
 notify = ["sysstat-collect.timer"]
 
