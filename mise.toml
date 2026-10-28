@@ -41,6 +41,8 @@ enabled = true
 on_change = "restart"
 
 [dotfiles]
+"~/.config/git/allowed_signers" = {}
+"~/.config/git/config" = {}
 "~/.config/mise/config.toml" = {}
 
 # The global tools only, from the home directory: projects pin their own versions. Paseo restarts when the daemon runs an older version than the one installed

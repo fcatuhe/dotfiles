@@ -1,6 +1,6 @@
 # Dotfiles
 
-fc-agents, a Debian trixie arm64 VPS where agents run through Paseo and pi, symlinked by [mise](https://mise.jdx.dev/) `[dotfiles]`. See `mise.toml` for what maps where. The `main` branch is the Omarchy laptop, laid out the same way, and this branch keeps only what the server needs: the global mise tools, Tailscale and sysstat.
+fc-agents, a Debian trixie arm64 VPS where agents run through Paseo and pi, symlinked by [mise](https://mise.jdx.dev/) `[dotfiles]`. See `mise.toml` for what maps where. The `main` branch is the Omarchy laptop, laid out the same way, and this branch keeps only what the server needs: the global mise tools, Tailscale, sysstat and git commit signing with the server's `~/.ssh/id_ed25519` key.
 
 Nothing here is secret, so the server needs neither Bitwarden nor fnox.
 
