@@ -8,6 +8,36 @@ fingerprint = "2596 A99E AAB3 3821 893C  0A79 458C A832 957F 5868"
 
 [bootstrap.packages]
 "apt:tailscale" = "latest"
+"apt:sysstat" = "latest"
+
+# Keeps 28 days of system activity, read with sar, to size the server from its RAM and CPU history
+[bootstrap.files."/etc/sysstat/sysstat"]
+content = """
+HISTORY=28
+COMPRESSAFTER=10
+SADC_OPTIONS="-S DISK"
+SA_DIR=/var/log/sysstat
+ZIP="xz"
+DELAY_RANGE=0
+UMASK=0022
+"""
+
+# Samples every minute instead of every 10, so short peaks show
+[bootstrap.directories."/etc/systemd/system/sysstat-collect.timer.d"]
+
+[bootstrap.files."/etc/systemd/system/sysstat-collect.timer.d/every-minute.conf"]
+content = """
+[Timer]
+OnCalendar=
+OnCalendar=*:*:00
+"""
+notify = ["sysstat-collect.timer"]
+
+[bootstrap.services.sysstat]
+enabled = true
+
+[bootstrap.services."sysstat-collect.timer"]
+on_change = "restart"
 
 [dotfiles]
 "~/.config/mise/config.toml" = {}
