@@ -1,167 +1,36 @@
 # Dotfiles
 
-Omarchy laptop, symlinked by [mise](https://mise.jdx.dev/) `[dotfiles]`. See `mise.toml` for what maps where.
+fc-agents, a Debian trixie arm64 VPS where agents run through Paseo and pi, symlinked by [mise](https://mise.jdx.dev/) `[dotfiles]`. See `mise.toml` for what maps where. The `main` branch is the Omarchy laptop, laid out the same way, and this branch keeps only what the server needs: the global mise tools and Tailscale.
 
-The repo lives at mise's default `dotfiles.root` and mirrors `$HOME`, so `.config/tmux/tmux.conf` here is `~/.config/tmux/tmux.conf` there and an entry needs no `source`.
-
-Only files that diverge from Omarchy's install templates are tracked. The rest of `~/.config/hypr/` is pristine, so tracking it would only cause conflicts on `omarchy update`.
+Nothing here is secret, so the server needs neither Bitwarden nor fnox.
 
 ## Apply
 
-On a new computer, do these steps in this sequence.
+vps-ansible provisions the host first: the francois user with sudo, the base and dev packages, and mise from its apt repository. Then, over SSH as francois:
 
-1. Install Bitwarden.
+```bash
+gh repo clone fcatuhe/dotfiles ~/.dotfiles -- -b fc-agents
+cd ~/.dotfiles
+mise trust
+mise bootstrap
+tailscale up
+```
 
-   ```bash
-   omarchy-pkg-add bitwarden bitwarden-cli
-   ```
-
-2. Open the Bitwarden app. Log in to the `bitwarden.eu` region. In the settings, turn on the SSH agent and "Unlock with system authentication".
-
-3. Log in to the Bitwarden CLI and unlock the vault. If Bitwarden blocks the new device, use `bw login --apikey` with the personal API key (web vault, Settings, Security, Keys).
-
-   ```bash
-   bw config server https://vault.bitwarden.eu
-   bw login
-   export BW_SESSION=$(bw unlock --raw)
-   ```
-
-4. Clone the dotfiles and apply them. Use the same shell as step 3.
-
-   ```bash
-   export SSH_AUTH_SOCK=~/.bitwarden-ssh-agent.sock
-   git clone git@github.com:fcatuhe/dotfiles.git ~/.dotfiles
-   cd ~/.dotfiles
-   mise trust
-   mise x fnox -- fnox exec -- mise bootstrap
-   ```
-
-5. Log out. Log in again.
-
-6. Log in to the CLIs.
-
-   ```bash
-   gh auth login
-   hey auth login
-   ol auth login
-   ```
-
-   In pi, type `/login`, then `/wares-doctor:apply` for the pi-wares model shortcuts and subagent config, which it only writes for models a login can run. To receive Stripe webhooks in patoumatic, do `stripe login --project-name development`. Log in to the sites in the agent-browser Chrome profile.
-
-7. Join the Brave Sync chain. In Brave Origin, open Settings, Sync, "I have a Sync Code", and type a code shown by another device in the chain under Settings, Sync, "Add new device". A saved code does not work, since its last word expires. Then quit Brave Origin and run `mise run brave-origin:apply` for the settings Sync skips. See [Browser](#browser) for what it brings back.
+It refuses to replace a file already in `$HOME`, such as a `~/.config/mise/config.toml` written by hand. Back it up, then rerun with `--force-dotfiles`.
 
 ### What the bootstrap does
 
-It does these steps in this sequence:
+1. Adds Tailscale's apt repository in `/etc/apt/sources.list.d/mise-tailscale.sources`, then installs `tailscale`, whose package enables `tailscaled`.
+2. Applies `[dotfiles]`.
+3. Installs the mise tools.
+4. Runs `setup:tailscale-operator`, so francois runs `tailscale serve` without sudo, as patoumatic's `bin/dev --tailscale` does.
 
-1. Installs `[bootstrap.packages]`, with sudo. The AUR packages use yay with `--noconfirm`, so read their PKGBUILD on aur.archlinux.org before the first install.
-2. Enables `[bootstrap.services]`.
-3. Clones `[bootstrap.repos]`: oh-my-zsh, and crooz, patoumatic, pi-wares, skyblip and vps-ansible in `~/fcode`. It does not move a checkout that exists.
-4. Applies `[dotfiles]`. The templates get their secrets from Bitwarden through fnox, see [Secrets](#secrets).
-5. Installs the mise tools.
-6. Runs the `setup:*` tasks. `setup:repos` does `mise trust` and `mise install` in each `~/fcode` repository, not in a third-party one like oh-my-zsh.
-
-The repositories must exist before the dotfiles, because the dotfiles write `config/master.key` into crooz, patoumatic and skyblip, and `inventory.yml` into vps-ansible.
-
-### Again, later
-
-```bash
-fnox exec -- mise bootstrap --skip-dirty        # all, but not the repositories with local changes
-fnox exec -- mise bootstrap dotfiles apply      # only the files
-fnox exec -- mise bootstrap --dry-run           # show the changes, do not apply them
-```
-
-## Shell
-
-zsh inside herdr, bash everywhere else. `default_shell` in `~/.config/herdr/config.toml` starts zsh in every herdr pane, while the login shell, Alacritty outside herdr and Omarchy's scripts stay on bash: every `omarchy-*` command carries its own `#!/bin/bash` or Python shebang, so the shell typed in never runs them.
-
-`~/.zshrc` is oh-my-zsh with its defaults, the `robbyrussell` theme and the `git` plugin, plus `mise` for activation and completions, `vscode`, whose `vsc` opens VSCodium when it is the only flavour installed, `kamal`, which prefers a project's `./bin/kamal`, and `history-substring-search`, which makes Up and Down match the typed text anywhere in a history entry rather than only at its start. The Mac setup also had `common-aliases`, `gitfast` and `last-working-dir`, dropped: the first aliases `rm` to `rm -i` among 48 others, the second only swaps in git's own completion, and the third would move a new pane that herdr opened in `~` to the last directory used. zsh-autosuggestions and zsh-syntax-highlighting come from pacman and are sourced after oh-my-zsh, highlighting last since it wraps every widget defined before it. The bootstrap installs the three packages and clones oh-my-zsh into `~/.oh-my-zsh`, where its own updater keeps it current. It asks for the sudo password.
-
-None of Omarchy's bash config reaches zsh: no starship, no zoxide, and none of its aliases and functions, the herdr and worktree helpers included. zsh was tried before through the [omarchy-zsh](https://github.com/omacom/omarchy-zsh) package and dropped, because its shared config is a build-time snapshot of [omadots](https://github.com/omacom/omadots) that lagged 4.0.1 (no `a`, `h`, `mup`), and Omarchy is tested against bash only, so features like `omarchy-cmd-terminal-cwd` break on it ([#3994](https://github.com/omacom/omarchy/issues/3994)). Keeping zsh to herdr keeps those features on bash.
-
-bash is Omarchy's own, with `shopt -s autocd` so a directory name on its own is a `cd` as it is in zsh. `~/.bashrc` sources Omarchy's `default/bash/rc` for the aliases, functions and tool init.
-
-`~/.config/shell/aliases` is what the mac's oh-my-zsh setup added on top of the plugins, sourced by both shells: `gs` for `git sweep`, and the pi and utility aliases. Environment variables live in `~/.config/uwsm/env.d/` instead, see Commands. The omz git and vscode names exist in zsh only, so bash keeps Omarchy's own `g`, `gcm`, `ga` and `gd`.
-
-## Keyboard
-
-`frenchy-clavier`, a custom AZERTY layout living in `~/.config/xkb/`, which libxkbcommon reads before the system tree so nothing has to be installed into `/usr/share/X11/xkb/`. `symbols/frenchy` has the `ansi` layout, `iso` including it and remapping the extra key, and the `digitlock` option group. `types/frenchy` defines `FRENCHY_DIGITS_LOCK`, which puts accented letters on the digit row unshifted and the digits on shift, and `rules/evdev.post` wires the option names up per layout slot, with `rules/evdev.xml` describing the layout to anything that lists layouts. A `.post` file, read since libxkbcommon 1.13, adds to the first `rules/evdev` found instead of replacing it, so Omarchy's `/etc/xkb/rules/evdev` and its `omarchy:shift_caps_compose` option stay in effect, and any other system works from its own rules.
-
-`~/.config/hypr/input.lua` selects it: `kb_layout = "frenchy,us"`, variant `ansi`, Omarchy's default options plus `grp:ctrls_toggle`, which switches layouts with both Ctrl keys, and `frenchy:digitlock`. Omarchy's option makes Caps Lock a plain Caps Lock and Shift + Caps Lock the compose key. `frenchy:digitlock` sets the whole Caps key again on every group, with the digit lock on AltGr, because Omarchy's option rewrites the first group's Caps key on two levels. The files are the output of `linux/install.sh` in `~/fcode/frenchy-clavier`, which writes through these links. It is the whole Omarchy template with the one `hl.config` block uncommented, so an `omarchy update` changing the commented documentation shows up as a conflict worth reading.
-
-The bar widget is `~/.config/omarchy/plugins/francois.keyboard-layout/`, an `omarchy plugin clone` of `omarchy.keyboard-layout` that appends `#` to the label while the digit row is locked. Hyprland raises no event for that lock, so `~/.config/hypr/bindings.lua` binds the key that moves it, AltGr + Caps Lock, to `hl.dsp.event("digitlock")`, and `KeyboardLayout.qml` refreshes on that custom event. The bind is non-consuming, or the key would no longer reach the lock it is there to move, and it fires on release with the modifiers ignored: AltGr is usually let go first, and xkb only settles the lock once the key is up. Hyprland dispatches the bind before feeding the key to xkb, but in the same handler, and answers `hyprctl` on that same thread afterwards, so the widget can ask straight away.
-
-Hyprland keeps the layout and the locks per device, and lists the headphone jack and the ThinkPad hotkeys as keyboards too, so the widget has to pick which one to describe. The stock widget guesses from the last `activelayout` event and falls back to the first device listed, which froze the `#` whenever that landed on the jack: after a shell restart, on a new monitor's bar, or when a device was re-added. `follow` in `KeyboardLayoutModel.js` compares each reading with the previous one and describes the device whose layout or lock moved, which only a keyboard being typed on does, so no name list is needed and a Bluetooth or USB keyboard is picked up the first time it switches or locks. Every refresh comes from an event, nothing polls. A click sets every device to the next layout, so they agree whichever one is read. The tests run in the shell's own JavaScript engine, which lacks newer builtins node has such as `Object.fromEntries`, with `QT_QPA_PLATFORM=offscreen /usr/lib/qt6/bin/qmltestrunner -input tst_KeyboardLayoutModel.qml` in the plugin directory, and are not linked into `~/.config`. `shell.json` names the plugin, which is why both have to be tracked together.
-
-## Browser
-
-Brave Origin, the default in `~/.config/mimeapps.list`, so links and Omarchy's web apps open in it. It is Brave without Leo, News, Rewards, Wallet, VPN, Tor and the other extras, keeping Shields, and `brave-origin-bin` comes from Omarchy's own repo.
-
-The bootstrap installs it and nothing more. `setup:brave-origin` runs `omarchy-install-browser brave-origin`, which writes Omarchy's theme color, Wayland flags and extensions, and asks for the sudo password. It then appends `BraveWebBluetoothAPI,WebBluetooth` to the `--enable-features` line of `~/.config/brave-origin-flags.conf`: Linux has no `navigator.bluetooth` without both, and a second `--enable-features` line would replace the first. The file is not tracked, since `omarchy-install-browser` overwrites it. Last, it installs `brave-origin/metrics.json` as a root-owned policy in `/etc/brave/policies/managed`, which turns crash reports off and locks them. Omarchy's policy refresh only deletes files there that root does not own.
-
-Most of the rest comes from Brave Sync, step 7, which syncs three types: bookmarks, extensions and settings. Extensions means the Bitwarden one: Omarchy's copy-url, yt-dlp and whatsapp-slim come from `--load-extension` in the flags file. Settings brings the search engines, Startpage under `:sp` among them, Brave as the private window engine, the Shields defaults, the languages, Do Not Track, and spellcheck, search suggestions, autofill and password saving off. Passwords, autofill and payments stay off because Bitwarden holds them, themes because Omarchy sets the color through its policy, and open tabs, history, reading list and tab groups because bookmarks carry what should last.
-
-Sync carries a setting only if it is on Chromium's syncable allowlist, and Brave adds only Shields, the private window search engine and a few others to that list. So vertical tabs, the new tab page, history retention, the confirmation before closing a window and everything in `Local State` stay on the machine. `Local State` holds Memory Saver, the Facebook and X embed blocking, and the Shields filter lists past the defaults: Annoying distractions, AI suggestions, Newsletter popups, Social media, Tracking URLs, Chat apps, Paywalls, Porn, French website ads, and the YouTube Shorts, Playables, autodubbed, end video elements and members-only lists. `brave-origin/preferences.json` and `brave-origin/local-state.json` hold those, and `mise run brave-origin:apply` deep-merges them into the profile. It refuses while the profile's `SingletonLock` points at a live process, since Brave writes its preferences back on exit, and it needs the profile that the first launch creates. A key goes in these files only when its value differs from the default: the sidebar is hidden by default on Origin, so it is not there.
-
-## Updates
-
-`~/.config/omarchy/plugins/francois.updates/` is a bar widget for everything the stock `omarchy.system-update` icon ignores: pacman packages other than `omarchy`, AUR, mise tools and firmware. Every 6 hours `updates-pending` prints one count per source, and the widget shows their total, hidden at zero. The check runs once in the plugin's service and every screen's widget reads it, so the bars never run `checkupdates` against each other. A failed check shows `!` in the urgent color, with the error in the tooltip. Without full connectivity, as NetworkManager reports it, the check is skipped and the previous counts stay, until the next one. Left click toggles the per-source counts, middle click checks again, right click opens the narrowest command that clears them: `omarchy update` for pacman or AUR, which upgrades mise too, `omarchy-update-mise` when only mise is behind, `omarchy update firmware` when only firmware is. The widget checks again once that command exits. mise is checked with its release-age cooldown off, matching how `omarchy update` runs `mise up`. Firmware is read from the local fwupd metadata without touching the network, so the bootstrap installs fwupd and enables `fwupd-refresh.timer`, which downloads it daily.
-
-## VSCodium
-
-`~/.config/VSCodium/User/settings.json` is a dotfile, but the layout is not a setting: pinned activity bar icons, the Accounts icon, hidden status bar items and hidden sidebar views live in VSCodium's SQLite state, `~/.config/VSCodium/User/globalStorage/state.vscdb`, next to machine IDs and caches that do not belong in the repo. `vscodium/layout.sql` holds only those keys. After changing the layout, `mise run vscodium:dump` rewrites it from the live state, so `git diff` shows what moved. `mise run vscodium:apply` writes it back, creating the database on a machine where VSCodium never ran, and refuses while VSCodium is open, since it saves its whole state again on exit and would undo the write. Per-project state, like which sidebar sections are collapsed, stays in each workspace's own database and is not tracked.
-
-## Boot
-
-`setup:limine` sets `timeout: 1` and `quiet: yes` in `/boot/limine.conf`. The menu stays hidden, and holding Down from power-on opens it with the snapper snapshots. Limine's countdown runs about twice as fast as the clock here, too short to aim at, and Space, Enter and Right would boot the highlighted entry where an arrow only moves the selection. `timeout: 0` would skip the menu for good, and a system too broken to run `systemctl reboot --boot-loader-menu=30` is when a snapshot is needed. The file sits on the root-only vfat ESP, so it cannot be a symlink, and `omarchy-refresh-limine` copies Omarchy's template back over it: rerun `mise run setup:limine` after that.
-
-## Power
-
-`setup:power-profile` keeps the balanced power profile on AC, where Omarchy defaults to performance. Battery already defaults to balanced. `omarchy-powerprofiles-set ac balanced` saves the choice to `~/.local/state/omarchy/powerprofiles/ac`, and the shell reapplies it whenever the power source changes. The file is state that the power menu rewrites, so it is set by the task rather than tracked. Plugged and unplugged still differ in two ways: power-profiles-daemon's battery-aware mode makes balanced write `balance_performance` as the CPU energy preference on AC and `balance_power` on battery, and the BIOS runs `AdaptiveThermalManagementAC=MaximizePerformance` against `Balanced` on battery.
-
-The battery widget is `~/.config/omarchy/plugins/francois.power/`, an `omarchy plugin clone` of `omarchy.power` with one added choice, "Charge to 80% / 100%", under the battery stats. The first value is UPower's charge end threshold, and the row hides when the battery has no charge limit. It shares the panel's cursor with the power profiles: Up and Down move between the two rows. A choice runs `omarchy-battery-charge-limit` from the plugin folder, which calls UPower's `EnableChargeThreshold` over D-Bus on the battery that powers the machine. It needs no password, and UPower keeps the setting across reboots. The firmware stops charging at the end threshold and starts again below the start one, 75% here. The panel's charging state comes from UPower, which re-reads the battery only every 30 seconds, so it lags a change by up to that long. The idea comes from [patcastle/omarchy-battery-health](https://github.com/patcastle/omarchy-battery-health), which was cloned from an older `omarchy.power`, and from the upstream proposal [omarchy#8579](https://github.com/omacom/omarchy/pull/8579).
-
-`upstream/` in the repo holds the files as Omarchy shipped them when the clone was last synced, and is not linked into `~`. After each `omarchy update`, `~/.config/omarchy/hooks/post-update.d/check-plugin-clones.hook` compares them with the installed plugin and sends a notification for each file that changed, was removed or was added, and for a source plugin that is gone. For a changed file, the hook prints the fix: `git merge-file` the clone with the old and new upstream, then copy the new upstream into `upstream/`. Any clone that gets an `upstream/` directory is checked the same way.
-
-## BIOS
-
-`bios/thinkpad-x1-carbon-7th-20r1/` and `bios/thinkpad-x1-carbon-7th-20qd/` are snapshots of each laptop's firmware state, rewritten by `mise run bios:dump` from `~/.dotfiles` after any change in F1 setup or from Linux, so `git diff` shows what moved. `settings.txt` holds every Lenovo setting the `thinklmi` driver exposes under `/sys/class/firmware-attributes/`, which needs root to read. `efibootmgr.txt` holds the UEFI boot entries without `BootCurrent` and `BootNext`, which change from boot to boot. `bios-version.txt` explains a setting appearing or vanishing after a firmware update. The folder is named after the slugged `product_version` and the machine type, the first four characters of `product_name`, as the Comet Lake 20R1 runs the `N2QET` BIOS and the Whiskey Lake 20QD the `N2HET` one. Their settings match except `TFTPWindowSize`, which `N2HET` lacks. A folder is not named after the serial, because the repo is public and the serial looks up the owner's warranty.
-
-`settings.txt` is also the desired state. Edit a value, run `mise run bios:apply`, reboot, and `bios:dump` should leave no diff. The task writes only the values that differ from the firmware's, to `/sys/class/firmware-attributes/thinklmi/attributes/<name>/current_value`, and stops at the first one refused, so a wrong password cannot reach the three attempts that trigger POST error 0199. It asks for the supervisor password, hands it to the driver through the write-only `current_password`, and clears it on exit, as any root process could otherwise change settings until reboot. LUKS protects the disk, so the BIOS fingerprint logins are off too, leaving the fingerprint to sudo and the lock screen.
-
-The changes from the factory state are for battery and for hardware this laptop lacks. `SleepState=Linux` gives S3 `deep` suspend instead of s2idle. `AlwaysOnUSB` and both Wake-on-LAN settings are off, so nothing draws power in sleep or power-off. Ethernet, the UEFI network stacks, Lenovo Cloud, AMT, NFC, the smart card slot and WWAN are off, since there is no dongle, no network boot and no such hardware. SGX is off, as the kernel created no `/dev/sgx_enclave` with it on, and libfprint does not use it despite F1 setup warning that the fingerprint reader might stop working. Absolute Persistence (Computrace) is permanently disabled, which only F1 setup can do. `AdaptiveThermalManagementAC` stays on `MaximizePerformance` and Thunderbolt security stays off, the IOMMU already blocking DMA from a device. `PreBootForThunderboltDevice=Disable` was accepted from Linux and reverted by the firmware at reboot, F1 setup offering only `Enable` and `Pre-BootACL`, and the security level cannot be changed there.
-
-The boot order is `NVMe0:USBHDD`, the only devices this laptop can boot from. In UEFI, Limine is `Boot0000` and the fwupd updater `Boot0001`, last in `BootOrder`: `limine-install` finds its entry by partition and path, fwupd by its label, so both keep their numbers. `Boot0010` and above are the firmware's own, and it marks active only the ones in the Lenovo boot order.
-
-## Secrets
-
-Secrets live in Bitwarden, and the repo holds only references to them, so nothing secret is published, not even as ciphertext. `fnox.toml` maps each one to a field of the `dotfiles-repository` secure note, as `dotfiles-repository/NAME`, and `[bootstrap.secrets]` in `mise.toml` declares the names the templates read with `{{ secret(name="NAME") }}`. `fnox exec -- mise bootstrap` reads them through the `bw` CLI, which needs `BW_SESSION` from `bw unlock --raw`, and hands them to mise as environment variables for that run only.
-
-A project file that must sit at a fixed path goes the same way: `~/fcode/<project>/config/master.key`, the development credentials key of patoumatic and crooz, renders from `fcode/<project>/config/master.key.tmpl` with the `<project>-repository` note's `RAILS_DEVELOPMENT_KEY`. skyblip's Rails app lives in `server/`, so its key goes the same way one level down, as `~/fcode/skyblip/server/config/master.key`. vps-ansible's `inventory.yml`, which that repo git-ignores because it names real machines, renders whole from the `vps-ansible-repository` note's `INVENTORY`: edit the note, not the rendered file, or the next apply overwrites it. Its entry sets `permissions = "0600"`, since a rendered file would otherwise take its source's mode, and git tracks only the exec bit. The project has to be cloned first, or the entry creates `~/fcode/<project>/config/` and the clone then refuses a non-empty directory.
-
-`~/.pi/agent/mcp.json` renders from `.pi/agent/mcp.json.tmpl` with the client ID and secret of the Ridecell Slack app, since Slack's MCP server accepts only a registered app. Add or change an MCP server in the template, not with `pi mcp add`, which writes the rendered file that the next apply overwrites.
-
-Without fnox, a template reading a secret fails to render, and `mise bootstrap` stops before writing anything, so a missing secret never leaves a half-written file. `mise bootstrap secrets status` lists which ones the environment holds, without printing them.
-
-Add one by creating a hidden custom field on the `dotfiles-repository` note named after it, then a line in `fnox.toml` and one in `[bootstrap.secrets]`. fnox splits a reference at its first `/` into item and field, so an item name cannot hold one, and `bw` finds an item by searching names, usernames and URLs, so the name must match a single item.
+vps-ansible must not declare the Tailscale repository in `apt_repositories` for this host: apt refuses two sources for the same URL signed by different keyrings.
 
 ## Commands
 
 ```bash
 mise bootstrap dotfiles status   # what is out of sync
-fnox exec -- mise bootstrap dotfiles apply    # symlink everything into place
-mise bootstrap dotfiles add -l ~/.config/foo/bar.toml   # track a new file, or capture a copy-mode one after editing it live
+mise bootstrap plan              # what an apply would change
+mise bootstrap packages upgrade  # upgrade tailscale from its repository
 ```
-
-Run them from `~/.dotfiles`, and pass `-l` to `add` so the entry lands in `mise.toml` rather than the global config.
-
-Symlinked files are live: editing them in the repo or in `~` is the same file. The `mode = "copy"` entries are the exception, one per app that rewrites its own config file in place, which would replace a symlink with a regular file:
-
-- `~/.config/mimeapps.list`, rewritten by xdg-mime when a default app is set.
-- `~/.config/omarchy/shell.json`, rewritten by the shell.
-- `~/.config/foot/foot.ini`, rewritten by `omarchy-display-text-size`, which derives the size from the text size, and by `omarchy-font-set`, which puts it back to 9pt. It sets 9pt, since 10pt read too big.
-- `~/.config/voxtype/config.toml`, rewritten by the `voxtype configure` TUI, which also rejects a partial config.
-
-Edit those live, then capture them back with `add -l`. `~/.ssh/config` and `~/.config/scw/config.yaml` are the other exception, templates with `permissions = "0600"`, because a rendered file otherwise inherits the source's mode and git tracks only the exec bit, so a fresh clone would render it world-readable. The scw one holds the `agent-readonly` API key, so a change made with `scw config set` or `scw init` goes in `.config/scw/config.yaml.tmpl`, or the next apply overwrites it.
-
-`~/.config/uwsm/env.d/` holds the session environment, which every app and both shells inherit: uwsm sources these files once at session start, after Omarchy's own defaults, so a change takes effect on next login. `bitwarden-ssh` points `SSH_AUTH_SOCK` at the Bitwarden desktop SSH agent. `editor` sets `EDITOR` and `BUNDLER_EDITOR` to `codium --wait` when VSCodium is installed, and leaves Omarchy's `omarchy-launch-editor` in place otherwise, since an editor that is not there would break `git commit`. `console1984` sets `CONSOLE_USER`, which the console1984 gem asks for at a Rails console, and `npm` silences npm's funding notice.

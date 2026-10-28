@@ -1,5 +1,0 @@
-{
-  "app.message.followUp": ["ctrl+enter"],
-  "app.message.dequeue": ["ctrl+pageUp"],
-  "tui.editor.pageUp": ["pageUp"]
-}

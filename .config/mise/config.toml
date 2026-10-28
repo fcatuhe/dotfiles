@@ -1,23 +1,22 @@
 [tools]
-"aqua:modem-dev/hunk" = "latest"
-bun = "latest"
-fnox = "latest"
-gh = "latest"
-"github:basecamp/hey-cli" = "latest"
-"github:getpaseo/paseo" = { version = "latest", asset_pattern = "Paseo-*-x64.tar.gz", strip_components = 1, bin_path = "resources/bin" }
-"github:steipete/gogcli" = "latest"
-herdr = "latest"
-node = "latest"
-npm = "latest"
-"npm:@kitlangton/ghui" = { version = "latest", allow_low_downloads = true }
-"npm:agent-browser" = "latest"
-pi = { version = "latest", minimum_release_age = "0" }
-ruby = "latest"
-scaleway = "latest"
-stripe = "latest"
+btop = "latest"
+"fnox" = "latest"
+gdu = "latest"
+"gh" = "latest"
+"github:openclaw/gogcli" = "latest"
+"node" = "lts"
+"npm:@getpaseo/cli" = "latest"
+"pi" = "latest"
+"ruby" = "latest"
 
+# Empty password on purpose: the gog file keyring needs it set to work without a TTY.
+[env]
+GOG_KEYRING_PASSWORD = ""
+
+# Projects pin Ruby in .ruby-version, not in mise.toml.
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
 
+# Prebuilt Ruby instead of compiling each version.
 [settings.ruby]
 compile = false
