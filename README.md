@@ -1,6 +1,6 @@
 # Dotfiles
 
-fc-agents, a Debian trixie arm64 VPS where agents run through Paseo and pi, symlinked by [mise](https://mise.jdx.dev/) `[dotfiles]`. See `mise.toml` for what maps where. The `main` branch is the Omarchy laptop, laid out the same way, and this branch keeps only what the server needs: the global mise tools, Tailscale, sysstat and git commit signing with the server's `~/.ssh/id_ed25519` key.
+fc-agents, a Debian trixie arm64 VPS where agents run through Paseo and pi, symlinked by [mise](https://mise.jdx.dev/) `[dotfiles]`. See `mise.toml` for what maps where. The `main` branch is the Omarchy laptop, laid out the same way, and this branch keeps only what the server needs: the global mise tools, Tailscale, sysstat, zsh for Paseo terminals and git commit signing with the server's `~/.ssh/id_ed25519` key.
 
 Nothing here is secret, so the server needs neither Bitwarden nor fnox.
 
@@ -22,12 +22,16 @@ It refuses to replace a file already in `$HOME`, such as a `~/.config/mise/confi
 
 1. Adds Tailscale's apt repository in `/etc/apt/sources.list.d/mise-tailscale.sources`, then installs `tailscale`, whose package enables `tailscaled`.
 2. Installs `sysstat` and enables it. It samples CPU, RAM, load, memory and CPU stall, disk and network every minute, and keeps 28 days in `/var/log/sysstat/saDD`. Read that history with `sar` before resizing the server, for example from CAX31 to CAX41.
-3. Applies `[dotfiles]`.
+3. Installs zsh, zsh-autosuggestions and zsh-syntax-highlighting from apt, clones oh-my-zsh into `~/.oh-my-zsh`, then applies `[dotfiles]`.
 4. Writes the `dev.mise.mise-upgrade` user service and its timer, at 04:00 Paris time. It runs `mise upgrade` from the home directory, so it upgrades the global tools and leaves the versions that projects pin alone. Then it restarts the Paseo daemon when the daemon runs an older version than the one installed, which interrupts the agents running at that time. mise removes the replaced versions 24 hours later. francois lingers, so the timer runs without a login session.
 5. Installs the mise tools.
 6. Runs `setup:tailscale-operator`, so francois runs `tailscale serve` without sudo, as patoumatic's `bin/dev --tailscale` does.
 
 vps-ansible must not declare the Tailscale repository in `apt_repositories` for this host: apt refuses two sources for the same URL signed by different keyrings. It lists `origin=Tailscale` in `security_autoupdate_origins` instead, so unattended-upgrades installs new Tailscale releases daily with the Debian packages.
+
+## Shell
+
+zsh in Paseo terminals, bash everywhere else. Paseo starts every new terminal in the daemon's `$SHELL`, so `~/.config/systemd/user/paseo.service.d/shell.conf` sets `SHELL=/usr/bin/zsh` for the `paseo` user service only, and Paseo adds its own zsh integration on top. The login shell, SSH sessions and cron stay on bash. pi runs its bash tool with bash whatever `$SHELL` says, so the agents are unaffected. The drop-in takes effect after `systemctl --user daemon-reload && systemctl --user restart paseo`, which interrupts the running agents. `paseo.service` itself is written by hand on the server and not tracked here. `~/.zshrc` follows the `main` branch's: oh-my-zsh with the `robbyrussell` theme and the `git`, `history-substring-search`, `kamal` and `mise` plugins, `LESS=-FR`, Ctrl+U deleting to the start of the line, then zsh-autosuggestions and zsh-syntax-highlighting last. It drops `vscode`, emscripten and the scw completion, which only the laptop has. `~/.config/shell/aliases` keeps the pi and utility aliases and drops `gs` and `wt`, since this git config has no `sweep` or `wt`. Only zsh sources it: bash keeps Debian's `~/.bashrc`.
 
 ## Commands
 
