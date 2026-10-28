@@ -51,15 +51,23 @@ on_change = "restart"
 "~/.config/git/config" = {}
 "~/.config/mise/config.toml" = {}
 "~/.config/shell/aliases" = {}
-"~/.config/systemd/user/paseo.service.d/shell.conf" = {}
+"~/.paseo/config.json" = {}
+"~/.pi/agent/settings.json" = {}
 "~/.zshrc" = {}
+
+# The shims lead PATH so each agent gets the Ruby or Node its repository pins, and SHELL opens every Paseo terminal in zsh
+[bootstrap.linux.systemd.units.paseo]
+description = "Paseo daemon"
+exec_start = "%h/.local/share/mise/shims/paseo daemon run"
+restart = "on-failure"
+environment = { PATH = "%h/.local/share/mise/shims:/usr/local/bin:/usr/bin:/bin", PASEO_RELAY_ENABLED = "true", SHELL = "/usr/bin/zsh" }
 
 # The global tools only, from the home directory: projects pin their own versions. Paseo restarts when the daemon runs an older version than the one installed
 [bootstrap.linux.systemd.units.mise-upgrade]
 description = "Upgrade the global mise tools"
 type = "oneshot"
 exec_start = "/usr/bin/mise upgrade"
-exec_start_post = ['''/bin/sh -c 'test "$$(%h/.local/share/mise/shims/paseo daemon status --json | jq -r .daemonVersion)" = "$$(%h/.local/share/mise/shims/paseo --version)" || systemctl --user restart paseo'''']
+exec_start_post = ['''/bin/sh -c 'test "$$(%h/.local/share/mise/shims/paseo daemon status --json | jq -r .daemonVersion)" = "$$(%h/.local/share/mise/shims/paseo --version)" || systemctl --user restart dev.mise.paseo'''']
 start = false
 wanted_by = []
 
