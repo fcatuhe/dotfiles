@@ -126,6 +126,8 @@ The Paseo daemon on fc-thinkpad listens on `127.0.0.1:6767` only. `mise run tail
 
 `~/.paseo/config.json` is a symlink into this repo. Paseo rewrites it whenever a setting changes in the app or through `paseo daemon config set`, and it writes to the file the link points at, so those changes show up here as a diff to commit. The daemon answers 403 to a Host header it does not know, so `daemon.hostnames` lists the tailnet name. `relay.enabled` is off, so the apps reach the daemon over Tailscale only. The `page-scroll` plugin it lists lives in the pi-wares package that pi installs. The rest of `~/.paseo` is state or secret and stays out: the daemon keypair, the local credential, push tokens, agents, projects, schedules, worktrees and logs.
 
+`~/.config/Paseo/desktop-settings.json` holds the desktop app's own settings: the release channel, the notification sound, and whether the app starts the daemon and stops it on quit. All four are the app's defaults for now. The rest of `~/.config/Paseo` is Electron state and caches.
+
 The daemon links to fc-agents as a connected host over Tailscale, and fc-agents links back to `tcp://fc-thinkpad.airplane-catfish.ts.net:6767?ssl=true`. The link lives in `~/.paseo/hosts.json`, which is daemon state, so add it again after a rebuild:
 
 ```bash
@@ -182,6 +184,7 @@ Symlinked files are live: editing them in the repo or in `~` is the same file. T
 - `~/.config/omarchy/shell.json`, rewritten by the shell.
 - `~/.config/foot/foot.ini`, rewritten by `omarchy-display-text-size`, which derives the size from the text size, and by `omarchy-font-set`, which puts it back to 9pt. It sets 9pt, since 10pt read too big.
 - `~/.config/voxtype/config.toml`, rewritten by the `voxtype configure` TUI, which also rejects a partial config.
+- `~/.config/Paseo/desktop-settings.json`, rewritten by the Paseo app through a temporary file and a rename.
 
 Edit those live, then capture them back with `add -l`. `~/.ssh/config` and `~/.config/scw/config.yaml` are the other exception, templates with `permissions = "0600"`, because a rendered file otherwise inherits the source's mode and git tracks only the exec bit, so a fresh clone would render it world-readable. The scw one holds the `agent-readonly` API key, so a change made with `scw config set` or `scw init` goes in `.config/scw/config.yaml.tmpl`, or the next apply overwrites it.
 
