@@ -60,7 +60,7 @@ on_change = "restart"
 description = "Paseo daemon"
 exec_start = "%h/.local/share/mise/shims/paseo daemon run"
 restart = "on-failure"
-environment = { PATH = "%h/.local/share/mise/shims:/usr/local/bin:/usr/bin:/bin", PASEO_RELAY_ENABLED = "true", SHELL = "/usr/bin/zsh" }
+environment = { PATH = "%h/.local/share/mise/shims:/usr/local/bin:/usr/bin:/bin", SHELL = "/usr/bin/zsh" }
 
 # The global tools only, from the home directory: projects pin their own versions. Paseo restarts when the daemon runs an older version than the one installed
 [bootstrap.linux.systemd.units.mise-upgrade]
@@ -84,3 +84,8 @@ depends = ["setup:*"]
 # Lets francois run tailscale serve without sudo, as patoumatic's bin/dev --tailscale does
 [tasks."setup:tailscale-operator"]
 run = "sudo tailscale set --operator=$USER"
+
+# Run once after tailscale up: tailscaled keeps the mapping across restarts and reboots
+[tasks."tailscale:serve-paseo"]
+description = "Serve the Paseo daemon to the tailnet over HTTPS on its own port, 6767"
+run = "tailscale serve --bg --https=6767 http://127.0.0.1:6767"

@@ -2,6 +2,9 @@
   "version": 1,
   "daemon": {
     "listen": "127.0.0.1:6767",
+    "hostnames": [
+      "fc-agents.airplane-catfish.ts.net"
+    ],
     "mcp": {
       "injectIntoAgents": true
     },
