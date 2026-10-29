@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "daemon": {
+    "listen": "127.0.0.1:6767",
+    "hostnames": [
+      "fc-thinkpad.airplane-catfish.ts.net"
+    ],
+    "mcp": {
+      "injectIntoAgents": true
+    },
+    "browserTools": {
+      "enabled": true
+    },
+    "autoArchiveAfterMerge": true,
+    "terminalProfiles": [
+      {
+        "id": "pi",
+        "name": "Pi",
+        "command": "pi",
+        "args": [
+          "{{{prompt}}}"
+        ],
+        "icon": "pi"
+      },
+      {
+        "id": "claude",
+        "name": "Claude Code",
+        "command": "claude",
+        "args": [
+          "{{{prompt}}}"
+        ],
+        "icon": "claude"
+      },
+      {
+        "id": "codex",
+        "name": "Codex",
+        "command": "codex",
+        "args": [
+          "{{{prompt}}}"
+        ],
+        "icon": "codex"
+      },
+      {
+        "id": "opencode",
+        "name": "OpenCode",
+        "command": "opencode",
+        "args": [
+          "--prompt={{{prompt}}}"
+        ],
+        "icon": "opencode"
+      }
+    ],
+    "cors": {
+      "allowedOrigins": [
+        "https://app.paseo.sh"
+      ]
+    },
+    "relay": {
+      "enabled": false
+    }
+  },
+  "app": {
+    "baseUrl": "https://app.paseo.sh"
+  },
+  "pluginsEnabled": true,
+  "plugins": {
+    "page-scroll": {
+      "source": "directory",
+      "path": "/home/francois/.pi/agent/git/github.com/fcatuhe/pi-wares/paseo/plugins/page-scroll",
+      "enabled": true
+    }
+  },
+  "agents": {
+    "providers": {
+      "muse": {
+        "enabled": false
+      },
+      "antigravity": {
+        "enabled": false
+      },
+      "opencode": {
+        "enabled": false
+      },
+      "copilot": {
+        "enabled": false
+      },
+      "codex": {
+        "enabled": false
+      },
+      "claude": {
+        "enabled": false
+      }
+    },
+    "metadataGeneration": {
+      "providers": [
+        {
+          "provider": "pi",
+          "model": "anthropic/claude-haiku-5-5"
+        }
+      ]
+    }
+  }
+}

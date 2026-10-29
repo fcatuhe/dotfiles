@@ -50,7 +50,7 @@ On a new computer, do these steps in this sequence.
 
 7. Join the Brave Sync chain. In Brave Origin, open Settings, Sync, "I have a Sync Code", and type a code shown by another device in the chain under Settings, Sync, "Add new device". A saved code does not work, since its last word expires. Then quit Brave Origin and run `mise run brave-origin:apply` for the settings Sync skips. See [Browser](#browser) for what it brings back.
 
-8. Join the tailnet and serve Paseo on it. `omarchy-install-service-tailscale` runs `tailscale up` and makes you the Tailscale operator, so `tailscale serve` needs no sudo. Then set the daemon's hostname and link fc-agents, see [Paseo](#paseo).
+8. Join the tailnet and serve Paseo on it. `omarchy-install-service-tailscale` runs `tailscale up` and makes you the Tailscale operator, so `tailscale serve` needs no sudo. Then link fc-agents, see [Paseo](#paseo).
 
    ```bash
    omarchy-install-service-tailscale
@@ -124,12 +124,7 @@ Sync carries a setting only if it is on Chromium's syncable allowlist, and Brave
 
 The Paseo daemon on fc-thinkpad listens on `127.0.0.1:6767` only. `mise run tailscale:serve-paseo` makes tailscaled serve it at `https://fc-thinkpad.airplane-catfish.ts.net:6767`, to the tailnet only, with a Tailscale certificate. tailscaled keeps that mapping across restarts and reboots, so no service is needed, and `tailscale serve status` shows it. The Paseo app on another device and the fc-agents daemon reach it at that address.
 
-The daemon answers 403 to a Host header it does not know, so `daemon.hostnames` must list the tailnet name. `~/.paseo/config.json` is not tracked, so set it again after a rebuild:
-
-```bash
-paseo daemon config set daemon.hostnames '["fc-thinkpad.airplane-catfish.ts.net"]'
-paseo daemon reload
-```
+`~/.paseo/config.json` is a symlink into this repo. Paseo rewrites it whenever a setting changes in the app or through `paseo daemon config set`, and it writes to the file the link points at, so those changes show up here as a diff to commit. The daemon answers 403 to a Host header it does not know, so `daemon.hostnames` lists the tailnet name. `relay.enabled` is off, so the apps reach the daemon over Tailscale only. The `page-scroll` plugin it lists lives in the pi-wares package that pi installs. The rest of `~/.paseo` is state or secret and stays out: the daemon keypair, the local credential, push tokens, agents, projects, schedules, worktrees and logs.
 
 The daemon links to fc-agents as a connected host over Tailscale, and fc-agents links back to `tcp://fc-thinkpad.airplane-catfish.ts.net:6767?ssl=true`. The link lives in `~/.paseo/hosts.json`, which is daemon state, so add it again after a rebuild:
 
