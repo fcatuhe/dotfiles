@@ -50,6 +50,13 @@ On a new computer, do these steps in this sequence.
 
 7. Join the Brave Sync chain. In Brave Origin, open Settings, Sync, "I have a Sync Code", and type a code shown by another device in the chain under Settings, Sync, "Add new device". A saved code does not work, since its last word expires. Then quit Brave Origin and run `mise run brave-origin:apply` for the settings Sync skips. See [Browser](#browser) for what it brings back.
 
+8. Join the tailnet and serve Paseo on it. `omarchy-install-service-tailscale` runs `tailscale up` and makes you the Tailscale operator, so `tailscale serve` needs no sudo. Then set the daemon's hostname and link fc-agents, see [Paseo](#paseo).
+
+   ```bash
+   omarchy-install-service-tailscale
+   mise run tailscale:serve-paseo
+   ```
+
 ### What the bootstrap does
 
 It does these steps in this sequence:
@@ -110,6 +117,23 @@ Sync carries a setting only if it is on Chromium's syncable allowlist, and Brave
 ## VSCodium
 
 `~/.config/VSCodium/User/settings.json` is a dotfile, but the layout is not a setting: pinned activity bar icons, the Accounts icon, hidden status bar items and hidden sidebar views live in VSCodium's SQLite state, `~/.config/VSCodium/User/globalStorage/state.vscdb`, next to machine IDs and caches that do not belong in the repo. `vscodium/layout.sql` holds only those keys. After changing the layout, `mise run vscodium:dump` rewrites it from the live state, so `git diff` shows what moved. `mise run vscodium:apply` writes it back, creating the database on a machine where VSCodium never ran, and refuses while VSCodium is open, since it saves its whole state again on exit and would undo the write. Per-project state, like which sidebar sections are collapsed, stays in each workspace's own database and is not tracked.
+
+## Paseo
+
+The Paseo daemon on fc-thinkpad listens on `127.0.0.1:6767` only. `mise run tailscale:serve-paseo` makes tailscaled serve it at `https://fc-thinkpad.airplane-catfish.ts.net:6767`, to the tailnet only, with a Tailscale certificate. tailscaled keeps that mapping across restarts and reboots, so no service is needed, and `tailscale serve status` shows it. The Paseo app on another device and the fc-agents daemon reach it at that address.
+
+The daemon answers 403 to a Host header it does not know, so `daemon.hostnames` must list the tailnet name. `~/.paseo/config.json` is not tracked, so set it again after a rebuild:
+
+```bash
+paseo daemon config set daemon.hostnames '["fc-thinkpad.airplane-catfish.ts.net"]'
+paseo daemon reload
+```
+
+The daemon links to fc-agents as a connected host over Tailscale, and fc-agents links back to `tcp://fc-thinkpad.airplane-catfish.ts.net:6767?ssl=true`. The link lives in `~/.paseo/hosts.json`, which is daemon state, so add it again after a rebuild:
+
+```bash
+paseo host add 'tcp://fc-agents.airplane-catfish.ts.net:6767?ssl=true' --label fc-agents
+```
 
 ## Boot
 

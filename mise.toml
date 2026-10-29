@@ -191,6 +191,11 @@ for pair in "Default/Preferences:brave-origin/preferences.json" "Local State:bra
 done
 '''
 
+# Run once after tailscale up: tailscaled keeps the mapping across restarts and reboots
+[tasks."tailscale:serve-paseo"]
+description = "Serve the Paseo daemon to the tailnet over HTTPS on its own port, 6767"
+run = "tailscale serve --bg --https=6767 http://127.0.0.1:6767"
+
 # Omarchy's theme color policy folder, Wayland flags and browser extensions, then Web Bluetooth and crash reports off
 [tasks."setup:brave-origin"]
 run = [
