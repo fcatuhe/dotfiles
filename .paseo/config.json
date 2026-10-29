@@ -104,5 +104,20 @@
         }
       ]
     }
+  },
+  "features": {
+    "dictation": {
+      "stt": {
+        "provider": "local",
+        "model": "parakeet-tdt-0.6b-v3-int8"
+      }
+    },
+    "voiceMode": {
+      "enabled": true,
+      "stt": {
+        "provider": "local",
+        "model": "parakeet-tdt-0.6b-v3-int8"
+      }
+    }
   }
 }
