@@ -8,6 +8,7 @@ gdu = "latest"
 "npm:@getpaseo/cli" = "latest"
 "pi" = "latest"
 "ruby" = "latest"
+uv = "latest"
 
 # Empty password on purpose: the gog file keyring needs it set to work without a TTY.
 [env]

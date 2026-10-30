@@ -30,6 +30,7 @@ It refuses to replace a file already in `$HOME`, such as a `~/.config/mise/confi
 5. Writes the `dev.mise.mise-upgrade` user service and its timer, at 04:00 Paris time. It runs `mise upgrade` from the home directory, so it upgrades the global tools and leaves the versions that projects pin alone. Then it restarts the Paseo daemon when the daemon runs an older version than the one installed, which interrupts the agents running at that time. mise removes the replaced versions 24 hours later. francois lingers, so the timer runs without a login session.
 6. Installs the mise tools.
 7. Runs `setup:tailscale-operator`, so francois runs `tailscale serve` without sudo, as patoumatic's `bin/dev --tailscale` does.
+8. Runs `setup:gh-signoff`, which installs the `basecamp/gh-signoff` extension for gh. badger's `bin/ci` runs `gh signoff` once its checks pass, so a pull request can merge without waiting for the GitHub runners.
 
 vps-ansible must not declare the Tailscale repository in `apt_repositories` for this host: apt refuses two sources for the same URL signed by different keyrings. It lists `origin=Tailscale` in `security_autoupdate_origins` instead, so unattended-upgrades installs new Tailscale releases daily with the Debian packages.
 

@@ -85,6 +85,10 @@ depends = ["setup:*"]
 [tasks."setup:tailscale-operator"]
 run = "sudo tailscale set --operator=$USER"
 
+# gh has no manifest for extensions, and badger's bin/ci runs gh signoff once its checks pass
+[tasks."setup:gh-signoff"]
+run = "gh extension list | grep -q basecamp/gh-signoff || gh extension install basecamp/gh-signoff"
+
 # Run once after tailscale up: tailscaled keeps the mapping across restarts and reboots
 [tasks."tailscale:serve-paseo"]
 description = "Serve the Paseo daemon to the tailnet over HTTPS on its own port, 6767"
