@@ -16,6 +16,8 @@ BADGER_SERVER_IP = { provider = "bitwarden", value = "dotfiles-repository/BADGER
 BADGER_SERVER_USER = { provider = "bitwarden", value = "dotfiles-repository/BADGER_SERVER_USER" }
 FC_AGENTS_SERVER_IP = { provider = "bitwarden", value = "dotfiles-repository/FC_AGENTS_SERVER_IP" }
 FC_AGENTS_SERVER_USER = { provider = "bitwarden", value = "dotfiles-repository/FC_AGENTS_SERVER_USER" }
+FLYZILLA_SERVER_IP = { provider = "bitwarden", value = "dotfiles-repository/FLYZILLA_SERVER_IP" }
+FLYZILLA_SERVER_USER = { provider = "bitwarden", value = "dotfiles-repository/FLYZILLA_SERVER_USER" }
 SCALEWAY_ACCESS_KEY = { provider = "bitwarden", value = "dotfiles-repository/SCALEWAY_ACCESS_KEY" }
 SCALEWAY_SECRET_KEY = { provider = "bitwarden", value = "dotfiles-repository/SCALEWAY_SECRET_KEY" }
 SCALEWAY_ORGANIZATION_ID = { provider = "bitwarden", value = "dotfiles-repository/SCALEWAY_ORGANIZATION_ID" }
