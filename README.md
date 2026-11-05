@@ -138,10 +138,6 @@ The daemon links to fc-agents as a connected host over Tailscale, and fc-agents 
 paseo host add 'tcp://fc-agents.airplane-catfish.ts.net:6767?ssl=true' --label fc-agents
 ```
 
-## Boot
-
-`setup:limine` sets `timeout: 1` and `quiet: yes` in `/boot/limine.conf`. The menu stays hidden, and holding Down from power-on opens it with the snapper snapshots. Limine's countdown runs about twice as fast as the clock here, too short to aim at, and Space, Enter and Right would boot the highlighted entry where an arrow only moves the selection. `timeout: 0` would skip the menu for good, and a system too broken to run `systemctl reboot --boot-loader-menu=30` is when a snapshot is needed. The file sits on the root-only vfat ESP, so it cannot be a symlink, and `omarchy-refresh-limine` copies Omarchy's template back over it: rerun `mise run setup:limine` after that.
-
 ## Power
 
 `setup:power-profile` keeps the balanced power profile on AC, where Omarchy defaults to performance. Battery already defaults to balanced. `omarchy-powerprofiles-set ac balanced` saves the choice to `~/.local/state/omarchy/powerprofiles/ac`, and the shell reapplies it whenever the power source changes. The file is state that the power menu rewrites, so it is set by the task rather than tracked. Plugged and unplugged still differ in two ways: power-profiles-daemon's battery-aware mode makes balanced write `balance_performance` as the CPU energy preference on AC and `balance_power` on battery, and the BIOS runs `AdaptiveThermalManagementAC=MaximizePerformance` against `Balanced` on battery.
