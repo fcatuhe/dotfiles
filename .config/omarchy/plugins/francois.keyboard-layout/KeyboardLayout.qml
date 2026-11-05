@@ -30,8 +30,9 @@ BarWidget {
   property int layoutIndex: 0
   property int layoutCount: 0
   property var syncNames: []
-  // INFO: fc 05nov26 the stock widget reads the first keyboard listed, here the headphone jack, until a layout switch names one
-  property bool digitsLocked: false
+  // INFO: fc 05nov26 frenchy locks the digit row while numLock is off, and the never-typed headphone jack always has it off
+  property bool numLockOn: false
+  readonly property bool digitsLocked: layoutFull.startsWith("frenchy-clavier") && !numLockOn
   // Short language code per layout description ("English (US)": "en"), read from
   // xkb's own table rather than maintained by hand.
   property var layoutBriefs: ({})
@@ -169,7 +170,7 @@ BarWidget {
         }
 
         const typed = root.typedKeyboards(listed)
-        root.digitsLocked = typed.some(k => k.numLock && String(k.active_keymap).startsWith("frenchy-clavier"))
+        root.numLockOn = typed.some(k => k.numLock)
         const kb = root.selectKeyboard(typed)
         if (!kb || !kb.active_keymap) {
           // Either the last keyboard has been unplugged, which the label has to
