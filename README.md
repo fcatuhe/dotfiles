@@ -100,6 +100,10 @@ The bar widget is `~/.config/omarchy/plugins/francois.keyboard-layout/`, an `oma
 
 Hyprland keeps the layout and the locks per device, and lists the headphone jack and the ThinkPad hotkeys as keyboards too, so the widget has to pick which one to describe. The stock widget guesses from the last `activelayout` event and falls back to the first device listed, which froze the `#` whenever that landed on the jack: after a shell restart, on a new monitor's bar, or when a device was re-added. `follow` in `KeyboardLayoutModel.js` compares each reading with the previous one and describes the device whose layout or lock moved, which only a keyboard being typed on does, so no name list is needed and a Bluetooth or USB keyboard is picked up the first time it switches or locks. Every refresh comes from an event, nothing polls. A click sets every device to the next layout, so they agree whichever one is read. The tests run in the shell's own JavaScript engine, which lacks newer builtins node has such as `Object.fromEntries`, with `QT_QPA_PLATFORM=offscreen /usr/lib/qt6/bin/qmltestrunner -input tst_KeyboardLayoutModel.qml` in the plugin directory, and are not linked into `~/.config`. `shell.json` names the plugin, which is why both have to be tracked together.
 
+## Dictation
+
+Dictation runs on voxtype with the Parakeet v3 int8 model, which handles French as well as English. On an 11-second clip it took 1.3 to 2 s on this laptop's CPU, against 3.5 to 7 s for Whisper `base.en` and 8 to 10 s for Cohere Transcribe, the offline model Superwhisper uses. `setup:voxtype` switches voxtype to its ONNX build, which Parakeet needs, and downloads the model, and `~/.config/voxtype/config.toml` selects it. Alt + Space and the ThinkPad star key toggle dictation through `omarchy-dictation`. Omarchy's Right Alt push-to-talk never fires here, since that key is AltGr on frenchy.
+
 ## Browser
 
 Brave Origin, the default in `~/.config/mimeapps.list`, so links and Omarchy's web apps open in it. It is Brave without Leo, News, Rewards, Wallet, VPN, Tor and the other extras, keeping Shields, and `brave-origin-bin` comes from Omarchy's own repo.

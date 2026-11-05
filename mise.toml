@@ -239,6 +239,14 @@ run = "omarchy-powerprofiles-set ac balanced"
 [tasks."setup:repos"]
 run = '''mise bootstrap repos exec -- sh -c 'case "$PWD" in "$HOME"/fcode/*) mise trust --quiet && mise install ;; esac' '''
 
+# Voxtype's ONNX build runs Parakeet, which transcribed about 3x faster than Whisper base.en here
+[tasks."setup:voxtype"]
+run = [
+  "sudo voxtype setup onnx --enable",
+  "voxtype setup --download --model parakeet-tdt-0.6b-v3-int8 --no-post-install --quiet",
+  "systemctl --user restart voxtype",
+]
+
 [tasks."setup:vscodium"]
 run = [
   "codium --install-extension esbenp.prettier-vscode",

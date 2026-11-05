@@ -9,6 +9,7 @@
 # ("idle", "recording", "transcribing") to this file whenever it changes.
 # Required for `voxtype record toggle` and `voxtype status` commands.
 state_file = "auto"
+engine = "parakeet"
 
 [hotkey]
 # Hotkey is configured in Hyprland. Default is Super + Ctrl + X
@@ -93,6 +94,10 @@ on_recording_stop = false
 
 # Show notification with transcribed text after transcription completes
 on_transcription = false
+
+[parakeet]
+model = "parakeet-tdt-0.6b-v3-int8"
+model_type = "tdt"
 
 # [text]
 # Text processing options (word replacements, spoken punctuation)
