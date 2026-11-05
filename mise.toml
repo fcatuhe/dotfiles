@@ -97,7 +97,6 @@ SLACK_RIDECELL_MCP_CLIENT_SECRET = "SLACK_RIDECELL_MCP_CLIENT_SECRET"
 "~/.config/xkb/rules/evdev.xml" = {}
 "~/.config/xkb/symbols/frenchy" = {}
 "~/.config/xkb/types/frenchy" = {}
-"~/.local/bin/webapp-handler-office" = {}
 "~/.paseo/config.json" = {}
 "~/.pi/agent/keybindings.json" = {}
 "~/.pi/agent/mcp.json" = { source = ".pi/agent/mcp.json.tmpl", mode = "template", permissions = "0600" }
@@ -225,12 +224,13 @@ run = [
   "sudo grep -qx 'quiet: yes' /boot/limine.conf",
 ]
 
-# Microsoft 365 web apps in Chrome, whose Default profile holds the Ridecell account, opening the Office files
-[tasks."setup:office-webapps"]
+# Omarchy's Microsoft 365 web apps in Chrome, whose Default profile holds the Ridecell account
+[tasks."setup:microsoft"]
 run = [
-  "omarchy-webapp-install Word https://word.cloud.microsoft/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-word.png 'webapp-handler-office word %f' 'application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/msword;'",
-  "omarchy-webapp-install Excel https://excel.cloud.microsoft/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-excel.png 'webapp-handler-office excel %f' 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;application/vnd.ms-excel;'",
-  "omarchy-webapp-install PowerPoint https://powerpoint.cloud.microsoft/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-powerpoint.png 'webapp-handler-office powerpoint %f' 'application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.ms-powerpoint;'",
+  "omarchy-webapp-install 'Microsoft Word' https://word.cloud.microsoft/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-word.png 'google-chrome-stable --profile-directory=Default --app=https://word.cloud.microsoft/'",
+  "omarchy-webapp-install 'Microsoft Excel' https://excel.cloud.microsoft/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-excel.png 'google-chrome-stable --profile-directory=Default --app=https://excel.cloud.microsoft/'",
+  "omarchy-webapp-install 'Microsoft PowerPoint' https://powerpoint.cloud.microsoft/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-powerpoint.png 'google-chrome-stable --profile-directory=Default --app=https://powerpoint.cloud.microsoft/'",
+  "omarchy-webapp-install 'Microsoft Teams' https://teams.cloud.microsoft/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-teams.png 'google-chrome-stable --profile-directory=Default --app=https://teams.cloud.microsoft/'",
 ]
 
 [tasks."setup:power-profile"]
