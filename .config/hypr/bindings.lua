@@ -5,7 +5,7 @@
 hl.bind("Caps_Lock", hl.dsp.event("digitlock"), { non_consuming = true, release = true, ignore_mods = true })
 
 -- INFO: fc 25sep26 the ThinkPad star key reports press and release together, so it can only toggle
-o.bind("XF86Favorites", "Toggle dictation", "voxtype record toggle")
+o.bind("XF86Favorites", "Toggle dictation", "omarchy-dictation toggle")
 
 -- INFO: fc 05nov26 code:49 is the key left of 1, @ on frenchy and ` on us, so one bind serves both layouts
 hl.unbind("SUPER + grave")
@@ -83,10 +83,3 @@ end)
 -- o.bind("SUPER + SHIFT + S", nil, "omarchy-capture-screenshot")
 -- o.bind("SUPER + H", nil, "voxtype record toggle")
 -- o.bind("SUPER + PERIOD", nil, "omarchy-shell shell toggle omarchy.emojis")
-
--- Dictation keys from before Alt + Space and Right Alt became the defaults.
--- Remove these lines to give the keys back to applications.
-if o.dictation_installed and o.dictation_installed() then
-  o.bind("SUPER + CTRL + X", "Toggle dictation", "omarchy-dictation toggle")
-  o.bind_hold("F9", "Start dictation (push-to-talk)", "omarchy-dictation start", "Stop dictation (push-to-talk)", "omarchy-dictation stop")
-end
