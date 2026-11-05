@@ -16,7 +16,7 @@ hl.config({
 --   input = {
 --     -- Use multiple keyboard layouts and switch between them with Left Alt + Right Alt.
 --     kb_layout = "us,dk,eu",
---     kb_options = "compose:caps,shift:both_capslock_cancel,grp:alts_toggle",
+--     kb_options = "omarchy:shift_caps_compose,grp:alts_toggle",
 --
 --     -- Use a specific keyboard variant if needed (e.g. intl for international keyboards).
 --     kb_variant = "intl",
@@ -54,7 +54,8 @@ hl.config({
 -- })
 
 -- App-specific touchpad scroll speeds.
--- o.window("(Alacritty|kitty|foot)", { scroll_touchpad = 1.5 })
+-- o.window("(Alacritty|kitty)", { scroll_touchpad = 1.5 })
+-- o.window("foot", { scroll_touchpad = 2.0 })
 -- o.window("com.mitchellh.ghostty", { scroll_touchpad = 0.2 })
 
 -- Enable touchpad gestures for changing workspaces.
