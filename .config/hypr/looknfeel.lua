@@ -60,3 +60,8 @@ hl.window_rule({ match = { float = false, workspace = "f[1]s[false]" }, border_s
 --     column_width = 0.97,
 --   },
 -- })
+
+-- Opt another application in to Omarchy's standard transparency.
+-- Find its class with: hyprctl clients
+-- o.transparent_window("my-app")
+-- o.transparent_window("my-app", "0.9 0.85") -- Custom active/inactive opacity.
