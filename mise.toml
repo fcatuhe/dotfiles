@@ -57,7 +57,6 @@ SLACK_RIDECELL_MCP_CLIENT_SECRET = "SLACK_RIDECELL_MCP_CLIENT_SECRET"
 "~/.bashrc" = {}
 "~/.config/Paseo/desktop-settings.json" = { mode = "copy" }
 "~/.config/VSCodium/User/settings.json" = {}
-"~/.config/foot/foot.ini" = { mode = "copy" }
 "~/.config/gh/config.yml" = {}
 "~/.config/git/allowed_signers" = {}
 "~/.config/git/config" = {}

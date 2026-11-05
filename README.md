@@ -182,7 +182,6 @@ Symlinked files are live: editing them in the repo or in `~` is the same file. T
 
 - `~/.config/mimeapps.list`, rewritten by xdg-mime when a default app is set.
 - `~/.config/omarchy/shell.json`, rewritten by the shell.
-- `~/.config/foot/foot.ini`, rewritten by `omarchy-display-text-size`, which derives the size from the text size, and by `omarchy-font-set`, which puts it back to 9pt. It sets 9pt, since 10pt read too big.
 - `~/.config/voxtype/config.toml`, rewritten by the `voxtype configure` TUI, which also rejects a partial config.
 - `~/.config/Paseo/desktop-settings.json`, rewritten by the Paseo app through a temporary file and a rename.
 
