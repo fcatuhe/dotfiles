@@ -1,6 +1,6 @@
 # Dotfiles
 
-fc-agents, a Debian trixie arm64 VPS where agents run through Paseo and pi, symlinked by [mise](https://mise.jdx.dev/) `[dotfiles]`. See `mise.toml` for what maps where. The `main` branch is the Omarchy laptop, laid out the same way, and this branch keeps only what the server needs: the global mise tools, the Paseo daemon and its config, pi's settings, Tailscale, sysstat, zsh for Paseo terminals and git commit signing with the server's `~/.ssh/id_ed25519` key.
+fc-agents, a Debian trixie arm64 VPS where agents run through Paseo and pi, symlinked by [mise](https://mise.jdx.dev/) `[dotfiles]`. See `mise.toml` for what maps where. The `main` branch is the Omarchy laptop, laid out the same way, and this branch keeps only what the server needs: the global mise tools, the Paseo daemon and its config, pi's settings, Tailscale, sysstat, zsh for Paseo terminals and herdr panes, and git commit signing with the server's `~/.ssh/id_ed25519` key.
 
 Nothing here is secret, so the server needs neither Bitwarden nor fnox. That is why `~/.pi/agent/mcp.json` stays out: it holds the Slack MCP OAuth client secret.
 
@@ -51,7 +51,7 @@ Tailscale peers connect directly over UDP 41641, which the Hetzner firewall rule
 
 ## Shell
 
-zsh in Paseo terminals, bash everywhere else. Paseo starts every new terminal in the daemon's `$SHELL`, so the `dev.mise.paseo` unit sets `SHELL=/usr/bin/zsh` for the daemon only, and Paseo adds its own zsh integration on top. The login shell, SSH sessions and cron stay on bash. pi runs its bash tool with bash whatever `$SHELL` says, so the agents are unaffected. `~/.zshrc` follows the `main` branch's: oh-my-zsh with the `robbyrussell` theme and the `git`, `history-substring-search`, `kamal` and `mise` plugins, `LESS=-FR`, Ctrl+U deleting to the start of the line, then zsh-autosuggestions and zsh-syntax-highlighting last. It drops `vscode`, emscripten and the scw completion, which only the laptop has. `~/.config/shell/aliases` keeps the pi and utility aliases and drops `gs` and `wt`, since this git config has no `sweep` or `wt`. Only zsh sources it: bash keeps Debian's `~/.bashrc`.
+zsh in Paseo terminals and herdr panes, bash everywhere else. Paseo starts every new terminal in the daemon's `$SHELL`, so the `dev.mise.paseo` unit sets `SHELL=/usr/bin/zsh` for the daemon only, and Paseo adds its own zsh integration on top. herdr reads `default_shell` in `~/.config/herdr/config.toml`, as on the `main` branch. The login shell, SSH sessions and cron stay on bash. pi runs its bash tool with bash whatever `$SHELL` says, so the agents are unaffected. `~/.zshrc` follows the `main` branch's: oh-my-zsh with the `robbyrussell` theme and the `git`, `history-substring-search`, `kamal` and `mise` plugins, `LESS=-FR`, Ctrl+U deleting to the start of the line, then zsh-autosuggestions and zsh-syntax-highlighting last. It drops `vscode`, emscripten and the scw completion, which only the laptop has. `~/.config/shell/aliases` keeps the pi and utility aliases and drops `gs` and `wt`, since this git config has no `sweep` or `wt`. Only zsh sources it: bash keeps Debian's `~/.bashrc`.
 
 ## Commands
 

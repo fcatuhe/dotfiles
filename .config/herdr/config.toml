@@ -1,0 +1,37 @@
+onboarding = false
+
+# omarchy's chords, the ones every machine here agrees on
+[keys]
+prefix = "ctrl+space"
+reload_config = "prefix+q"
+help = "prefix+?"
+detach = "prefix+d"
+copy_mode = "prefix+["
+zoom = "prefix+z"
+last_pane = "prefix+;"
+rename_pane = "prefix+shift+o"
+focus_pane_left = "ctrl+alt+left"
+focus_pane_down = "ctrl+alt+down"
+focus_pane_up = "ctrl+alt+up"
+focus_pane_right = "ctrl+alt+right"
+resize_mode = ["prefix+ctrl+left", "prefix+ctrl+down", "prefix+ctrl+up", "prefix+ctrl+right"]
+resize_pane_left = "ctrl+alt+shift+left"
+resize_pane_down = "ctrl+alt+shift+down"
+resize_pane_up = "ctrl+alt+shift+up"
+resize_pane_right = "ctrl+alt+shift+right"
+
+# zsh in herdr panes only, the login shell and pi's bash tool stay on bash
+[terminal]
+default_shell = "/usr/bin/zsh"
+
+# Beside the repos, where git wt puts its worktrees too
+[worktrees]
+directory = "~/fcode/worktrees"
+
+[ui]
+prompt_new_tab_name = false
+pane_scrollbars = false
+
+# A blank row between spaces in the sidebar, so each space reads as its own block
+[ui.sidebar.spaces]
+row_gap = 1

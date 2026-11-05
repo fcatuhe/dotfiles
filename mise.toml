@@ -48,6 +48,7 @@ on_change = "restart"
 
 [dotfiles]
 "~/.config/git/allowed_signers" = {}
+"~/.config/herdr/config.toml" = {}
 "~/.config/git/config" = {}
 "~/.config/mise/config.toml" = {}
 "~/.config/shell/aliases" = {}
