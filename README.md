@@ -102,7 +102,7 @@ Hyprland keeps the layout and the locks per device, and lists the headphone jack
 
 ## Dictation
 
-Dictation runs on voxtype with the Parakeet v3 int8 model, which handles French as well as English. On an 11-second clip it took 1.3 to 2 s on this laptop's CPU, against 3.5 to 7 s for Whisper `base.en` and 8 to 10 s for Cohere Transcribe, the offline model Superwhisper uses. `setup:voxtype` switches voxtype to its ONNX build, which Parakeet needs, and downloads the model, and `~/.config/voxtype/config.toml` selects it. Alt + Space and the ThinkPad star key toggle dictation through `omarchy-dictation`. Omarchy's Right Alt push-to-talk never fires here, since that key is AltGr on frenchy.
+Dictation runs on voxtype with the Parakeet v3 int8 model, which handles French as well as English. On an 11-second clip it took 1.6 to 2.2 s on this laptop's CPU. Superwhisper, which Omarchy 4.5 installs as the default, took 5 to 7 s in its Offline Lite mode with a 4-bit Parakeet v3 on the CPU and 10 to 12 s on the Intel GPU, and used 1.6 GB of RAM against voxtype's 660 MB. Whisper `base.en` took 3.5 to 7 s. `setup:voxtype` switches voxtype to its ONNX build, which Parakeet needs, downloads the model, installs and starts the service, makes voxtype Omarchy's dictation backend and removes Superwhisper. `~/.config/voxtype/config.toml` selects the model. Alt + Space and the ThinkPad star key toggle dictation through `omarchy-dictation`. There is no push-to-talk: Omarchy's Right Alt is AltGr on frenchy, and the star key reports its press and release together.
 
 ## Browser
 

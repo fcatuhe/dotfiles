@@ -13,6 +13,7 @@ experimental = true
 "pacman:zsh-syntax-highlighting" = "latest"
 "aur:sunsetr-bin" = "latest"
 "aur:vscodium-bin" = "latest"
+"pacman:voxtype-bin" = "latest"
 
 # Downloads the firmware metadata the updates widget reads offline
 [bootstrap.services."fwupd-refresh.timer"]
@@ -229,12 +230,16 @@ run = "omarchy-powerprofiles-set ac balanced"
 [tasks."setup:repos"]
 run = '''mise bootstrap repos exec -- sh -c 'case "$PWD" in "$HOME"/fcode/*) mise trust --quiet && mise install ;; esac' '''
 
-# Voxtype's ONNX build runs Parakeet, which transcribed about 3x faster than Whisper base.en here
+# Omarchy 4.5 installs Superwhisper as the dictation default, and its local Parakeet ran 3x slower than voxtype's here
 [tasks."setup:voxtype"]
 run = [
   "sudo voxtype setup onnx --enable",
   "voxtype setup --download --model parakeet-tdt-0.6b-v3-int8 --no-post-install --quiet",
-  "systemctl --user restart voxtype",
+  "voxtype setup systemd",
+  "systemctl --user enable voxtype.service",
+  "systemctl --user restart voxtype.service",
+  "omarchy-dictation-use voxtype",
+  "omarchy-cmd-missing superwhisper || omarchy-remove-dictation-superwhisper",
 ]
 
 [tasks."setup:vscodium"]
