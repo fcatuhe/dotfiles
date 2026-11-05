@@ -47,6 +47,11 @@
       "source": "directory",
       "path": "/home/francois/.pi/agent/git/github.com/fcatuhe/pi-wares/paseo/plugins/usage-pace",
       "enabled": true
+    },
+    "tab-width-workaround": {
+      "source": "directory",
+      "path": "/home/francois/.pi/agent/git/github.com/fcatuhe/pi-wares/paseo/plugins/tab-width-workaround",
+      "enabled": true
     }
   },
   "agents": {
@@ -70,6 +75,7 @@
         "enabled": false
       }
     },
+    "resumeOnStartup": true,
     "metadataGeneration": {
       "providers": [
         {
@@ -77,6 +83,21 @@
           "model": "anthropic/claude-haiku-5-5"
         }
       ]
+    }
+  },
+  "features": {
+    "dictation": {
+      "stt": {
+        "provider": "local",
+        "model": "parakeet-tdt-0.6b-v3-int8"
+      }
+    },
+    "voiceMode": {
+      "enabled": true,
+      "stt": {
+        "provider": "local",
+        "model": "parakeet-tdt-0.6b-v3-int8"
+      }
     }
   }
 }
