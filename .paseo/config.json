@@ -12,6 +12,7 @@
       "enabled": true
     },
     "autoArchiveAfterMerge": true,
+    "enableTerminalAgentHooks": true,
     "terminalProfiles": [
       {
         "id": "pi",
@@ -21,33 +22,6 @@
           "{{{prompt}}}"
         ],
         "icon": "pi"
-      },
-      {
-        "id": "claude",
-        "name": "Claude Code",
-        "command": "claude",
-        "args": [
-          "{{{prompt}}}"
-        ],
-        "icon": "claude"
-      },
-      {
-        "id": "codex",
-        "name": "Codex",
-        "command": "codex",
-        "args": [
-          "{{{prompt}}}"
-        ],
-        "icon": "codex"
-      },
-      {
-        "id": "opencode",
-        "name": "OpenCode",
-        "command": "opencode",
-        "args": [
-          "--prompt={{{prompt}}}"
-        ],
-        "icon": "opencode"
       }
     ],
     "cors": {
@@ -67,6 +41,11 @@
     "page-scroll": {
       "source": "directory",
       "path": "/home/francois/.pi/agent/git/github.com/fcatuhe/pi-wares/paseo/plugins/page-scroll",
+      "enabled": true
+    },
+    "usage-pace": {
+      "source": "directory",
+      "path": "/home/francois/.pi/agent/git/github.com/fcatuhe/pi-wares/paseo/plugins/usage-pace",
       "enabled": true
     }
   },
