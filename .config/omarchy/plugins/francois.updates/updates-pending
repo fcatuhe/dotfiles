@@ -11,7 +11,7 @@ pacman=$({ checkupdates --nocolor || (($? == 2)); } | awk '$1 != "omarchy" && $1
 # INFO: fc 01oct26 yay -Qua exits 1 when nothing is pending, so an error with no output passes too
 aur=$({ yay -Qua || (($? == 1)); } | wc -l)
 
-mise=$(cd ~ && MISE_MINIMUM_RELEASE_AGE=0 mise outdated --json | jq length)
+mise=$(cd ~ && MISE_MINIMUM_RELEASE_AGE=0 mise outdated --json | jq '[.[] | select(.current != null)] | length')
 
 firmware=$(fwupdmgr get-updates --json --no-unreported-check --no-metadata-check | jq '.Devices | length')
 
