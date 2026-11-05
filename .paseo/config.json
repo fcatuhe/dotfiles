@@ -12,6 +12,7 @@
       "enabled": true
     },
     "autoArchiveAfterMerge": true,
+    "enableTerminalAgentHooks": true,
     "terminalProfiles": [
       {
         "id": "pi",
@@ -21,33 +22,6 @@
           "{{{prompt}}}"
         ],
         "icon": "pi"
-      },
-      {
-        "id": "claude",
-        "name": "Claude Code",
-        "command": "claude",
-        "args": [
-          "{{{prompt}}}"
-        ],
-        "icon": "claude"
-      },
-      {
-        "id": "codex",
-        "name": "Codex",
-        "command": "codex",
-        "args": [
-          "{{{prompt}}}"
-        ],
-        "icon": "codex"
-      },
-      {
-        "id": "opencode",
-        "name": "OpenCode",
-        "command": "opencode",
-        "args": [
-          "--prompt={{{prompt}}}"
-        ],
-        "icon": "opencode"
       }
     ],
     "cors": {
@@ -66,12 +40,17 @@
   "plugins": {
     "paseo-cafe": {
       "source": "directory",
-      "path": "/home/francois/.paseo/plugins/paseo-cafe/d4442e46-a5ac-4d12-be63-ccf3161f178d/node_modules/paseo-cafe",
+      "path": "/home/francois/.paseo/plugins/paseo-cafe/30ef517e-18d6-4559-a419-a71f1fc5db85/node_modules/paseo-cafe",
       "enabled": true
     },
     "host-monitor": {
       "source": "directory",
       "path": "/home/francois/.paseo/plugins/host-monitor/13ae7522-279a-4658-9a72-95fb30cc940f/checkout/plugins/host-monitor",
+      "enabled": true
+    },
+    "tab-width-workaround": {
+      "source": "directory",
+      "path": "/home/francois/.pi/agent/git/github.com/fcatuhe/pi-wares/paseo/plugins/tab-width-workaround",
       "enabled": true
     }
   },
@@ -96,6 +75,7 @@
         "enabled": false
       }
     },
+    "resumeOnStartup": true,
     "metadataGeneration": {
       "providers": [
         {
