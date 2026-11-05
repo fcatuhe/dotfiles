@@ -7,6 +7,12 @@ hl.bind("Caps_Lock", hl.dsp.event("digitlock"), { non_consuming = true, release 
 -- INFO: fc 25sep26 the ThinkPad star key reports press and release together, so it can only toggle
 o.bind("XF86Favorites", "Toggle dictation", "voxtype record toggle")
 
+-- INFO: fc 05nov26 code:49 is the key left of 1, @ on frenchy and ` on us, so one bind serves both layouts
+hl.unbind("SUPER + grave")
+hl.unbind("SUPER + SHIFT + grave")
+o.bind("SUPER + code:49", "Toggle Quake console", hl.dsp.workspace.toggle_special("qconsole"))
+o.bind("SUPER + SHIFT + code:49", "Move window to Quake console", hl.dsp.window.move({ workspace = "special:qconsole", follow = false }))
+
 local function active_window_is_terminal()
   local window = hl.get_active_window()
   if not window then
