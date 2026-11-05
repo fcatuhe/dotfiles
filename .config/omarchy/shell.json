@@ -1,28 +1,12 @@
 {
   "bar": {
-    "centerAnchor": "omarchy.clock",
     "layout": {
       "center": [
-        {
-          "id": "omarchy.indicators"
-        },
         {
           "id": "omarchy.clock",
           "format": "ddd d MMM HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
           "verticalFormat": "HH\n—\nmm"
-        },
-        {
-          "id": "francois.keyboard-layout"
-        },
-        {
-          "id": "omarchy.weather"
-        },
-        {
-          "id": "omarchy.system-update"
-        },
-        {
-          "id": "francois.updates"
         }
       ],
       "left": [
@@ -58,6 +42,58 @@
         {
           "id": "francois.power",
           "showPercentage": true
+        }
+      ],
+      "centerBegin": [
+        {
+          "id": "omarchy.indicators"
+        }
+      ],
+      "centerEnd": [
+        {
+          "id": "omarchy.elsewhen",
+          "cities": [
+            {
+              "name": "San Francisco",
+              "zone": "America/Los_Angeles",
+              "lat": 37.77493,
+              "lon": -122.41942,
+              "region": "California, US"
+            },
+            {
+              "name": "Bordeaux",
+              "zone": "Europe/Paris",
+              "lat": 44.84124,
+              "lon": -0.58046,
+              "region": "New Aquitaine, FR"
+            },
+            {
+              "name": "Pune",
+              "zone": "Asia/Kolkata",
+              "lat": 18.51957,
+              "lon": 73.85535,
+              "region": "Maharashtra, IN"
+            }
+          ],
+          "here": {
+            "name": "Bordeaux",
+            "zone": "Europe/Paris",
+            "lat": 44.84124,
+            "lon": -0.58046,
+            "region": "New Aquitaine, FR"
+          }
+        },
+        {
+          "id": "francois.keyboard-layout"
+        },
+        {
+          "id": "omarchy.weather"
+        },
+        {
+          "id": "omarchy.system-update"
+        },
+        {
+          "id": "francois.updates"
         }
       ]
     },
