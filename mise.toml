@@ -215,6 +215,13 @@ run = [
   "sudo dconf update",
 ]
 
+# Hibernate at 5% battery, as UPower's default suspend-then-hibernate came back to the desktop at 1% and the battery died
+[tasks."setup:low-battery"]
+run = [
+  "sudo install -D -m 644 upower/50-hibernate.conf /etc/UPower/UPower.conf.d/50-hibernate.conf",
+  "sudo systemctl restart upower",
+]
+
 # Omarchy's Microsoft 365 web apps in Chrome, whose Default profile holds the Ridecell account
 [tasks."setup:microsoft"]
 run = [
