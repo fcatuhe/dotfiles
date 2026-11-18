@@ -17,7 +17,7 @@
     "anthropic/claude-fable-5-1",
     "anthropic/claude-sonnet-5-5",
     "anthropic/claude-haiku-5-5",
-    "openai/gpt-6.1-sol"
+    "openai/gpt-6.2-sol"
   ],
   "deviceId": "f6739836-ceda-45de-8be7-ce1cd182d058",
   "compaction": {
