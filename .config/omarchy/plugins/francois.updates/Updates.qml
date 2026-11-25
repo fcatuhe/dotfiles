@@ -32,9 +32,9 @@ BarWidget {
     horizontalMargin: 6
     tooltipText: root.lastError || "Pending updates"
     onPressed: function(mouseButton) {
-      if (mouseButton === Qt.RightButton) root.runUpdate()
+      if (mouseButton === Qt.RightButton) root.expanded = !root.expanded
       else if (mouseButton === Qt.MiddleButton && root.service) root.service.refresh()
-      else root.expanded = !root.expanded
+      else root.runUpdate()
     }
   }
 }
